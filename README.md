@@ -1,6 +1,36 @@
-### 팀<hr>
-- 박수형
-- 전소현
+### TEAM<hr>
+> `대전 2반 9조` - 박수형, **전소현**
+
+
+### PLAN<hr>
+1. 무엇을 개발할 것인가?
+    - 주제 : 영화 추천 알고리즘 기반 커뮤니티 서비스
+2. 왜 개발하는 것인가?
+    - 타겟 : 맞춤 영화 추천이 필요한 사람들
+3. 어떻게 개발할 것인가?
+    - 기술 스택 : Vue, Django
+    - 일정 및 업무 부담
+        - 23.11.16 (목) : 가이드 라인 확립 (설계서, 구조도, ERD, DB 등)
+
+### REFERENCE<hr>
+[css animation](https://animate.style/)<br>
+[css style](https://www.w3schools.com/css/css3_animations.asp)
+
+### Front-End<hr>
+- 디자인 컨셉
+- 컴포넌트 구조도
+- UI/UX 설계서
+  -> Figma
+
+### Back-End<hr>
+- ERD
+
+### DB<hr>
+[TMDB-API](https://developer.themoviedb.org/reference/intro/getting-started)<br>
+[Youtube-API](https://console.cloud.google.com/marketplace/product/google/youtube.googleapis.com?q=search&referrer=search&project=new-project-404701)<br>
+[Youtube-API 사용법](https://cocococo.tistory.com/entry/Youtube-API-%EC%9C%A0%ED%8A%9C%EB%B8%8C-API-%EB%8F%99%EC%98%81%EC%83%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B0%80%EC%A0%B8%EC%98%A4%EB%8A%94-%EB%B0%A9%EB%B2%95)<br>
+장르('코미디', '공연', '다큐멘터리', '드라마', '뮤지컬', '애니메이션', '멜로/로맨스', '미스터리', '범죄', '스릴러', 'SF', '액션', '어드벤처', '판타지', '기타', '공포(호러)', '가족', '사극', '서부극(웨스턴)', '전쟁')
+
 
 <br>
 
