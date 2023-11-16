@@ -74,5 +74,11 @@
 |`comment`|대댓글 관리|대댓글 보기|해당 글의 디테일 페이지에서만 가능<br>좋아요 수 출력<br>해당 대댓글 좋아요 기능(토글)|
 |`likes`|좋아요|리뷰 좋아요|리뷰의 좋아요 기능(토글)|
 |`likes`|좋아요|댓글/대댓글 좋아요|댓글/대댓글의 좋아요 기능(토글)|
-
 <br>
+
+## Components
+<img src="readme_image/components.png" width="70%">
+
+## ERD
+- 추후 수정 가능<br>
+<img src="readme_image/erd.png" width="70%">
