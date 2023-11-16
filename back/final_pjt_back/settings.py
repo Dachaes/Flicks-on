@@ -31,8 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Apps
     'accounts',
     'movies',
+    
+    # DRF 
+    'rest_framework',
+    'rest_framework.authtoken',
+    
+    # REST_AUTH
+    'dj_rest_auth',
+    'allauth',
+    'allauth.account',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
