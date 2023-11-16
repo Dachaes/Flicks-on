@@ -21,11 +21,10 @@
     <img src="assets/components/components.png" width="70%">
 
 - UI/UX<br>
-    <img src="assets/wire_frame/login_page.png" width="70%">
-    <img src="assets/wire_frame/main_page1.jpg" width="70%">
-    <img src="assets/wire_frame/main_page2.jpg" width="70%">
-    <img src="assets/wire_frame/detail_page.jpg" width="70%">
-    <img src="assets/wire_frame/profile_page.jpg" width="70%">
+    <img src="assets/wire_frame/login_page.png">
+    |<img src="assets/wire_frame/main_page1.jpg">|<img src="assets/wire_frame/main_page2.jpg">|
+    |:--:|:--:|
+    |<img src="assets/wire_frame/detail_page.jpg">|<img src="assets/wire_frame/profile_page.jpg">|
 
 ### Back-End<hr>
 
