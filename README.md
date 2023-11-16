@@ -17,13 +17,22 @@
 [css style](https://www.w3schools.com/css/css3_animations.asp)
 
 ### Front-End<hr>
-- 디자인 컨셉
-- 컴포넌트 구조도
-- UI/UX 설계서
-  -> Figma
+- Components<br>
+    <img src="assets/components/components.png" width="70%">
+
+- UI/UX<br>
+    <img src="assets/wire_frame/login_page.png" width="70%">
+    <img src="assets/wire_frame/main_page1.jpg" width="70%">
+    <img src="assets/wire_frame/main_page2.jpg" width="70%">
+    <img src="assets/wire_frame/detail_page.jpg" width="70%">
+    <img src="assets/wire_frame/profile_page.jpg" width="70%">
 
 ### Back-End<hr>
-- ERD
+
+
+- ERD (추후 수정 예정) <br>
+<img src="assets/erd/erd.png" width="70%">
+
 
 ### DB<hr>
 [TMDB-API](https://developer.themoviedb.org/reference/intro/getting-started)<br>
@@ -76,9 +85,3 @@
 |`likes`|좋아요|댓글/대댓글 좋아요|댓글/대댓글의 좋아요 기능(토글)|
 <br>
 
-## Components
-<img src="readme_image/components.png" width="70%">
-
-## ERD
-- 추후 수정 가능<br>
-<img src="readme_image/erd.png" width="70%">
