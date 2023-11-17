@@ -34,9 +34,9 @@
 ### Front-End<hr>
 - Components Tree<br>
     - 초안<br>
-    <img src="assets/components/components1.png" width="70%"><br>
+    <img src="assets/components/components1.png"><br>
     - 1차 수정안<br>
-    <img src="assets/components/components2.png" width="70%"><br>
+    <img src="assets/components/components2.png"><br>
 
 - UI/UX<br>
     <img src="assets/wire_frame/login_page.png">
