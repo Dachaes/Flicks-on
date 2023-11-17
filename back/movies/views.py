@@ -27,22 +27,22 @@ def index(request):
         )
 """
 def index(request):
-    # url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
-    # response = requests.get(
-    #     url,
-    #     headers = {
-    #     "accept": "application/json",
-    #     "Authorization": f"Bearer {os.environ.get('API_TOKEN')}"
-    #     }
-    # )
-    # data = response.json()
-    # if not Genres.objects.exists():
-    #     for genre in data['genres']:
-    #         Genres.objects.create(
-    #             name=genre["name"],
-    #             tmdb_id=genre["id"],
-    #         )
-    pass
+    url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
+    response = requests.get(
+        url,
+        headers = {
+        "accept": "application/json",
+        "Authorization": f"Bearer {os.environ.get('API_TOKEN')}"
+        }
+    )
+    data = response.json()
+    if not Genre.objects.exists():
+        for genre in data['genres']:
+            Genre.objects.create(
+                name=genre["name"],
+                tmdb_id=genre["id"],
+            )
+    # pass
 
 
 def detail(request, movie_pk):
