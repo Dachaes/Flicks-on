@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from .models import Movie, Genres
+from .models import Movie, Genre
 from .utils import check_exist
 from .serializers import MovieSerializer
 import requests
