@@ -4,7 +4,6 @@
     <!-- <img class="logo-img"
           @mouseenter="convertLogo=true" @mouseleave="convertLogo=false"
           @click="goMain()" :src="convertLogo? './assets/logo/logo2-1.png':'./assets/logo/logo1.png'" height="80" alt="logo"> -->
-    
     <img class="logo-img" @click="goMain()" src="@/assets/logo/logo1.png" height="80" alt="logo">
 
     <img class="user-img" @click="goProfile()" src="@/assets/user/anonymous_user.png" height="50" alt="logo1">
@@ -12,8 +11,7 @@
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue'
-
+  // import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
 
   const router = useRouter()
@@ -37,7 +35,11 @@
   .header-container {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgb(227, 226, 226);
+    border-bottom: 1px solid rgb(227, 227, 227);
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
   }
 
   .logo-img {

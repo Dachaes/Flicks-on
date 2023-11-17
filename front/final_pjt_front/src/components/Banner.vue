@@ -39,6 +39,7 @@
 
 <style scoped>
   .banner-container {
+    position: relative;
     margin: 20px 10px;
     height: 300px;
     min-height: 300px; 

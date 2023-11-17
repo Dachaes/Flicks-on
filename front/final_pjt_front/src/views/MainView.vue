@@ -2,8 +2,12 @@
   <div>
     <Headers />
     <Banner />
-    <hr>
-    <button @click="goPage('genre')">장르 뷰</button>
+    <!-- Genre Comp -->
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div v-for="button in 5">
+        <button type="button" class="btn btn-secondary" @click="goPage('genre')">Romance</button>
+      </div>
+    </div>
     <MovieList />
     <MovieList />
     <footers />
@@ -27,5 +31,12 @@
 </script>
 
 <style scoped>
+  .btn-toolbar {
+    flex-direction: row;
+    justify-content: space-around;
+  }
 
+  .btn {
+    padding: 5px 20px;
+  }
 </style>

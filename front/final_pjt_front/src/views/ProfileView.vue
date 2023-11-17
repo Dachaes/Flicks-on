@@ -1,7 +1,6 @@
 <template>
   <div>
     <Headers />
-    <h1>프로필 뷰</h1>
     <ProfileDetail />
     <PersonalizedService />
     <CommentList />
