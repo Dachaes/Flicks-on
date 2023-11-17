@@ -4,7 +4,8 @@
     - 구현 목록 초안
     - `Front` - Vue Components Tree 초안
     - `Back` - ERD 1차 수정
-    - `Back` - Model 작성 및 TMDB API를 이용해 db 데이터 작성
+    - `Back` - 전체 Model 작성 및 TMDB API를 이용해 db 데이터 작성
+    - `Back` - Login, SignUp 구현 및 테스트 진행해 확인
 
 - **전소현**
     - 구현 목록 1차 수정
