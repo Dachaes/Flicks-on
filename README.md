@@ -17,15 +17,19 @@
 ### PLAN<hr>
 1. 무엇을 개발할 것인가?
     - 주제 : 영화 추천 알고리즘 기반 커뮤니티 서비스
+    <br>
 2. 왜 개발하는 것인가?
     - 타겟 : 맞춤 영화 추천이 필요한 사람들
+    <br>
 3. 어떻게 개발할 것인가?
     - 기술 스택 : Vue, Django
-    - 일정 및 업무 부담
-        - 23.11.16 (목) : 가이드 라인 확립 (설계서, 구조도, ERD, DB 등)
-        - 23.11.17 (금)
-            - `Front` : Components Tree 에 따라 Vue Project 구체화
-            - `back` : TMDB 데이터를 이용하여 Dummy Data 생성, Serializer 작성 후 의도대로 동작하는지 확인
+    <br>
+4. 일정 및 업무 부담
+    - 23.11.16 (목) : 가이드 라인 확립 (설계서, 구조도, ERD, DB 등)
+    - 23.11.17 (금)
+        - `Front` : Components Tree 에 따라 Vue Project 구체화
+        - `back` : TMDB 데이터를 이용하여 Dummy Data 생성, Serializer 작성 후 의도대로 동작하는지 확인
+    <br>
 
 ### REFERENCE<hr>
 [css animation](https://animate.style/)<br>
@@ -34,9 +38,9 @@
 ### Front-End<hr>
 - Components Tree<br>
     - 초안<br>
-    <img src="assets/components/components1.png"><br>
+    <img src="assets/components/components1.png" width="85%"><br>
     - 1차 수정안<br>
-    <img src="assets/components/components2.png"><br>
+    <img src="assets/components/components2.png" width="85%"><br>
 
 - UI/UX<br>
     <img src="assets/wire_frame/login_page.png">
