@@ -1,13 +1,52 @@
 <template>
-  <div>
-    <h1>배너 컴포넌트</h1>
+  <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div id="carouselExample" class="carousel slide banner-container">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="@/assets/banner/img1.jpg" class="d-block w-100" alt="exImg1">
+        </div>
+        <div class="carousel-item">
+          <img src="@/assets/banner/img2.png" class="d-block w-100" alt="exImg2">
+        </div>
+        <div class="carousel-item">
+          <img src="@/assets/banner/img3.jpg" class="d-block w-100" alt="exImg3">
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
   </div>
-</template>
+ </template>
 
+ 
 <script setup>
-
 </script>
 
 <style scoped>
-
+  .banner-container {
+    margin: 20px 10px;
+    height: 300px;
+    min-height: 300px; 
+  }
+  .d-block {
+    object-fit: contain;
+    width: 100%;
+    min-height: 300px;
+    height: 300px;
+  }
 </style>

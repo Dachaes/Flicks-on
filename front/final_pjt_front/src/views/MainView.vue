@@ -1,7 +1,6 @@
 <template>
   <div>
     <Headers />
-    <h1>메인 뷰</h1>
     <Banner />
     <hr>
     <button @click="goPage('genre')">장르 뷰</button>
@@ -28,9 +27,5 @@
 </script>
 
 <style scoped>
-.wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
-}
+
 </style>

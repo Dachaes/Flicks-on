@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="wrapper">
     <div>
       <RouterView />
     </div>
@@ -11,7 +11,10 @@
 </script>
 
 <style scoped>
-
-
+  .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
 
 </style>
