@@ -17,8 +17,11 @@
 [css style](https://www.w3schools.com/css/css3_animations.asp)
 
 ### Front-End<hr>
-- Components<br>
-    <img src="assets/components/components.png" width="70%">
+- Components Tree<br>
+    - 초안<br>
+    <img src="assets/components/components1.png" width="70%">
+    - 1차 수정안<br>
+    <img src="assets/components/components2.png" width="70%">
 
 - UI/UX<br>
     <img src="assets/wire_frame/login_page.png">
@@ -30,10 +33,11 @@
 
 
 - ERD (추후 수정 예정) <br>
-<img src="assets/erd/erd.png" width="70%"><br>
+    - 초안<br>
+    <img src="assets/erd/erd.png" width="70%"><br>
 
-- 1차 수정안<br>
-<img src="assets/erd/erd2.png" width="70%"><br>
+    - 1차 수정안<br>
+    <img src="assets/erd/erd2.png" width="70%"><br>
 
 - 모델이 저장될 때 마다 tmdb 의 영화 id 가 있는지 확인 후 없는 경우에만 영화를 저장
 
