@@ -25,8 +25,8 @@ def index(request):
             poster_path=f'https://image.tmdb.org/t/p/original/{movie["poster_path"]}',
             tmdb_id=movie["id"],
         )
-"""
-def index(request):
+
+    # 장르 가져오기
     url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
     response = requests.get(
         url,
@@ -42,7 +42,9 @@ def index(request):
                 name=genre["name"],
                 tmdb_id=genre["id"],
             )
-    # pass
+"""
+def index(request):
+    pass
 
 
 def detail(request, movie_pk):
