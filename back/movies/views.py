@@ -6,8 +6,6 @@ import os
 # Create your views here.
 """ genre call function
 def index(request):
-"""
-def index(request):
     url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
     response = requests.get(
         url,
@@ -23,4 +21,6 @@ def index(request):
                 name=genre["name"],
                 tmdb_id=genre["id"],
             )
-    print('@@@@@@@@@@@@@@')
+"""
+def index(request):
+    pass
