@@ -1,6 +1,13 @@
 <template>
-  <div>
-    <h1>퍼스널라이즈드 서비스 컴포넌트</h1>
+  <div class="personalized-container">
+    <h2>User 님의 취향</h2>
+    <div class="analysis">
+      <h3>취향 분석</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+    </div>
+  </div>
+  <div class="likes">
+
   </div>
 </template>
 
@@ -9,5 +16,21 @@
 </script>
 
 <style scoped>
+  .personalized-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .analysis {
+    display: flex;
+    align-items: center;
 
+  }
+  .analysis svg {
+    margin: 13px;
+  }
+  .likes {
+    height: 500px;
+    border-bottom: 1px solid rgb(143, 142, 142);
+  }
 </style>

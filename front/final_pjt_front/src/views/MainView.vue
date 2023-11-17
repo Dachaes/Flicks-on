@@ -2,7 +2,6 @@
   <div>
     <Headers />
     <Banner />
-    <!-- Genre Comp -->
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
       <div v-for="button in 5">
         <button type="button" class="btn btn-secondary" @click="goPage('genre')">Romance</button>
