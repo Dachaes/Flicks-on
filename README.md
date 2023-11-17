@@ -1,5 +1,16 @@
 ### TEAM<hr>
-> `대전 2반 9조` - 박수형, **전소현**
+> `대전 2반 9조`
+- 박수형
+    - 구현 목록 초안
+    - `Front` - Vue Components Tree 초안
+    - `Back` - ERD 1차 수정
+
+- **전소현**
+    - 구현 목록 1차 수정
+    - `Logo` - 제작
+    - `Back` - ERD 초안
+    - `Front, Back` - Project, App 생성
+    - `Front` - Vue Components Tree 완성
 
 
 ### PLAN<hr>
@@ -11,6 +22,9 @@
     - 기술 스택 : Vue, Django
     - 일정 및 업무 부담
         - 23.11.16 (목) : 가이드 라인 확립 (설계서, 구조도, ERD, DB 등)
+        - 23.11.17 (금)
+            - `Front` : Components Tree 에 따라 Vue Project 구체화
+            - `back` : TMDB 데이터를 이용하여 Dummy Data 생성, Serializer 작성 후 의도대로 동작하는지 확인
 
 ### REFERENCE<hr>
 [css animation](https://animate.style/)<br>
@@ -19,9 +33,9 @@
 ### Front-End<hr>
 - Components Tree<br>
     - 초안<br>
-    <img src="assets/components/components1.png" width="70%">
+    <img src="assets/components/components1.png" width="70%"><br>
     - 1차 수정안<br>
-    <img src="assets/components/components2.png" width="70%">
+    <img src="assets/components/components2.png" width="70%"><br>
 
 - UI/UX<br>
     <img src="assets/wire_frame/login_page.png">
