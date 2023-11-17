@@ -24,3 +24,7 @@ def index(request):
 """
 def index(request):
     pass
+
+
+def detail(request, movie_pk):
+    pass
