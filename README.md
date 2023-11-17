@@ -8,10 +8,11 @@
 - **전소현**
     - 구현 목록 1차 수정
     - `Logo` - 제작
-    - `Back` - ERD 초안
     - `Front, Back` - Project, App 생성
-    - `Front` - Vue Components Tree 완성
-
+    - `Front`
+        - Vue Components Tree 완성
+    - `Back`
+        - ERD 초안
 
 ### PLAN<hr>
 1. 무엇을 개발할 것인가?
