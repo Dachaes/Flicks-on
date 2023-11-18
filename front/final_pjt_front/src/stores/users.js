@@ -12,13 +12,14 @@ export const useUserStore = defineStore('user', () => {
   })
 
   const signUp = function (payload) {
-    const { username, password1, password2 } = payload
+    const { username, nickname, password1, password2 } = payload
 
     axios({
       method: 'post',
       url: `${API_URL}/accounts/signup/`,
       data:{
         username,
+        nickname,
         password1,
         password2,
       }
@@ -50,6 +51,9 @@ export const useUserStore = defineStore('user', () => {
         // 추후 수정
         router.push({ name:'main' })
       })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   const logOut = function () {
@@ -60,7 +64,7 @@ export const useUserStore = defineStore('user', () => {
       .then((res) => {
         token.value = null
         // 임시
-        router.push({ name:'main' })
+        router.push({ name:'login' })
       })
       .catch((err) => {
         console.log(err)
