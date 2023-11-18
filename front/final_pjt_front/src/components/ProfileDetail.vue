@@ -5,13 +5,21 @@
   <div class="profile-container1">
     <div class="blank"></div>
     <p class="edit">Edit</p>
-    <p class="sign-out">Sign Out</p>
+    <p class="sign-out" @click="signOut">Sign Out</p>
   </div>
   <div class="profile-container2">
   </div>
 </template>
 
 <script setup>
+import { useUserStore } from '../stores/users';
+
+const store = useUserStore()
+
+const signOut = function () {
+  store.logOut()
+}
+
 </script>
 
 <style scoped>
