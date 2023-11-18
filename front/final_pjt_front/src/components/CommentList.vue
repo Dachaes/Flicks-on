@@ -1,15 +1,12 @@
 <template>
-  <h2 class="mt-3">한줄평</h2>
   <div class="comments-container">
     <div class="movie">
       <p class="user-name">User</p>
       <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
     </div>
     <div class="comment">
-      <form action="">
-        <input type="text">
-        <input type="submit" value="등록">
-      </form>
+      <img src="@/assets/likes/heart2.png" width="33" alt="likes">
+      <p class="one-comment">재밌어요!</p>
     </div>
   </div>
 
@@ -26,9 +23,6 @@
     display: flex;
     align-items: center;
     margin-top: 15px;
-    border-top: 1px solid rgb(139, 139, 139);
-    border-bottom: 1px solid rgb(139, 139, 139);
-    padding: 10px 0 20px;
   }
 
   .movie {
