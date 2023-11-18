@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'allauth',
     'allauth.account',
+    'corsheaders',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -67,17 +68,31 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+SITE_ID = 1
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' : [
         'rest_framework.authentication.TokenAuthentication'
     ]
 }
 
+REST_AUTH = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+}
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5173',
+    'http://localhost:5173',
+]
+
 MIDDLEWARE = [
+    # 맨위에 둬야함
+    'django.contrib.sessions.middleware.SessionMiddleware',
+
     "allauth.account.middleware.AccountMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -168,3 +183,4 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+ACCOUNT_ADAPTER = 'accounts.models.CustomAccountAdapter'
