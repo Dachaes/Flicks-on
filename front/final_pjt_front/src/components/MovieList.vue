@@ -51,10 +51,10 @@
     padding: 10px 0;
   }
   .movie {
-    height: 250px;
+    width: 20%;
   }
   .movie-poster {
-    height: 200px;
+    width: 85%;
   }
 
 

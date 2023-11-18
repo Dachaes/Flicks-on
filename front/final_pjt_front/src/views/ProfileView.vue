@@ -3,7 +3,7 @@
     <Headers />
     <ProfileDetail />
     <PersonalizedService />
-    <CommentList />
+    <MyCommentList />
     <Footers />
   </div>
 </template>
@@ -12,7 +12,7 @@
   import Headers from '@/components/Headers.vue'
   import ProfileDetail from '@/components/ProfileDetail.vue'
   import PersonalizedService from '@/components/PersonalizedService.vue'
-  import CommentList from '@/components/CommentList.vue'
+  import MyCommentList from '@/components/MyCommentList.vue'
   import Footers from '@/components/Footers.vue'
 </script>
 

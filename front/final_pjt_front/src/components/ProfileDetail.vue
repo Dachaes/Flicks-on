@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: column;
 
-    height: 330px;
+    height: 300px;
     text-align: end;
 
     border-bottom: 1px solid rgb(227, 227, 227);
@@ -34,9 +34,9 @@
   .blank{
     height: 250px;
   }
-    .edit {
-    margin: 5px;
-    padding-right: 10px;
+  .edit {
+  margin: 5px;
+  padding-right: 10px;
   }
 
   .sign-out {
@@ -49,9 +49,9 @@
   }
 
   .user-img {
-    top: 250px;
+    top: 230px;
     position: absolute;
     justify-content: center;
-    width: 140px;
+    width: 130px;
   }
 </style>
