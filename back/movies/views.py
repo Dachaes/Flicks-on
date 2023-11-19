@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404, get_object_or_404
+from rest_framework import status
 from rest_framework.response import Response
-from .models import Movie, Genre
+from rest_framework.decorators import api_view
+from .models import Movie, Genre, Comment
 from .utils import check_exist
-from .serializers import MovieSerializer
+from .serializers import MovieSerializer, CommentSerializer
 import requests
 import os
+
 
 # Create your views here.
 """ genre call function
@@ -64,3 +67,25 @@ def detail(request, movie_pk):
             poster_path=f'https://image.tmdb.org/t/p/original/{data["poster_path"]}',
             tmdb_id=data["id"],
         )
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def comment_func(request, movie_pk):
+    if request.method == 'POST':
+        # movie = Movie.objects.get(pk=movie_pk)
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            if request.user.is_authenticated and request.user.is_active:
+                # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+                serializer.save(user=request.user, movie=movie)
+            else:
+                # print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                return Response(status=status.HTTP_401_UNAUTHORIZED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    elif request.method == 'PUT':
+        pass
+    
+    elif request.method == 'DELETE':
+        pass

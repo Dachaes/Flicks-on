@@ -42,7 +42,6 @@ const signUp = function () {
   }
   store.signUp(payLoad)
 }
-
 </script>
 
 <style scoped>

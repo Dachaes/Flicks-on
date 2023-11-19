@@ -7,8 +7,8 @@
     </div>
     <div class="comment">
       <form @submit.prevent="createComment">
-        <input type="text" v-model="comment">
-        <p>{{ comment }}</p>
+        <input type="text" :value="content" @input="updateComment">
+        <p>{{ content }}</p>
         <input type="submit" value="등록">
       </form>
     </div>
@@ -17,13 +17,26 @@
 </template>
 
 <script setup>
-  import { useRouter } from 'vue-router'
-  const router = useRouter()
-  const comment = ref('')
+  import { ref } from 'vue'
+  import { useCommentStore } from '@/stores/comments.js'
 
-  const createComment = function (event) {
-    comment.value = event.currentTarget.value
+  const store = useCommentStore()
+
+  const content = ref('')
+  const movie_pk = ref('')
+  // const props = defineProps({
+  //   moviePk: Number
+  // })
+  const updateComment = function (event) {
+    content.value = event.currentTarget.value
   }
+
+  movie_pk.value = 1
+  const createComment = function () {
+    // store.commentCreate(props.moviePk, content.value)
+    store.commentCreate(movie_pk.value, content.value)
+  }
+
 </script>
 
 <style scoped>
