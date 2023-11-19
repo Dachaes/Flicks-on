@@ -3,16 +3,18 @@
 - 박수형
     - 구현 목록 초안
     - `Front` - Vue Components Tree 초안
-    - `Back` - ERD 1차 수정
-    - `Back` - 전체 Model 작성 및 TMDB API를 이용해 db 데이터 작성
-    - `Back` - Login, SignUp 구현 및 테스트 진행해 확인
+    - `Back`
+        - ERD 1차 수정
+        - 전체 Model 작성 및 TMDB API를 이용해 db 데이터 작성
+        - Login, SignUp 구현 및 테스트 진행해 확인
 
 - **전소현**
     - 구현 목록 1차 수정
     - `Logo` - 제작
     - `Front, Back` - Project, App 생성
     - `Front`
-        - Vue Components Tree 완성
+        - Vue Components Tree 1차 수정, 2차 수정 (완성)
+        - Login, SignUp 제외, 전 페이지 초안 구현
     - `Back`
         - ERD 초안
 
@@ -32,7 +34,7 @@
         - `Front` : Components Tree 에 따라 Vue Project 구체화
         - `back` : TMDB 데이터를 이용하여 Dummy Data 생성, Serializer 작성 후 의도대로 동작하는지 확인
     - 23.11.18~19(주말)
-        - `Front` : 
+        - `Front` : Components Tree 변경 및 완성, 그에 따른 Vue Project 구체화 -> 전 페이지 초안 완성
         - `back` :
     <br>
 
@@ -46,6 +48,8 @@
     <img src="assets/components/components1.png" width="85%"><br>
     - 1차 수정안<br>
     <img src="assets/components/components2.png" width="85%"><br>
+    - 2차 수정안<br>
+    <img src="assets/components/components3.png" width="85%"><br>
 
 - UI/UX<br>
     <img src="assets/wire_frame/login_page.png">
