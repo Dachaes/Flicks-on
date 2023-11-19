@@ -6,8 +6,9 @@
       <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
     </div>
     <div class="comment">
-      <form action="">
-        <input type="text">
+      <form @submit.prevent="createComment">
+        <input type="text" v-model="comment">
+        <p>{{ comment }}</p>
         <input type="submit" value="등록">
       </form>
     </div>
@@ -18,7 +19,11 @@
 <script setup>
   import { useRouter } from 'vue-router'
   const router = useRouter()
+  const comment = ref('')
 
+  const createComment = function (event) {
+    comment.value = event.currentTarget.value
+  }
 </script>
 
 <style scoped>
