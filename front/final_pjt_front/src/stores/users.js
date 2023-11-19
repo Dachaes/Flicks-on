@@ -46,25 +46,30 @@ export const useUserStore = defineStore('user', () => {
         password,
       }
     })
-    .then((res) => {
-        userName.value = username
+      .then((res) => {
+        console.log(res)
         token.value = res.data.key
-
+        // console.log(this)
+        
         axios({
           method:'get',
-          url: `${API_URL}/getuserinfo/${userName.value}/`
+          url: `${API_URL}/accounts/user/`,
+          headers:{
+            'Authorization': `Token ${token.value}`
+          }
         })
-          .then((res) => {
-            console.log(res)
-            router.push({ name:'main' })
+        .then((res) => {
+          userName.value = res.data.nickname
+          console.log(res)
           })
           .catch((err) => console.log(err))
         // 임시로 main으로 전송
         // 추후 수정
+        router.push({ name:'main' })
       })
       .catch((err) => {
-        console.log(err)
-      })
+          console.log(err)
+        })
     }
     
     const logOut = function () {
