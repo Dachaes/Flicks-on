@@ -7,6 +7,7 @@ export const useUserStore = defineStore('user', () => {
   const router = useRouter()
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
+  const userName = ref('')
   const isLogin = computed(() => {
     return token.value === null ? false : true
   })
@@ -46,22 +47,38 @@ export const useUserStore = defineStore('user', () => {
       }
     })
       .then((res) => {
+        console.log(res)
         token.value = res.data.key
+        // console.log(this)
+        
+        axios({
+          method:'get',
+          url: `${API_URL}/accounts/user/`,
+          headers:{
+            'Authorization': `Token ${token.value}`
+          }
+        })
+        .then((res) => {
+          userName.value = res.data.nickname
+          console.log(res)
+          })
+          .catch((err) => console.log(err))
         // 임시로 main으로 전송
         // 추후 수정
         router.push({ name:'main' })
       })
       .catch((err) => {
-        console.log(err)
+          console.log(err)
+        })
+    }
+    
+    const logOut = function () {
+      axios({
+        method: 'post',
+        url: `${API_URL}/accounts/logout/`,
       })
-  }
-
-  const logOut = function () {
-    axios({
-      method: 'post',
-      url: `${API_URL}/accounts/logout/`,
-    })
       .then((res) => {
+        userName.value = ''
         token.value = null
         // 임시
         router.push({ name:'login' })
@@ -71,5 +88,5 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { isLogin, API_URL, token, signUp, logIn, logOut }
+  return { isLogin, API_URL, token, userName, signUp, logIn, logOut }
 }, {persist: true})

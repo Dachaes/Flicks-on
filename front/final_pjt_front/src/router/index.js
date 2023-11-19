@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '../stores/users'
 import MainView from '@/views/MainView.vue'
 import LogInView from '@/views/LogInView.vue'
 import SignUpView from '@/views/SignUpView.vue'
@@ -43,11 +44,11 @@ const router = createRouter({
   ]
 })
 
-// router.beforeEach((to, from) => {
-//   const store = useUserStore()
-//   if (to.name === 'main' && !store.isLogin) {
-//     return { name: 'login' }
-//   }
-// })
+router.beforeEach((to, from) => {
+  const store = useUserStore()
+  if (to.name === 'profile' && !store.isLogin) {
+    return { name: 'login' }
+  }
+})
 
 export default router

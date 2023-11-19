@@ -13,13 +13,15 @@
 <script setup>
   // import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
+  import { useUserStore } from '../stores/users';
 
   const router = useRouter()
+  const userStore = useUserStore()
   // const logoSrc = ref(import.meta.glob("@/assets/logo/logo1.png"))
   // const convertLogo = ref(false) -> 2
 
   const goMain = () => { router.push({name: 'main'}) }
-  const goProfile = () => { router.push({name: 'profile', params: {user_name: 'amy'}}) }
+  const goProfile = () => { router.push({name: 'profile', params: {user_name: userStore.userName}}) }
 
   // const convert_logo = (hovered) => {
   //   if (hovered === 'logo2') {
