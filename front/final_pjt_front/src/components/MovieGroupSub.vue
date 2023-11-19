@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="goPage('genre', 'adventure')">
     <div class="container">
       <div class="image-container">
         <img class="image" alt="Image" src="@/assets/movie/parasite.png" />
@@ -19,10 +19,16 @@
       </svg>
     </div>
   </div>
+
 </template>
 
 <script setup>
+  import { useRouter } from 'vue-router'
+  const router = useRouter()
 
+  const goPage = function (pageName, genre) {
+    router.push({name: pageName, params: {genre: genre}})
+  }
 </script>
 
 <style scoped>
