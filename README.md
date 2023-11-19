@@ -31,6 +31,9 @@
     - 23.11.17 (금)
         - `Front` : Components Tree 에 따라 Vue Project 구체화
         - `back` : TMDB 데이터를 이용하여 Dummy Data 생성, Serializer 작성 후 의도대로 동작하는지 확인
+    - 23.11.18~19(주말)
+        - `Front` : 
+        - `back` :
     <br>
 
 ### REFERENCE<hr>
