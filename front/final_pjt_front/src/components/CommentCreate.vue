@@ -18,25 +18,22 @@
 <script setup>
   import { ref } from 'vue'
   import { useCommentStore } from '@/stores/comments.js'
-  import { useRouter } from 'vue-router'
+  import { useRouter, useRoute } from 'vue-router'
 
   const store = useCommentStore()
   const router = useRouter()
+  const route = useRoute()
 
   const content = ref('')
-  const movie_pk = ref('')
-  // const props = defineProps({
-  //   moviePk: Number
-  // })
+
   const updateComment = function (event) {
     content.value = event.currentTarget.value
   }
 
-  movie_pk.value = 1
   const createComment = function () {
-    // store.commentCreate(props.moviePk, content.value)
-    // console.log(moviePk)
-    store.commentCreate(movie_pk.value, content.value)
+    store.commentCreate(route.params.title, content.value)
+    console.log(route.params.title)
+    // router.push({name:'movies', params:{title:route.params.title}})
     router.go(0)
   }
 </script>

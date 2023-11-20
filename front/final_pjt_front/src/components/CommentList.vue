@@ -1,16 +1,19 @@
 <template>
   <div class="comments-container">
-    <div class="movie">
-      <!-- <p class="user-name">{{ comment.id }}</p> -->
-      <p class="user-name">username</p>
-
-      <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
-    </div>
-    <div class="comment">
-      <img src="@/assets/likes/heart2.png" width="33" alt="likes">
-      <!-- <p class="one-comment">{{ comment.content }}</p> -->
-      <p class="one-comment">짱잼</p>
-
+    <div v-for="comment in movieStore.detailMovieComment">
+      <div class="movie">
+        <div v-if="comment.content">
+          <!-- <p class="user-name">{{ comment.id }}</p> -->
+          <p class="user-name">{{ comment.user_nickname }}</p>
+    
+          <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
+        </div>
+        <div class="comment">
+          <img src="@/assets/likes/heart2.png" width="33" alt="likes">
+          <!-- <p class="one-comment">{{ comment.content }}</p> -->
+          <p class="one-comment">{{ comment.content }}</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -18,8 +21,12 @@
 </template>
 
 <script setup>
-  import { useRouter } from 'vue-router'
+  import { useRouter, useRoute } from 'vue-router'
+  import { useMovieStore } from '@/stores/movies'
+
   const router = useRouter()
+  const route = useRoute()
+  const movieStore = useMovieStore()
 
   // defineProps({
     // comment: Object

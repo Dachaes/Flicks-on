@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from .models import Movie, Genre, Comment
 from accounts.models import User
 from .utils import check_exist
-from .serializers import MovieSerializer, CommentSerializer
+from .serializers import MovieSerializer, CommentSerializer, MovieDetailSerializer
 import requests
 import os
 
@@ -80,6 +80,9 @@ def detail(request, tmdb_pk):
             poster_path=f'https://image.tmdb.org/t/p/original/{data["poster_path"]}',
             tmdb_id=data["id"],
         )
+    movie = get_object_or_404(Movie, tmdb_id=tmdb_pk)
+    serializers = MovieDetailSerializer(movie)
+    return Response(serializers.data)
 
 
 @api_view(['POST'])
