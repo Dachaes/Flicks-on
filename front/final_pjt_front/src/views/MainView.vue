@@ -2,9 +2,14 @@
   <div>
     <Headers />
     <Banner />
+    <h2 class="recommendation-message">현재 상영작이에요!</h2>
+    <MovieList />
+    <h2 class="recommendation-message">유명한 작품이에요!</h2>
+    <MovieList />
+    <h2 class="recommendation-message">장르별로 골라 봐요!</h2>
     <MovieGroup />
-    <MovieList />
-    <MovieList />
+    <h2 class="recommendation-message">시대별로 골라 봐요!</h2>
+    <MovieGroup />
     <footers />
   </div>
 </template>
@@ -23,6 +28,9 @@
 </script>
 
 <style scoped>
+  .recommendation-message{
+    margin: 65px 0px 30px;
+  }
   .btn-toolbar {
     flex-direction: row;
     justify-content: space-around;

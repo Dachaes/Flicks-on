@@ -1,6 +1,4 @@
 <template>
-  <h2 class="recommendation-message">이건 어때요?</h2>
-
   <div class="movies-container">
     <div class="movies"
     v-for="movie in movieStore.movieList" :key="movie.id">
@@ -29,9 +27,7 @@
 </script>
 
 <style scoped>
-  .recommendation-message{
-    margin: 65px 0px 30px;
-  }
+
   .movies-container {
     display: flex;
     justify-content: space-around;
