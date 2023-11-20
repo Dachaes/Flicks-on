@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
   const token = ref(null)
   const userName = ref('')
   const userPk = ref(0)
+  const userData = ref(null)
   const isLogin = computed(() => {
     return token.value === null ? false : true
   })
@@ -51,22 +52,8 @@ export const useUserStore = defineStore('user', () => {
         console.log(res)
         token.value = res.data.key
         // console.log(this)
-        
-        axios({
-          method:'get',
-          url: `${API_URL}/accounts/user/`,
-          headers:{
-            'Authorization': `Token ${token.value}`
-          }
-        })
-        .then((res) => {
-          userName.value = res.data.nickname
-          userPk.value = res.data.pk
-          console.log(res)
-          console.log(res.data)
-          console.log(res.data.pk)
-          })
-          .catch((err) => console.log(err))
+        getUserDetail()
+
         // 임시로 main으로 전송
         // 추후 수정
         router.push({ name:'main' })
@@ -86,6 +73,7 @@ export const useUserStore = defineStore('user', () => {
         token.value = null
         userName.value = ''
         userPk.value = 0
+        userData.value = null
         // 임시
         router.push({ name:'login' })
       })
@@ -94,5 +82,41 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { isLogin, API_URL, token, userName, userPk, signUp, logIn, logOut }
+  const getUserDetail = function () {
+    axios({
+      method:'get',
+      url: `${API_URL}/accounts/user/`,
+      headers:{
+        'Authorization': `Token ${token.value}`
+      }
+    })
+    .then((res) => {
+      console.log(res.data)
+      userData.data = res.data
+      userName.value = res.data.nickname
+      userPk.value = res.data.pk
+    })
+    .catch((err) => console.log(err))
+  }
+
+  const updateUserDetail = function (payload) {
+    axios({
+      method: 'put',
+      url: `${API_URL}/accounts/user/`,
+      headers:{
+        'Authorization': `Token ${token.value}`
+      },
+      data:{
+
+      }
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((res) => {
+        console.log(err)
+      })
+  }
+
+  return { isLogin, API_URL, token, userName, userPk, userData, signUp, logIn, logOut, getUserDetail, updateUserDetail }
 }, {persist: true})

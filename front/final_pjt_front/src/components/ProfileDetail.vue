@@ -4,21 +4,30 @@
   </div>
   <div class="profile-container1">
     <div class="blank"></div>
-    <p class="edit">Edit</p>
-    <p class="sign-out" @click="signOut">Sign Out</p>
+    <p class="edit" @click="edit">Edit</p>
+    <p class="sign-out" @click="logOut">Log Out</p>
   </div>
   <div class="profile-container2">
   </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { useUserStore } from '../stores/users';
+import { useRouter } from 'vue-router'
 
-const store = useUserStore()
+const userStore = useUserStore()
+const router = useRouter()
 
-const signOut = function () {
-  store.logOut()
+const logOut = function () {
+  userStore.logOut()
 }
+
+const edit = function () {
+  router.push({name:'edit'})
+}
+
+onMounted(() => userStore.getUserDetail())
 
 </script>
 

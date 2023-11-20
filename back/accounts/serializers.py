@@ -4,6 +4,8 @@ from django.conf import settings
 from allauth.account.adapter import get_adapter
 from rest_framework import  serializers
 from .models import User
+import os
+import tempfile
 
 
 UserModel = get_user_model()
@@ -16,7 +18,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         max_length=255,
     )
     age=serializers.IntegerField(required=False)
-    img=serializers.ImageField(required=False)
+    img=serializers.ImageField(use_url=True, required=False)
+
 
     def get_cleaned_data(self):
         return {
@@ -28,13 +31,31 @@ class CustomRegisterSerializer(RegisterSerializer):
             'img': self.validated_data.get('img', ''),
         }
     
+
     def save(self, request):
         adapter = get_adapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
         adapter.save_user(request, user, self)
         self.custom_signup(request, user)
+
+        # 이미지 파일이 업로드되었으면 MEDIA_ROOT 디렉토리에 저장합니다.
+        if self.cleaned_data['img']:
+            image = self.cleaned_data['img']
+            image_name = f'{user.pk}.jpg'
+            image_path = os.path.join(settings.MEDIA_ROOT, image_name)
+
+            # 이미지 파일을 MEDIA_ROOT 디렉토리에 저장합니다.
+            with open(image_path, 'wb') as f:
+                f.write(image.read())
+
+            # 이미지 경로를 user.image 필드에 설정합니다.
+            user.image = image_path
+            user.save()
+
         return user
+
+
 
 
 class CustomUserDetailsSerializer(serializers.ModelSerializer):
@@ -69,6 +90,8 @@ class CustomUserDetailsSerializer(serializers.ModelSerializer):
             extra_fields.append('last_name')
         if hasattr(UserModel, 'nickname'):
             extra_fields.append('nickname')
+        if hasattr(UserModel, 'age'):
+            extra_fields.append('age')
         model = UserModel
         fields = ('pk', *extra_fields)
         read_only_fields = ('email',)

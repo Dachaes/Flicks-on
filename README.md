@@ -10,7 +10,7 @@
         - ERD 1차 수정
         - 전체 Model 작성 및 TMDB API를 이용해 db 데이터 작성
         - Login, SignUp 구현 및 테스트 진행해 확인
-
+        - rest-auth 커스텀 &rarr; user deatil serializer 수정
 
 - **전소현**
     - 구현 목록 1차 수정
