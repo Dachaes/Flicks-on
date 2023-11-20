@@ -1,5 +1,6 @@
 from urllib import response
 from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.urls import is_valid_path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -81,22 +82,27 @@ def detail(request, tmdb_pk):
         )
 
 
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
-def comment_func(request, movie_pk):
-    if request.method == 'POST':
-        # movie = Movie.objects.get(pk=movie_pk)
-        movie = get_object_or_404(Movie, pk=movie_pk)
-        serializer = CommentSerializer(data=request.data)
-        print(request.data)
-        user = get_object_or_404(User, pk=request.data['pk'])
-        # print(movie)
-        # print(request.user)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save(user=user, movie=movie)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+@api_view(['POST'])
+def comment_create(request, movie_pk):
+    # movie = Movie.objects.get(pk=movie_pk)
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    serializer = CommentSerializer(data=request.data)
+    user = get_object_or_404(User, pk=request.data['pk'])
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=user, movie=movie)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-    elif request.method == 'PUT':
-        pass
+
+@api_view(['PUT', 'DELETE'])
+def comment_detail(request, comment_pk):
+    comment = get_object_or_404(pk=comment_pk)
+    
+    if request.method == 'PUT':
+        serializer = CommentSerializer(comment, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
     
     elif request.method == 'DELETE':
-        pass
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

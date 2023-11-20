@@ -15,5 +15,29 @@ export const useCommentStore = defineStore('comment', () => {
       }
     })
   }
-  return { commentCreate }
+
+  const commentUpdate = function (movie_pk, comment_pk, content) {
+    axios({
+      method: 'put',
+      url: `${API_URL}/api/v1/detail/${movie_pk}/comment/${comment_pk}`,
+      data: {
+        pk: userStore.userPk,
+        movie: movie_pk,
+        contnent: content,
+      }
+    })
+  }
+
+  const commentDelete = function (movie_pk, comment_pk) {
+    axios({
+      method: 'delete',
+      url: `${API_URL}/api/v1/detail/${movie_pk}/comment/${comment_pk}`,
+      data: {
+        pk: userStore.userPk,
+        movie: movie_pk,
+        contnent: content,
+      }
+    })
+  }
+  return { commentCreate, commentUpdate, commentDelete }
 })

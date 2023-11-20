@@ -10,11 +10,16 @@
       <img src="@/assets/likes/heart2.png" width="33" alt="likes">
       <p class="one-comment">재밌어요!</p>
     </div>
+    <div>
+      <button @click="goPage("MyCommentListVue")">수정</button>
+      <button>삭제</button>
+    </div>
   </div>
 
 </template>
 
 <script setup>
+  import { useCommentStore } from '@/stores/comments'
   import { useRouter } from 'vue-router'
   const router = useRouter()
 
