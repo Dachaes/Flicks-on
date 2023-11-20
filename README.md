@@ -76,8 +76,6 @@
         - 배너 수정
         
 
-
-
 ### REFERENCE<hr>
 [css animation](https://animate.style/)<br>
 [css style](https://www.w3schools.com/css/css3_animations.asp)
