@@ -11,7 +11,7 @@
       <p class="one-comment">재밌어요!</p>
     </div>
     <div>
-      <button @click="goPage("MyCommentListVue")">수정</button>
+      <button>수정</button>
       <button>삭제</button>
     </div>
   </div>

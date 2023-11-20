@@ -18,8 +18,10 @@
 <script setup>
   import { ref } from 'vue'
   import { useCommentStore } from '@/stores/comments.js'
+  import { useMovieStore } from '@/stores/movies'
   import { useRouter, useRoute } from 'vue-router'
 
+  const movieStore = useMovieStore()
   const store = useCommentStore()
   const router = useRouter()
   const route = useRoute()
@@ -32,9 +34,10 @@
 
   const createComment = function () {
     store.commentCreate(route.params.title, content.value)
-    console.log(route.params.title)
+  
+    // console.log(route.params.title)
     // router.push({name:'movies', params:{title:route.params.title}})
-    router.go(0)
+    // router.go(0)
   }
 </script>
 

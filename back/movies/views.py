@@ -1,3 +1,4 @@
+from functools import partial
 from urllib import response
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.urls import is_valid_path
@@ -85,23 +86,27 @@ def detail(request, tmdb_pk):
     return Response(serializers.data)
 
 
-@api_view(['POST'])
-def comment_create(request, movie_pk):
-    # movie = Movie.objects.get(pk=movie_pk)
-    movie = get_object_or_404(Movie, pk=movie_pk)
-    serializer = CommentSerializer(data=request.data)
-    user = get_object_or_404(User, pk=request.data['pk'])
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(user=user, movie=movie)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+@api_view(['GET', 'POST'])
+def comment_cr(request, movie_pk):
+    movie = get_object_or_404(Movie, tmdb_id=movie_pk)
+    if request.method == 'GET':
+        serializer = MovieDetailSerializer(movie)
+        return Response()
+
+    if request.method == 'POST':
+        serializer = CommentSerializer(data=request.data)
+        user = get_object_or_404(User, pk=request.data['pk'])
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=user, movie=movie)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 
 @api_view(['PUT', 'DELETE'])
-def comment_detail(request, comment_pk):
-    comment = get_object_or_404(pk=comment_pk)
-    
+def comment_ud(request, movie_pk, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+
     if request.method == 'PUT':
-        serializer = CommentSerializer(comment, data=request.data)
+        serializer = CommentSerializer(comment, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)

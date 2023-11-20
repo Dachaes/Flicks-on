@@ -1,18 +1,25 @@
 <template>
   <div class="comments-container">
-    <div v-for="comment in movieStore.detailMovieComment">
-      <div class="movie">
+    <div v-for="comment in movieStore.detailMovieComment" :key="comment.id">
+      <div class="movie" v-if="!comment.deleting">
         <div v-if="comment.content">
-          <!-- <p class="user-name">{{ comment.id }}</p> -->
           <p class="user-name">{{ comment.user_nickname }}</p>
-    
           <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
         </div>
-        <div class="comment">
-          <img src="@/assets/likes/heart2.png" width="33" alt="likes">
-          <!-- <p class="one-comment">{{ comment.content }}</p> -->
+        <!-- <img src="@/assets/likes/heart2.png" width="33" alt="likes"> -->
+
+        <div class="comment" v-if="!comment.editing">
           <p class="one-comment">{{ comment.content }}</p>
+          <button @click="editSwitch(comment)">Edit</button>
         </div>
+        <div class="comment" v-else>
+          <form class="one-comment" @submit.prevent="commentEdit(comment.id, comment)">
+            <input type="text" v-model="comment.content">
+            <button type="submit">Accept</button>
+          </form>
+        </div>
+
+        <button @click="deleteComment(comment, comment.id)">Delete</button>
       </div>
     </div>
   </div>
@@ -21,16 +28,42 @@
 </template>
 
 <script setup>
+  import { ref, computed, watch } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
+  import { useCommentStore } from '@/stores/comments'
   import { useMovieStore } from '@/stores/movies'
 
   const router = useRouter()
   const route = useRoute()
   const movieStore = useMovieStore()
+  const commentStore = useCommentStore()
 
-  // defineProps({
-    // comment: Object
-  // })
+  const deleteComment = (comment, pk) => {
+    commentStore.commentDelete(route.params.title, pk)
+    // router.push({name: "movie_detail", params: {title: pk}})
+    comment.deleting = !comment.deleting
+  }
+
+  const editSwitch = (comment) => {
+    comment.editing = !comment.editing
+  }
+
+  const commentEdit = (pk, comment) => {
+    const payLoad = {
+      movie_pk: route.params.title,
+      comment_pk: pk,
+      content: comment.content,
+    }
+    commentStore.commentUpdate(payLoad)
+    comment.editing = false
+  }
+  
+  // const comments = ref(movieStore.detailMovieComment)
+
+  // watch(comments, (newValue, oldValue) => {
+  //   console.log(newValue)
+  // }, { immediate: true })
+
 </script>
 
 
