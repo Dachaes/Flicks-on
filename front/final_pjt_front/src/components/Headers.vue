@@ -21,7 +21,7 @@
   // const convertLogo = ref(false) -> 2
 
   const goMain = () => { router.push({name: 'main'}) }
-  const goProfile = () => { router.push({name: 'profile', params: {user_name: userStore.userName}}) }
+  const goProfile = () => { router.push({name: 'profile', params: {user_name: userStore.userPk}}) }
 
   // const convert_logo = (hovered) => {
   //   if (hovered === 'logo2') {

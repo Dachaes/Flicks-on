@@ -7,7 +7,6 @@ class User(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
     nickname = models.CharField(max_length=255, blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
-    img = models.ImageField(upload_to='accout', blank=True)
 
     USERNAME_FIELD = 'username'
 
@@ -27,7 +26,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         username = data.get("username")
         nickname = data.get("nickname")
         age = data.get("age")
-        img = data.get("img")
+
         user_email(user, email)
         user_username(user, username)
         if first_name:
@@ -38,11 +37,6 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             user_field(user, "nickname", nickname)
         if age:
             user.age = age
-        if img:
-            with open('image.jpn', 'wb') as f:
-                f.write(img.read())
-            image_name = f'{user.pk}.jpg'
-            user.image = image_name
         if "password1" in data:
             user.set_password(data["password1"])
         else:

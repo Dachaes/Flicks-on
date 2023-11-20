@@ -18,10 +18,6 @@
         <label for="password2">비밀번호 확인 : </label>
         <input type="password" v-model.trim="password2" id="password2">
       </div>
-      <div>
-        <label for="img">이미지 추가 : </label>
-        <input type="password" id="img">
-      </div>
       <input type="submit">
     </form>
   </div>

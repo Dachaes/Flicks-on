@@ -1,6 +1,6 @@
 <template>
   <div class="personalized-container">
-    <h3>{{ route.params.user_name }} 님의 취향</h3>
+    <h3>{{ userStore.userNickName }} 님의 취향</h3>
     <div class="analysis">
       <h4>취향 분석</h4>
       <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
@@ -15,9 +15,11 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
+import { useUserStore } from '../stores/users';
 
 const route = useRoute()
 const router = useRouter()
+const userStore = useUserStore()
 
 </script>
 
