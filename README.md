@@ -2,16 +2,22 @@
 > `대전 2반 9조`
 - 박수형
     - 구현 목록 초안
-    - `Front` - Vue Components Tree 초안
+    - `Front, Back`
+        - Comment CRUD
+    - `Front`
+        - Vue Components Tree 초안
     - `Back`
         - ERD 1차 수정
         - 전체 Model 작성 및 TMDB API를 이용해 db 데이터 작성
         - Login, SignUp 구현 및 테스트 진행해 확인
 
+
 - **전소현**
     - 구현 목록 1차 수정
     - `Logo` - 제작
-    - `Front, Back` - Project, App 생성
+    - `Front, Back`
+        - Project, App 생성
+        - Comment CRUD
     - `Front`
         - Vue Components Tree 1차 수정, 2차 수정 (완성)
         - Login, SignUp 제외, 전 페이지 초안 구현
@@ -35,8 +41,42 @@
         - `back` : TMDB 데이터를 이용하여 Dummy Data 생성, Serializer 작성 후 의도대로 동작하는지 확인
     - 23.11.18~19(주말)
         - `Front` : Components Tree 변경 및 완성, 그에 따른 Vue Project 구체화 -> 전 페이지 초안 완성
+        - `back` : signup, login, 현재 로그인 하고 있는 유저의 정보 return 값 customizing
+    - 23.11.20(월)
+        - `Front` : Comment CRUD
+        - `back` : Comment CRUD
+    - 23.11.21(화)
+        - `Front` :
+        - `back` :
+    - 23.11.22(수)
+        - `Front` :
+        - `back` :
+    - 23.11.23(목)
+        - `Front` :
+        - `back` :
+    - 23.11.24(금)
+        - `Front` :
         - `back` :
     <br>
+5. 진행해야 할 부분
+    - 월요일
+        - 장르별 영화 가져오기 &rarr; 장르별 페이지 구현
+        - 각각 movieList 컴포넌트에 keyword 넣어서 custom 하기
+        - DetailPage 에 관련 영화 custom 하기 (위랑 동작 동일) &rarr; 페이지 넘겨주기 (디버깅)
+        - user 회원정보 수정
+        - logout 추가, signout 추가
+        - (comment) user의 한줄평 불러오기 &rarr; 수정, 삭제
+
+    - 화요일
+        - signup 추가 (취향 추천 알고리즘)
+        - 프로필 사진 추가 (추가 기능)   
+        - comment 생성 (추가 기능 &rarr; 새로고침 디버깅)
+
+    - 수요일
+        - 배너 수정
+        
+
+
 
 ### REFERENCE<hr>
 [css animation](https://animate.style/)<br>
