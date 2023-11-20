@@ -1,42 +1,30 @@
 <template>
   <h2 class="recommendation-message">이건 어때요?</h2>
+
   <div class="movies-container">
-    <div class="movie">
-      <img @click="goPage('movie_detail')" class="movie-poster" src="@/assets/movie/parasite.png" alt="movie_poster">
-      <p class="m-0 p-0">기생충</p>
-      <img src="@/assets/likes/heart2.png" width="17" alt=""> 5.3
-    </div>
-    <div class="movie">
-      <img @click="goPage('movie_detail')" class="movie-poster" src="@/assets/movie/parasite.png" alt="movie_poster">
-      <p class="m-0 p-0">기생충</p>
-      <img src="@/assets/likes/heart2.png" width="17" alt=""> 5.3
-    </div>
-    <div class="movie">
-      <img @click="goPage('movie_detail')" class="movie-poster" src="@/assets/movie/parasite.png" alt="movie_poster">
-      <p class="m-0 p-0">기생충</p>
-      <img src="@/assets/likes/heart2.png" width="17" alt=""> 5.3
-    </div>
-    <div class="movie">
-      <img @click="goPage('movie_detail')" class="movie-poster" src="@/assets/movie/parasite.png" alt="movie_poster">
-      <p class="m-0 p-0">기생충</p>
-      <img src="@/assets/likes/heart2.png" width="17" alt=""> 5.3
-    </div>
-    <div class="movie">
-      <img @click="goPage('movie_detail')" class="movie-poster" src="@/assets/movie/parasite.png" alt="movie_poster">
-      <p class="m-0 p-0">기생충</p>
+    <div class="movies"
+    v-for="movie in movieStore.movieList" :key="movie.id">
+      <img class="movie-poster" @click="goPage('movie_detail', movie.tmdb_id)"
+      :src="`${movie.poster_path}`" alt="movie_poster">
+      <p class="m-0 p-0">{{ movie.title }}</p>
       <img src="@/assets/likes/heart2.png" width="17" alt=""> 5.3
     </div>
   </div>
+  <!-- <p>{{ movieStore.movieList }}</p> -->
 </template>
 
 <script setup>
   // import MovieDetailView from '@/views/MovieDetailView.vue'
 
   import { useRouter } from 'vue-router'
-  const router = useRouter()
+  import { useMovieStore } from '@/stores/movies'
 
-  const goPage = function (pageName) {
-    router.push({name: pageName, params: {title: 'parasite'}})
+  const router = useRouter()
+  const movieStore = useMovieStore()
+  movieStore.getMovieList()
+
+  const goPage = function (pageName, id) {
+    router.push({name: pageName, params: {title: id}})
   }
 </script>
 
@@ -50,7 +38,7 @@
     margin-top: 30px;
     padding: 10px 0;
   }
-  .movie {
+  .movies {
     width: 20%;
   }
   .movie-poster {

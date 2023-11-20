@@ -1,12 +1,16 @@
 <template>
   <div class="comments-container">
     <div class="movie">
-      <p class="user-name">User</p>
+      <!-- <p class="user-name">{{ comment.id }}</p> -->
+      <p class="user-name">username</p>
+
       <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
     </div>
     <div class="comment">
       <img src="@/assets/likes/heart2.png" width="33" alt="likes">
-      <p class="one-comment">재밌어요!</p>
+      <!-- <p class="one-comment">{{ comment.content }}</p> -->
+      <p class="one-comment">짱잼</p>
+
     </div>
   </div>
 
@@ -16,20 +20,10 @@
   import { useRouter } from 'vue-router'
   const router = useRouter()
 
+  // defineProps({
+    // comment: Object
+  // })
 </script>
-
-<!-- <template>
-  <li>
-    <span class="comment-id">{{ comment.id }}</span>
-    <span class="comment-content">{{ comment.content }}</span>
-  </li>
-</template>
-
-<script setup>
-defineProps({
-  comment: Object
-})
-</script> -->
 
 
 <style scoped>

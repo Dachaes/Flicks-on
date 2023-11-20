@@ -8,6 +8,7 @@ export const useUserStore = defineStore('user', () => {
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   const userName = ref('')
+  const userPk = ref(0)
   const isLogin = computed(() => {
     return token.value === null ? false : true
   })
@@ -60,7 +61,10 @@ export const useUserStore = defineStore('user', () => {
         })
         .then((res) => {
           userName.value = res.data.nickname
+          userPk.value = res.data.pk
           console.log(res)
+          console.log(res.data)
+          console.log(res.data.pk)
           })
           .catch((err) => console.log(err))
         // 임시로 main으로 전송
@@ -80,6 +84,8 @@ export const useUserStore = defineStore('user', () => {
       .then((res) => {
         userName.value = ''
         token.value = null
+        userName.value = ''
+        userPk.value = 0
         // 임시
         router.push({ name:'login' })
       })
@@ -88,5 +94,5 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { isLogin, API_URL, token, userName, signUp, logIn, logOut }
+  return { isLogin, API_URL, token, userName, userPk, signUp, logIn, logOut }
 }, {persist: true})

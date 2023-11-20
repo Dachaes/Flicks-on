@@ -12,16 +12,21 @@
       </div>
       <input type="submit">
     </form>
+    <button @click="goPage('signup')">Create Account</button>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/users'
+import { useRouter } from 'vue-router'
 
 const store = useUserStore()
+const router = useRouter()
+
 const username = ref(null)
 const password = ref(null)
+
 
 const logIn = function() {
   const payLoad = {
@@ -29,6 +34,10 @@ const logIn = function() {
     password: password.value,
   }
   store.logIn(payLoad)
+}
+
+const goPage = function (pageName) {
+  router.push({name: pageName})
 }
 
 </script>

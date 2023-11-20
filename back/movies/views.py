@@ -1,8 +1,10 @@
+from urllib import response
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Movie, Genre, Comment
+from accounts.models import User
 from .utils import check_exist
 from .serializers import MovieSerializer, CommentSerializer
 import requests
@@ -50,10 +52,20 @@ def index(request):
     pass
 
 
-def detail(request, movie_pk):
-    movie = Movie.objects.filter(tmdb_id=movie_pk)
+@api_view(['GET'])
+def movies(request):
+    movies = get_list_or_404(Movie)[:5]
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def detail(request, tmdb_pk):
+    movie = Movie.objects.filter(tmdb_id=tmdb_pk)
     if not movie:
-        url = f"https://api.themoviedb.org/3/movie/{movie_pk}?language=ko-KR"
+        url = f"https://api.themoviedb.org/3/movie/{tmdb_pk}?language=ko-KR"
+        print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print(os.environ.get('API_TOKEN'))
         response = requests.get(
             url,
             headers = {
@@ -75,13 +87,12 @@ def comment_func(request, movie_pk):
         # movie = Movie.objects.get(pk=movie_pk)
         movie = get_object_or_404(Movie, pk=movie_pk)
         serializer = CommentSerializer(data=request.data)
+        print(request.data)
+        user = get_object_or_404(User, pk=request.data['pk'])
+        # print(movie)
+        # print(request.user)
         if serializer.is_valid(raise_exception=True):
-            if request.user.is_authenticated and request.user.is_active:
-                # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-                serializer.save(user=request.user, movie=movie)
-            else:
-                # print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-                return Response(status=status.HTTP_401_UNAUTHORIZED)
+            serializer.save(user=user, movie=movie)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     elif request.method == 'PUT':

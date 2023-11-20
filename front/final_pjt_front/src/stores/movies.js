@@ -2,36 +2,56 @@ import axios from 'axios'
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const usePostStore = defineStore('post', () => {
-  // const postList = ref([])
-  // const getPostList = function () {
-  //   axios({
-  //     method: 'get',
-  //     url: 'http://127.0.0.1:8000/api/v1/posts/'
-  //   })
-  //   .then(res => postList.value = res.data)
-  //   .catch(err => console.log(err))
-  // }
+export const useMovieStore = defineStore('post', () => {
+  const movieList = ref([])
+  const getMovieList = function () {
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8000/api/v1/movies/'
+    })
+    .then(res => movieList.value = res.data)
+    .catch(err => console.log(err))
+  }
+
+
   const detailMovie = ref([])
   const getDetailMovie = function (pk) {
+    const TMDB_API_TOKEN = ref(import.meta.env.VITE_TMDB_API_TOKEN)
+    
     axios({
       method: 'get',
       url: `http://127.0.0.1:8000/api/v1/detail/${pk}`
     })
-    .then(res => detailMovie.value = res.data)
+    .then(res => {
+      detailMovie.value = res.data
+      // console.log(res.data)
+    })
     .catch(err => console.log(err))
+
+    const options = {
+      method: 'GET',
+      url: `https://api.themoviedb.org/3/movie/${pk}`,
+      params: {language: 'ko-KR'},
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${TMDB_API_TOKEN.value}`
+      }
+    }
+    axios
+    .request(options)
+    .then(function (response) {
+      detailMovie.value = response.data
+      let tmp = detailMovie.value.poster_path
+      detailMovie.value.poster_path = 'https://image.tmdb.org/t/p/w500/' + tmp
+    })
+    .catch(function (error) {
+      console.error(error)
+    })
   }
 
-  // const createPost = function ({category, title, content}) {
-  //   axios({
-  //     method: 'post',
-  //     url: 'http://127.0.0.1:8000/api/v1/posts/',
-  //     data: {
-  //       category,
-  //       title,
-  //       content
-  //     }
-  //   })
-  // }
-  return { postList, getPostList, detailPost, getDetailPost, createPost }
+
+
+ 
+
+  return { movieList, getMovieList, detailMovie, getDetailMovie}
 })

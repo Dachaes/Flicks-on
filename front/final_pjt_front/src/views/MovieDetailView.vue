@@ -2,7 +2,8 @@
   <div>
     <Headers />
 
-    <MovieDetail />
+    <MovieDetail :tmdb-id="tmdb_id"/>
+
     <MovieList />
 
     <CommentCreate />
@@ -31,8 +32,13 @@
   import CommentList from '@/components/CommentList.vue'
   import Footers from '@/components/Footers.vue'
 
+  import { ref } from 'vue'
+  import { useRoute } from 'vue-router'
+
+  const route = useRoute()
+  const tmdb_id = ref(route.params.title)
+
   // import { onMounted } from 'vue'
-  // import { useRoute } from 'vue-router'
   // import { useMovieStore } from '@/stores/movies'
   // const route = useRoute()
   // const store = useMovieStore()
