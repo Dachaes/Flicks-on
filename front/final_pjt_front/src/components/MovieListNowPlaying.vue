@@ -1,25 +1,26 @@
 <template>
   <div class="movies-container">
     <div class="movies"
-    v-for="movie in movieStore.movieList" :key="movie.id">
-      <img class="movie-poster" @click="goPage('movie_detail', movie.tmdb_id)"
-      :src="`${movie.poster_path}`" alt="movie_poster">
-      <p class="m-0 p-0">{{ movie.title }}</p>
-      <img src="@/assets/likes/heart2.png" width="17" alt=""> 5.3
+    v-for="movie in movieStore.nowPlayingMovie" :key="movie.id">
+      <!-- <div v-if="movie.poster_path">
+        <div v-if="movie.vote_average"> -->
+          <img class="movie-poster" @click="goPage('movie_detail', movie.id)"
+          :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="movie_poster">
+          <p class="m-0 p-0">{{ movie.title }}</p>
+          <img src="@/assets/likes/heart2.png" width="17" alt="">{{ movie.vote_average }}
+        <!-- </div>
+      </div> -->
     </div>
   </div>
-  <!-- <p>{{ movieStore.movieList }}</p> -->
 </template>
 
 <script setup>
-  // import MovieDetailView from '@/views/MovieDetailView.vue'
-
   import { useRouter } from 'vue-router'
   import { useMovieStore } from '@/stores/movies'
 
   const router = useRouter()
   const movieStore = useMovieStore()
-  movieStore.getMovieList()
+  movieStore.getNowPlayingMovie()
 
   const goPage = function (pageName, id) {
     router.push({name: pageName, params: {title: id}})

@@ -4,7 +4,7 @@
 
     <MovieDetail :tmdb-id="tmdb_id"/>
 
-    <MovieList />
+    <MovieListSimilar :tmdb-id="tmdb_id" />
 
     <CommentCreate />
     <!-- <CommentCreate 
@@ -27,7 +27,7 @@
 <script setup>
   import Headers from '@/components/Headers.vue'
   import MovieDetail from '@/components/MovieDetail.vue'
-  import MovieList from '@/components/MovieList.vue'
+  import MovieListSimilar from '@/components/MovieListSimilar.vue'
   import CommentCreate from '@/components/CommentCreate.vue'
   import CommentList from '@/components/CommentList.vue'
   import Footers from '@/components/Footers.vue'
