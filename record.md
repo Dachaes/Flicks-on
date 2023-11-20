@@ -108,3 +108,4 @@
 - 공식문서를 찾으면서 user detail을 불러 올 수 있는 url 발견
     - serializer를 custom 하고 settings 에 추가해 주니까 성공적으로 return 했다.
     - 공식문서에 따르면 put 요청 역시 이것을 통해 하면 된다고 명시되어 있음.
+- 작성자 : 박수형

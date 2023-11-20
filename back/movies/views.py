@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from .models import Movie, Genre, Comment
 from accounts.models import User
 from .utils import check_exist
-from .serializers import MovieSerializer, CommentSerializer
+from .serializers import MovieSerializer, CommentSerializer, MovieDetailSerializer
 import requests
 import os
 
@@ -79,18 +79,21 @@ def detail(request, tmdb_pk):
             poster_path=f'https://image.tmdb.org/t/p/original/{data["poster_path"]}',
             tmdb_id=data["id"],
         )
+    movie = get_object_or_404(Movie, tmdb_id=tmdb_pk)
+    serializers = MovieDetailSerializer(movie)
+    return Response(serializers.data)
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def comment_func(request, movie_pk):
+    movie = get_object_or_404(Movie, tmdb_id=movie_pk)
+    if request.method == 'GET':
+        serializer = MovieDetailSerializer(movie)
+        return Response()
+
     if request.method == 'POST':
-        # movie = Movie.objects.get(pk=movie_pk)
-        movie = get_object_or_404(Movie, pk=movie_pk)
         serializer = CommentSerializer(data=request.data)
-        print(request.data)
         user = get_object_or_404(User, pk=request.data['pk'])
-        # print(movie)
-        # print(request.user)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=user, movie=movie)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

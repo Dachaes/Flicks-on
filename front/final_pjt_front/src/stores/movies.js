@@ -15,6 +15,7 @@ export const useMovieStore = defineStore('post', () => {
 
 
   const detailMovie = ref([])
+  const detailMovieComment = ref([])
   const getDetailMovie = function (pk) {
     const TMDB_API_TOKEN = ref(import.meta.env.VITE_TMDB_API_TOKEN)
     
@@ -23,8 +24,8 @@ export const useMovieStore = defineStore('post', () => {
       url: `http://127.0.0.1:8000/api/v1/detail/${pk}`
     })
     .then(res => {
-      detailMovie.value = res.data
-      // console.log(res.data)
+      detailMovieComment.value = res.data.comment_set
+      console.log(detailMovieComment.value)
     })
     .catch(err => console.log(err))
 
@@ -49,9 +50,5 @@ export const useMovieStore = defineStore('post', () => {
     })
   }
 
-
-
- 
-
-  return { movieList, getMovieList, detailMovie, getDetailMovie}
+  return { movieList, detailMovieComment, getMovieList, detailMovie, getDetailMovie}
 })
