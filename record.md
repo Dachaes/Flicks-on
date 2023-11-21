@@ -117,6 +117,8 @@
 ### 시도해본 것들
 - 코드 1
    ```
+   import { useMovieStore } from '@/stores/movies'
+   
    const movieStore = useMovieStore()
    movieStore.getNowPlayingMovie()
    const nowPlayingMovieList = movieStore.nowPlayingMovie
@@ -124,7 +126,9 @@
    ```
 
 - 코드 2
-   ```
+   ```   
+   import { useMovieStore } from '@/stores/movies'
+   
    const movieStore = useMovieStore()
    const nowPlayingMovieList = ref([])
    onBeforeMount(async () => {
@@ -135,6 +139,8 @@
 
 - 코드 3
    ```
+   import { useMovieStore } from '@/stores/movies'
+
    const movieStore = useMovieStore()
    const nowPlayingMovieList = ref([])
    const isDataLoaded = ref(false)
