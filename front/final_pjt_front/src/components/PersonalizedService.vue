@@ -9,17 +9,57 @@
     </div>
   </div>
   <div class="likes">
-
+    <div v-if="userRecommendList">
+      <span v-for="movie in userRecommendList">
+        <img :src="movie.poster_path" alt="" width="60">
+        <strong>{{ movie.title }}</strong>
+      </span>
+    </div>
+    <div v-else>
+      <p>로딩중</p>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../stores/users';
+import axios from 'axios'
+import { ref, onMounted } from 'vue';
 
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
+
+const userRecommendList = ref(null)
+
+const getRecommendMovie = () => {
+  axios({
+    method: 'post',
+    url: `${userStore.API_URL}/api/v1/movies/recommend/${userStore.userPk}/`,
+    data:{
+      user_genre: userStore.userData.usergenre_set[0]
+    }
+  })
+    .then((res) => {
+      const uniqueMovies = removeDuplicates(res.data);
+      userRecommendList.value = uniqueMovies.slice(0, 20);
+      console.log(uniqueMovies.slice(0, 20))
+    })
+    .catch(err => console.log(err))
+}
+
+// Helper function to remove duplicates from an array of objects
+const removeDuplicates = (array) => {
+  const uniqueArray = array.filter((item, index, self) =>
+    index === self.findIndex(obj => JSON.stringify(obj) === JSON.stringify(item))
+  );
+  return uniqueArray;
+};
+
+onMounted(() => {
+  getRecommendMovie(route.params.user_name)
+})
 
 </script>
 

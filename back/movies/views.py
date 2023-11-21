@@ -1,7 +1,4 @@
-from re import L
-from urllib import response
-from django.shortcuts import render, get_list_or_404, get_object_or_404
-from django.urls import is_valid_path
+from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -12,50 +9,46 @@ import requests
 import os
 
 
-# Create your views here.
-""" genre call function
 def index(request):
     # 영화 더미데이터 가져오는 부분
-    for page_num in range(1, 21):
-        url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page_num}"
-        response = requests.get(
-            url,
-            headers = {
-            "accept": "application/json",
-            "Authorization": f"Bearer {os.environ.get('API_TOKEN')}"
-            }
-        )
-        data = response.json()
-        for movie in data['results']:
-            Movie.objects.create(
-                title=movie["title"],
-                poster_path=f'https://image.tmdb.org/t/p/original/{movie["poster_path"]}',
-                tmdb_id=movie["id"],
-                movie_rate = round(movie["vote_average"], 1),
-                release_date=movie['release_date'],
-                action= True if 28 in movie['genre_ids'] else False,
-                adventure = True if 12 in movie['genre_ids'] else False,
-                animation = True if 16 in movie['genre_ids'] else False,
-                comedy = True if 35 in movie['genre_ids'] else False,
-                crime = True if 80 in movie['genre_ids'] else False,
-                documentary = True if 99 in movie['genre_ids'] else False,
-                drama = True if 18 in movie['genre_ids'] else False,
-                family = True if 10751 in movie['genre_ids'] else False,
-                fantasy = True if 14 in movie['genre_ids'] else False,
-                history = True if 36 in movie['genre_ids'] else False,
-                horror = True if 27 in movie['genre_ids'] else False,
-                music = True if 10402 in movie['genre_ids'] else False,
-                mystery = True if 9648 in movie['genre_ids'] else False,
-                romance = True if 10749 in movie['genre_ids'] else False,
-                science_fiction = True if 878 in movie['genre_ids'] else False,
-                tv_movie = True if 10770 in movie['genre_ids'] else False,
-                thriller = True if 53 in movie['genre_ids'] else False,
-                war = True if 10752 in movie['genre_ids'] else False,
-                western = True if 27 in movie['genre_ids'] else False,
-
+    if not Movie.objects.exists():
+        for page_num in range(1, 21):
+            url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page_num}"
+            response = requests.get(
+                url,
+                headers = {
+                "accept": "application/json",
+                "Authorization": f"Bearer {os.environ.get('API_TOKEN')}"
+                }
             )
-"""
-def index(request):
+            data = response.json()
+            for movie in data['results']:
+                Movie.objects.create(
+                    title=movie["title"],
+                    poster_path=f'https://image.tmdb.org/t/p/original/{movie["poster_path"]}',
+                    tmdb_id=movie["id"],
+                    movie_rate = round(movie["vote_average"], 1),
+                    release_date=movie['release_date'],
+                    action= True if 28 in movie['genre_ids'] else False,
+                    adventure = True if 12 in movie['genre_ids'] else False,
+                    animation = True if 16 in movie['genre_ids'] else False,
+                    comedy = True if 35 in movie['genre_ids'] else False,
+                    crime = True if 80 in movie['genre_ids'] else False,
+                    documentary = True if 99 in movie['genre_ids'] else False,
+                    drama = True if 18 in movie['genre_ids'] else False,
+                    family = True if 10751 in movie['genre_ids'] else False,
+                    fantasy = True if 14 in movie['genre_ids'] else False,
+                    history = True if 36 in movie['genre_ids'] else False,
+                    horror = True if 27 in movie['genre_ids'] else False,
+                    music = True if 10402 in movie['genre_ids'] else False,
+                    mystery = True if 9648 in movie['genre_ids'] else False,
+                    romance = True if 10749 in movie['genre_ids'] else False,
+                    science_fiction = True if 878 in movie['genre_ids'] else False,
+                    tv_movie = True if 10770 in movie['genre_ids'] else False,
+                    thriller = True if 53 in movie['genre_ids'] else False,
+                    war = True if 10752 in movie['genre_ids'] else False,
+                    western = True if 27 in movie['genre_ids'] else False,
+                )
     # 장르 가져오기
     url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
     response = requests.get(
@@ -190,3 +183,16 @@ def user_init(request, user_pk):
         )
         serializer = UserGenreSerializer(user_genre)
         return Response(serializer.data)
+
+
+@api_view(['POST'])
+def recommend_movies(request, user_pk):
+    movie_list = []
+    for item in request.data['user_genre'].items():
+        if item[1] == 1:
+            movies = Movie.objects.filter(**{item[0]: True})
+            movie_list.extend(movies)
+
+    serializer = MovieSerializer(movie_list, many=True)
+    return Response(serializer.data)
+    
