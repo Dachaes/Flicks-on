@@ -1,12 +1,13 @@
 from re import L
+from urllib import response
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.urls import is_valid_path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Movie, Genre, Comment, UserImage
+from .models import Movie, Genre, Comment, UserImage, UserGenre
 from accounts.models import User
-from .serializers import GenreSerializer, MovieSerializer, CommentSerializer, MovieDetailSerializer, ImageSerializer
+from .serializers import GenreSerializer, MovieSerializer, CommentSerializer, MovieDetailSerializer, ImageSerializer, UserGenreSerializer
 import requests
 import os
 
@@ -160,6 +161,32 @@ def user_image(request, user_pk):
 @api_view(['GET', 'POST'])
 def user_init(request, user_pk):
     genres = get_list_or_404(Genre)
+    user = get_object_or_404(User, pk=user_pk)
     if request.method == 'GET':
         serializer = GenreSerializer(genres, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        user_genre = UserGenre.objects.create(
+            user = user,
+            action = 1 if 'Action' in request.data['selectedGenres'] else 0,
+            adventure = 1 if 'Adventure' in request.data['selectedGenres'] else 0,
+            animation = 1 if 'Animation' in request.data['selectedGenres'] else 0,
+            comedy = 1 if 'Comedy' in request.data['selectedGenres'] else 0,
+            crime = 1 if 'Crime' in request.data['selectedGenres'] else 0,
+            documentary = 1 if 'Documentary' in request.data['selectedGenres'] else 0,
+            drama = 1 if 'Drama' in request.data['selectedGenres'] else 0,
+            family = 1 if 'Family' in request.data['selectedGenres'] else 0,
+            fantasy = 1 if 'Fantasy' in request.data['selectedGenres'] else 0,
+            history = 1 if 'History' in request.data['selectedGenres'] else 0,
+            horror = 1 if 'Horror' in request.data['selectedGenres'] else 0,
+            music = 1 if 'Music' in request.data['selectedGenres'] else 0,
+            mystery = 1 if 'Mystery' in request.data['selectedGenres'] else 0,
+            romance = 1 if 'Romance' in request.data['selectedGenres'] else 0,
+            science_fiction = 1 if 'Science Fiction' in request.data['selectedGenres'] else 0,
+            tv_movie = 1 if 'TV Movie' in request.data['selectedGenres'] else 0,
+            thriller = 1 if 'Thriller' in request.data['selectedGenres'] else 0,
+            war = 1 if 'War' in request.data['selectedGenres'] else 0,
+            western = 1 if 'Western' in request.data['selectedGenres'] else 0,
+        )
+        serializer = UserGenreSerializer(user_genre)
         return Response(serializer.data)

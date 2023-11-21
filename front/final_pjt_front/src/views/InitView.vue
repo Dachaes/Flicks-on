@@ -1,21 +1,22 @@
 <template>
   <div>
-    <button @click="getMoviesInfo">버튼</button>
     <div v-for="genre in genres" :key="genre.id">
       <button @click="selectGenres(genre.name)">{{ genre.name }}</button>
     </div>
     <div v-if="comp">
-      <button>제출</button>
+      <button @click="addGenre">제출</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useUserStore } from '../stores/users';
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 
 const userStore = useUserStore()
+const router = useRouter()
 const genres = ref(null)
 const selectedGenres = ref([])
 
@@ -33,13 +34,33 @@ const getMoviesInfo = function () {
   }
 
 const selectGenres = function (genreName) {
-  selectedGenres.value.push(genreName)
+  selectedGenres.value.includes(genreName) ? false : selectedGenres.value.push(genreName)
   console.log(selectedGenres.value)
-  console.log(selectedGenres.value.length)
+}
+
+const addGenre = () => {
+  axios({
+      method: 'post',
+      url: `${userStore.API_URL}/api/v1/init/${userStore.userPk}/`,
+      data:{
+        selectedGenres: selectedGenres.value
+      }
+  })
+    .then((res) => {
+      console.log(res)
+      router.push({name:'main'})
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 const comp = computed(() => {
   return selectedGenres.value.length > 2 ? true : false
+})
+
+onMounted(() => {
+  getMoviesInfo()
 })
 
 </script>

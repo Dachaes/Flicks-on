@@ -2,7 +2,8 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from allauth.account.adapter import get_adapter
-from rest_framework import  serializers
+from rest_framework import serializers
+from movies.serializers import UserGenreSerializer
 
 
 UserModel = get_user_model()
@@ -43,6 +44,8 @@ class CustomUserDetailsSerializer(serializers.ModelSerializer):
     User model w/o password
     """
 
+    usergenre_set = UserGenreSerializer(read_only=True, many=True)
+
     @staticmethod
     def validate_username(username):
         if 'allauth.account' not in settings.INSTALLED_APPS:
@@ -72,8 +75,10 @@ class CustomUserDetailsSerializer(serializers.ModelSerializer):
             extra_fields.append('nickname')
         if hasattr(UserModel, 'age'):
             extra_fields.append('age')
-        if hasattr(UserModel, 'is_active'):
-            extra_fields.append('is_active')
+        if hasattr(UserModel, 'last_login'):
+            extra_fields.append('last_login')
+        if hasattr(UserModel, 'date_joined'):
+            extra_fields.append('date_joined')
         model = UserModel
-        fields = ('pk', *extra_fields)
+        fields = ('pk', 'usergenre_set', *extra_fields,)
         # read_only_fields = ('email',)

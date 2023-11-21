@@ -49,14 +49,19 @@ export const useUserStore = defineStore('user', () => {
       }
     })
       .then((res) => {
+        getUserDetail()
         console.log(res)
         token.value = res.data.key
-        // console.log(this)
-        getUserDetail()
-
-        // 임시로 main으로 전송
-        // 추후 수정
-        router.push({ name:'main' })
+        return userData.value
+      })
+      .then((res) => {
+        if (res.last_login.slice(0,15) === res.date_joined.slice(0,15)){
+          router.push({name:'init', params:{user_pk: userPk.value}})
+        } else {
+          // 임시로 main으로 전송
+          // 추후 수정
+          router.push({ name:'main' })
+        }
       })
       .catch((err) => {
           console.log(err)
@@ -90,12 +95,11 @@ export const useUserStore = defineStore('user', () => {
       }
     })
       .then((res) => {
-        console.log(res.data)
         userData.value = res.data
         userNickName.value = res.data.nickname
         userPk.value = res.data.pk
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
   }
 
   const updateUserDetail = function (payload) {
