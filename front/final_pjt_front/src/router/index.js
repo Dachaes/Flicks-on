@@ -7,6 +7,7 @@ import MovieGenreView from '@/views/MovieGenreView.vue'
 import MovieDetailView from '@/views/MovieDetailView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import ProfileEditView from '@/views/ProfileEditView.vue'
+import InitView from '@/views/InitView.vue'
 
 
 const router = createRouter({
@@ -46,6 +47,11 @@ const router = createRouter({
       path: '/edit/',
       name: 'edit',
       component: ProfileEditView
+    },
+    {
+      path: '/init/:user_pk',
+      name: 'init',
+      component: InitView
     },
   ]
 })

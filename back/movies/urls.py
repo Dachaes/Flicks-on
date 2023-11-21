@@ -9,4 +9,5 @@ urlpatterns = [
     path('detail/<int:movie_pk>/comment/', views.comment_cr),
     path('detail/<int:movie_pk>/comment/<int:comment_pk>', views.comment_ud),
     path('addimage/<int:user_pk>/', views.user_image),
+    path('init/<int:user_pk>/', views.user_init),
 ]
