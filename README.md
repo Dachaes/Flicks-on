@@ -47,7 +47,7 @@
         - `Front` : Comment CRUD, API Data 불러오기 (현재 상영작, 인기작, 관련 영화)
         - `back` : Comment CRUD
     - 23.11.21(화)
-        - `Front` :
+        - `Front` : 관련 영화 API 부분 디버깅, API Data 불러오기 (개봉 예정작, 검색 기능 구현)
         - `back` :
     - 23.11.22(수)
         - `Front` :
@@ -61,8 +61,6 @@
     <br>
 5. 진행해야 할 부분
     - 우선순위 상
-        - 장르별 영화 가져오기 &rarr; 장르별 페이지 구현
-        - DetailPage 에 관련 영화 custom 하기 (위랑 동작 동일) &rarr; 페이지 넘겨주기 (디버깅)
         - (comment) user의 한줄평 불러오기 &rarr; 수정, 삭제
         - signup 추가 (취향 추천 알고리즘)
 
