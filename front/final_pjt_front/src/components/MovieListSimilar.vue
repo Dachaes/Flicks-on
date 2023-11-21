@@ -9,10 +9,12 @@
       <div v-else>
         <img class="movie-poster"
         :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="movie_poster">
-        <router-view :key="route.fullPath" />
       </div>
-      <p class="m-0 p-0">{{ movie.title }}</p>
-      <img src="@/assets/likes/heart2.png" width="17" alt="">{{ movie.vote_average }}
+      <p class="movie-title">{{ movie.title }}</p>
+      <div class="movie-rating">
+        <img class="movie-heart" src="@/assets/likes/heart2.png" width="17" alt="">
+        <p class="movie-rate">{{ movie.vote_average }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -38,19 +40,60 @@
 </script>
 
 <style scoped>
-
-  .movies-container {
+.movies-container {
     display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-    padding: 10px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
   }
+
   .movies {
-    width: 20%;
+    margin: 10px;
+    padding: 10px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    text-align: center;
+    width: 197px;
+    height: 410px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
+
   .movie-poster {
-    width: 85%;
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+  }
+  .movie-poster:hover {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    opacity: 0.5;
+  }
+  
+  .movie-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
+  .movie-rating {  
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: space-between;
+    margin: 365px 0px 0px;
+  }
 
+  .movie-heart {
+    width: 17px;
+    height: 17px;
+    margin: 6px 6px 17px;
+  }
+
+  .movie-rate {
+    font-size: 16px;
+    font-weight: bold;
+  }
 </style>

@@ -1,55 +1,117 @@
 <template>
   <div class="header-container">
-    <!-- <img class="logo-img" @mouseover="convert_logo('logo2')" @mouseout="convert_logo('logo1')" @click="goMain()" :src="logoSrc" height="80" alt="logo"> -->
-    <!-- <img class="logo-img"
-          @mouseenter="convertLogo=true" @mouseleave="convertLogo=false"
-          @click="goMain()" :src="convertLogo? './assets/logo/logo2-1.png':'./assets/logo/logo1.png'" height="80" alt="logo"> -->
-    <img class="logo-img" @click="goMain()" src="@/assets/logo/logo1.png" height="80" alt="logo">
-
-    <img class="user-img" @click="goProfile()" src="@/assets/user/anonymous_user.png" height="50" alt="logo1">
+    <img class="logo-img" @click="goMain()" src="@/assets/logo/logo_dark.png" alt="logo">
+    
+    <div class="form">
+      <input type="text" class="input" :value="query" @input="updateQuery">
+      <img @click="goSearch(query)" src="@/assets/search/search.png" alt="search">
+    </div>
+    <img class="user-img" @click="goProfile()" src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/FFFFFF/external-User-essential-collection-bearicons-glyph-bearicons.png" alt="external-User-essential-collection-bearicons-glyph-bearicons"/>
+    <!-- <img class="user-img" @click="goProfile()" src="@/assets/user/anonymous_user.png" alt="logo1"> -->
   </div>
 </template>
 
 <script setup>
-  // import { ref, onMounted } from 'vue'
+  import { ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { useUserStore } from '../stores/users';
 
   const router = useRouter()
   const userStore = useUserStore()
-  // const logoSrc = ref(import.meta.glob("@/assets/logo/logo1.png"))
-  // const convertLogo = ref(false) -> 2
 
   const goMain = () => { router.push({name: 'main'}) }
   const goProfile = () => { router.push({name: 'profile', params: {user_name: userStore.userPk}}) }
 
-  // const convert_logo = (hovered) => {
-  //   if (hovered === 'logo2') {
-  //     logoSrc.value = import.meta.glob("@/assets/logo/logo2-1.png")
-  //   }
-  //   else {
-  //     logoSrc.value = import.meta.glob("@/assets/logo/logo1.png")
-  //   }
-  // }
+  const query = ref('')
+  
+  const updateQuery = function (event) {
+    query.value = event.currentTarget.value
+  }
+  
+  const goSearch = function (query) {
+    router.push({name: 'search', params: { query: query } })
+  }
 </script>
 
 <style scoped>
   .header-container {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgb(227, 227, 227);
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(20, 20, 20);
+  color: #fff;
+  padding: 8px;
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-  .logo-img {
-    padding-left: 65px;
-    margin: auto;
-  }
+.logo-img {
+  width: 170px;
+  height: auto;
+  cursor: pointer;
+  margin-left: -20px;
+}
 
-  .user-img {
-    margin-right: 15px;
-  }
+.logo-img:hover {
+  width: 170px;
+  height: auto;
+  cursor: pointer;
+  margin-left: -20px;
+  opacity: 0.5;
+}
+
+.form {
+  display: flex;
+  margin-right: 20px;
+}
+
+.input {
+  width: 500px;
+  height: 40px;
+  padding: 10px 25px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  /* text-align: center; */
+}
+
+.input:hover {
+  width: 500px;
+  height: 40px;
+  padding: 10px 25px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  /* text-align: center; */
+  opacity: 0.8;
+}
+
+.form img {
+  height: 40px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.form img:hover {
+  height: 40px;
+  cursor: pointer;
+  margin-left: 10px;
+  opacity: 0.5;
+}
+
+.user-img {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.user-img:hover {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 5px;
+  opacity: 0.5;
+}
 </style>
