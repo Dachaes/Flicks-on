@@ -64,8 +64,6 @@ def detail(request, tmdb_pk):
     movie = Movie.objects.filter(tmdb_id=tmdb_pk)
     if not movie:
         url = f"https://api.themoviedb.org/3/movie/{tmdb_pk}?language=ko-KR"
-        print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print(os.environ.get('API_TOKEN'))
         response = requests.get(
             url,
             headers = {

@@ -34,6 +34,13 @@ export const useMovieStore = defineStore('post', () => {
       .request(options)
       .then(function (response) {
         nowPlayingMovie.value = response.data.results
+        nowPlayingMovie.value.forEach((movie, index) => {
+          if (movie.vote_average === 0) {
+            movie.vote_average = '--'
+          } else {
+            movie.vote_average = Math.round(movie.vote_average * 10) / 10
+          }
+        })
       })
       .catch(function (error) {
         console.error(error);
@@ -59,6 +66,14 @@ export const useMovieStore = defineStore('post', () => {
       .then(function (response) {
         console.log(response.data)
         topRatedMovie.value = response.data.results
+        topRatedMovie.value.forEach((movie, index) => {
+          if (movie.vote_average === 0) {
+            movie.vote_average = '--'
+          } else {
+            movie.vote_average = Math.round(movie.vote_average * 10) / 10
+          }
+        })
+
       })
       .catch(function (error) {
         console.error(error)
@@ -83,7 +98,13 @@ export const useMovieStore = defineStore('post', () => {
       .request(options)
       .then(function (response) {
         similarMovie.value = response.data.results
-        console.log(response.data)
+        similarMovie.value.forEach((movie, index) => {
+          if (movie.vote_average === 0) {
+            movie.vote_average = '--'
+          } else {
+            movie.vote_average = Math.round(movie.vote_average * 10) / 10
+          }
+        })
       })
       .catch(function (error) {
         console.error(error)
@@ -120,6 +141,11 @@ export const useMovieStore = defineStore('post', () => {
       detailMovie.value = response.data
       let tmp = detailMovie.value.poster_path
       detailMovie.value.poster_path = 'https://image.tmdb.org/t/p/w500/' + tmp
+      if (detailMovie.value.vote_average === 0) {
+        detailMovie.value.vote_average = '--'
+      } else {
+        detailMovie.value.vote_average = Math.round(detailMovie.value.vote_average * 10) / 10
+      }
     })
     .catch(function (error) {
       console.error(error)
