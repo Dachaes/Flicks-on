@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Movie, Genre, Comment, UserImage
 from accounts.models import User
-from .utils import check_exist
 from .serializers import MovieSerializer, CommentSerializer, MovieDetailSerializer, ImageSerializer
 import requests
 import os

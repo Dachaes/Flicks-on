@@ -21,46 +21,6 @@
   import MovieListNowPlaying from '@/components/MovieListNowPlaying.vue'
   import MovieListTopRated from '@/components/MovieListTopRated.vue'
   import Footers from '@/components/Footers.vue'
-
-  // import { ref, onBeforeMount, onMounted } from 'vue'
-  import { useRouter } from 'vue-router'
-  // import { useMovieStore } from '@/stores/movies'
-
-  const router = useRouter()
-
-  // 1.
-  // const movieStore = useMovieStore()
-  // movieStore.getNowPlayingMovie()
-  // const nowPlayingMovieList = movieStore.nowPlayingMovie
-  // console.log(nowPlayingMovieList)
-
-  // 2.
-  // const movieStore = useMovieStore()
-  // const nowPlayingMovieList = ref([])
-  // onBeforeMount(async () => {
-  //   await movieStore.getNowPlayingMovie()
-  //    nowPlayingMovieList.value = await movieStore.nowPlayingMovie
-  // })
-
-  // 3.
-  // const movieStore = useMovieStore()
-  // const nowPlayingMovieList = ref([])
-  // const isDataLoaded = ref(false)
-  // onMounted(async () => {
-  //   try {
-  //     // 상영작 데이터 로딩
-  //     await movieStore.getNowPlayingMovie()
-  //     nowPlayingMovieList.value = movieStore.nowPlayingMovie
-
-  //     // 다른 비동기 작업이 있다면 여기에 추가 가능
-  //     // 예: await movieStore.getFamousMovies()
-
-  //     // 데이터 로딩 완료
-  //     isDataLoaded.value = true
-  //   } catch (error) {
-  //     console.error('Error fetching movie list:', error)
-  //   }
-  // })
 </script>
 
 <style scoped>

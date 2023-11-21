@@ -1,5 +1,5 @@
 ## 1. nickname 불러오기
-- 로그인 후 닉네임을 불러오려고 했으나, rest_auth를 이용해 login을 진행 한 경우 return 되는 항목이 토큰 외에 다른것은 찾을 수  없었음.
+- 로그인 후 닉네임을 불러오려고 했으나, rest_auth를 이용해 login을 진행 한 경우 return 되는 항목이 토큰 외에 다른것은 찾을 수 없었음.
 ### 시도해본 것들
 - 기존에 배포받은 pdf파일에 들어있는 내용처럼 git hub에 들어가 login 항목들을 찾아보고 커스텀을 시도해 보려 했으나 실패
     - 한시간 정도 잡고 시도해 보려 했으나 rest_auth에 있는 방식은 단순히 함수를 불러오는 것이 아니라 class를 호출하여
@@ -109,3 +109,55 @@
     - serializer를 custom 하고 settings 에 추가해 주니까 성공적으로 return 했다.
     - 공식문서에 따르면 put 요청 역시 이것을 통해 하면 된다고 명시되어 있음.
 - 작성자 : 박수형
+
+
+## 2. MovieList Components 에 원하는 Props 를 내려받아 영화 불러오기
+- `MainView` -> `MovieList` Components, `MovieDetailView` -> `MovieList` Components 에서 원하는 Movie 정보에 따라 다른 `Props` 를 내려주고 싶었다. 
+
+### 시도해본 것들
+- 코드 1
+   ```
+   import { useMovieStore } from '@/stores/movies'
+   
+   const movieStore = useMovieStore()
+   movieStore.getNowPlayingMovie()
+   const nowPlayingMovieList = movieStore.nowPlayingMovie
+   console.log(nowPlayingMovieList)
+   ```
+
+- 코드 2
+   ```   
+   import { useMovieStore } from '@/stores/movies'
+   
+   const movieStore = useMovieStore()
+   const nowPlayingMovieList = ref([])
+   onBeforeMount(async () => {
+     await movieStore.getNowPlayingMovie()
+      nowPlayingMovieList.value = await movieStore.nowPlayingMovie
+   })
+   ```
+
+- 코드 3
+   ```
+   import { useMovieStore } from '@/stores/movies'
+
+   const movieStore = useMovieStore()
+   const nowPlayingMovieList = ref([])
+   const isDataLoaded = ref(false)
+   onMounted(async () => {
+     try {
+       await movieStore.getNowPlayingMovie()
+       nowPlayingMovieList.value = movieStore.nowPlayingMovie
+
+       isDataLoaded.value = true
+     } catch (error) {
+       console.error('Error fetching movie list:', error)
+     }
+   })
+   ```
+
+- 이외에도 여러 가지 방식으로 코드를 작성해보았으나, 모든 코드가 동작은 되지만 비동기 처리로 인해 첫 렌더링 때 영화를 불러오지 못했다. (메인 &rarr; 다른 페이지로 이동했다가 뒤로 가기하면 재렌더링될 때는 로딩이 됨)
+- 페이지 첫 렌더링과 데이터 로딩 비동기 처리에 대해 고민해보았으나 성공하지 못하고, 다른 방식으로 코드 작성을 완료하였다.
+- 결국, 다른 데이터를 가지고 있는 똑같은 컴포넌트를 여러 개 만들었다.
+- `MovieListNowPlaying` Component, `MovieListTopRated` Component, `MoviesListSimilar` Component
+- 작성자 : 전소현
