@@ -8,5 +8,5 @@ urlpatterns = [
     path('detail/<int:tmdb_pk>/', views.detail),
     path('detail/<int:movie_pk>/comment/', views.comment_cr),
     path('detail/<int:movie_pk>/comment/<int:comment_pk>', views.comment_ud),
-
+    path('addimage/<int:user_pk>/', views.user_image),
 ]

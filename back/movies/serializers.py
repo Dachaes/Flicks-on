@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Genre, Comment
+from .models import Movie, Genre, Comment, UserImage
 from accounts.models import User
 
 
@@ -38,3 +38,7 @@ class GenreSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserImage
+        fields = '__all__'

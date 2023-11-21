@@ -7,8 +7,9 @@ export const useUserStore = defineStore('user', () => {
   const router = useRouter()
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
-  const userName = ref('')
+  const userNickName = ref('')
   const userPk = ref(0)
+  const userData = ref(null)
   const isLogin = computed(() => {
     return token.value === null ? false : true
   })
@@ -51,22 +52,8 @@ export const useUserStore = defineStore('user', () => {
         console.log(res)
         token.value = res.data.key
         // console.log(this)
-        
-        axios({
-          method:'get',
-          url: `${API_URL}/accounts/user/`,
-          headers:{
-            'Authorization': `Token ${token.value}`
-          }
-        })
-        .then((res) => {
-          userName.value = res.data.nickname
-          userPk.value = res.data.pk
-          console.log(res)
-          console.log(res.data)
-          console.log(res.data.pk)
-          })
-          .catch((err) => console.log(err))
+        getUserDetail()
+
         // 임시로 main으로 전송
         // 추후 수정
         router.push({ name:'main' })
@@ -82,10 +69,10 @@ export const useUserStore = defineStore('user', () => {
         url: `${API_URL}/accounts/logout/`,
       })
       .then((res) => {
-        userName.value = ''
+        userNickName.value = ''
         token.value = null
-        userName.value = ''
         userPk.value = 0
+        userData.value = []
         // 임시
         router.push({ name:'login' })
       })
@@ -94,5 +81,85 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { isLogin, API_URL, token, userName, userPk, signUp, logIn, logOut }
+  const getUserDetail = function () {
+    axios({
+      method:'get',
+      url: `${API_URL}/accounts/user/`,
+      headers:{
+        'Authorization': `Token ${token.value}`
+      }
+    })
+      .then((res) => {
+        console.log(res.data)
+        userData.value = res.data
+        userNickName.value = res.data.nickname
+        userPk.value = res.data.pk
+      })
+      .catch((err) => console.log(err))
+  }
+
+  const updateUserDetail = function (payload) {
+    const { email, nickName, firstName, lastName, age } = payload
+    axios({
+      method: 'patch',
+      url: `${API_URL}/accounts/user/`,
+      headers:{
+        'Authorization': `Token ${token.value}`
+      },
+      data:{
+        email: email,
+        first_name:firstName,
+        last_name:lastName,
+        nickname:nickName,
+        age: age,
+      }
+    })
+      .then((res) => {
+        router.push({name:'profile', params:{user_name:userPk.value}})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const updateUserImage = function (image) {
+    axios({
+      method: 'post',
+      url: `${API_URL}/api/v1/addimage/${userPk.value}/`,
+      data:{
+        img:image
+      }
+    })
+      .then((res) => {
+        console.log('image@@@@@@@@@@@@@@@@@@@@@@@@@@')
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log('image error @@@@@@@@@@@@@@@@@@@@@@@@@@')
+        console.log(err)
+      })
+  }
+
+  // const deleteUser = function () {
+  //   axios({
+  //     method: 'patch',
+  //     url: `${API_URL}/accounts/user/`,
+  //     headers:{
+  //       'Authorization': `Token ${token.value}`
+  //     },
+  //     data:{
+  //       is_acitve: 0,
+  //     }
+  //   })
+  //     .then((res) => {
+  //       console.log(res)
+  //       logOut()
+  //       router.push({name:'profile', params:{user_name:userPk.value}})
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
+
+  return { isLogin, API_URL, token, userNickName, userPk, userData, signUp, logIn, logOut, getUserDetail, updateUserDetail, updateUserImage }
 }, {persist: true})

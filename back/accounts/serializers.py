@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from allauth.account.adapter import get_adapter
 from rest_framework import  serializers
-from .models import User
 
 
 UserModel = get_user_model()
@@ -16,7 +15,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         max_length=255,
     )
     age=serializers.IntegerField(required=False)
-    img=serializers.ImageField(required=False)
+
 
     def get_cleaned_data(self):
         return {
@@ -25,9 +24,9 @@ class CustomRegisterSerializer(RegisterSerializer):
             'nickname': self.validated_data.get('nickname', ''),
             'email': self.validated_data.get('email', ''),
             'age': self.validated_data.get('age', ''),
-            'img': self.validated_data.get('img', ''),
         }
     
+
     def save(self, request):
         adapter = get_adapter()
         user = adapter.new_user(request)
@@ -35,6 +34,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         adapter.save_user(request, user, self)
         self.custom_signup(request, user)
         return user
+
+
 
 
 class CustomUserDetailsSerializer(serializers.ModelSerializer):
@@ -69,6 +70,10 @@ class CustomUserDetailsSerializer(serializers.ModelSerializer):
             extra_fields.append('last_name')
         if hasattr(UserModel, 'nickname'):
             extra_fields.append('nickname')
+        if hasattr(UserModel, 'age'):
+            extra_fields.append('age')
+        if hasattr(UserModel, 'is_active'):
+            extra_fields.append('is_active')
         model = UserModel
         fields = ('pk', *extra_fields)
-        read_only_fields = ('email',)
+        # read_only_fields = ('email',)

@@ -1,14 +1,12 @@
-from functools import partial
-from urllib import response
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.urls import is_valid_path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Movie, Genre, Comment
+from .models import Movie, Genre, Comment, UserImage
 from accounts.models import User
 from .utils import check_exist
-from .serializers import MovieSerializer, CommentSerializer, MovieDetailSerializer
+from .serializers import MovieSerializer, CommentSerializer, MovieDetailSerializer, ImageSerializer
 import requests
 import os
 
@@ -114,3 +112,24 @@ def comment_ud(request, movie_pk, comment_pk):
     elif request.method == 'DELETE':
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST', 'PUT'])
+def user_image(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
+    user_image = get_object_or_404(UserImage, user=user)
+    if request.method == 'GET':
+        serializer = ImageSerializer(user_image)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = ImageSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    elif request.method == 'PUT':
+        serializer = ImageSerializer(user_image, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
