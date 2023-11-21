@@ -1,18 +1,16 @@
 <template>
   <div>
     <Headers />
-    <Banner />
-    <form @submit.prevent="goSearch(query)">
-      <input type="text" :value="query" @input="updateQuery">
-      <input type="submit" value="Search">
-    </form>
-    <h2 class="recommendation-message">현재 상영작이에요!</h2>
-    <MovieListNowPlaying />
-    <h2 class="recommendation-message">유명한 작품이에요!</h2>
-    <MovieListTopRated />
-    <h2 class="recommendation-message">개봉 예정작이에요!</h2>
-    <MovieListUpcomming />
-    <footers />
+    <div class="container">
+      <banner />
+      <h2 class="recommendation-message">현재 상영작이에요!</h2>
+      <MovieListNowPlaying />
+      <h2 class="recommendation-message">유명한 작품이에요!</h2>
+      <MovieListTopRated />
+      <h2 class="recommendation-message">개봉 예정작이에요!</h2>
+      <MovieListUpcomming />
+    </div>
+    <Footers />
   </div>
 </template>
 
@@ -40,11 +38,23 @@
 </script>
 
 <style scoped>
-  .recommendation-message{
-    margin: 65px 0px 30px;
-  }
-  .btn-toolbar {
-    flex-direction: row;
-    justify-content: space-around;
-  }
+
+/* Main container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Search form */
+
+/* Recommendation messages */
+.recommendation-message {
+  margin: 50px 0px 0px;
+  text-align: left;
+}
+
 </style>
