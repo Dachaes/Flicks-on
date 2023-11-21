@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Movie, Genre, Comment, UserImage
 from accounts.models import User
-from .serializers import MovieSerializer, CommentSerializer, MovieDetailSerializer, ImageSerializer
+from .serializers import GenreSerializer, MovieSerializer, CommentSerializer, MovieDetailSerializer, ImageSerializer
 import requests
 import os
 
@@ -15,25 +15,6 @@ import os
 """ genre call function
 def index(request):
     # 영화 더미데이터 가져오는 부분
-
-    # 장르 가져오기
-    url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
-    response = requests.get(
-        url,
-        headers = {
-        "accept": "application/json",
-        "Authorization": f"Bearer {os.environ.get('API_TOKEN')}"
-        }
-    )
-    data = response.json()
-    if not Genre.objects.exists():
-        for genre in data['genres']:
-            Genre.objects.create(
-                name=genre["name"],
-                tmdb_id=genre["id"],
-            )
-"""
-def index(request):
     for page_num in range(1, 21):
         url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page_num}"
         response = requests.get(
@@ -71,6 +52,25 @@ def index(request):
                 war = True if 10752 in movie['genre_ids'] else False,
                 western = True if 27 in movie['genre_ids'] else False,
 
+            )
+"""
+def index(request):
+    # 장르 가져오기
+    url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
+    response = requests.get(
+        url,
+        headers = {
+        "accept": "application/json",
+        "Authorization": f"Bearer {os.environ.get('API_TOKEN')}"
+        }
+    )
+    data = response.json()
+    print(data)
+    if not Genre.objects.exists():
+        for genre in data['genres']:
+            Genre.objects.create(
+                name=genre["name"],
+                tmdb_id=genre["id"],
             )
 
 
@@ -159,7 +159,7 @@ def user_image(request, user_pk):
 
 @api_view(['GET', 'POST'])
 def user_init(request, user_pk):
-    movies = get_list_or_404(Movie)
+    genres = get_list_or_404(Genre)
     if request.method == 'GET':
-        serializer = MovieSerializer(movies, many=True)
+        serializer = GenreSerializer(genres, many=True)
         return Response(serializer.data)
