@@ -7,19 +7,20 @@
           <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
         </div>
         <!-- <img src="@/assets/likes/heart2.png" width="33" alt="likes"> -->
-
-        <div class="comment" v-if="!comment.editing">
-          <p class="one-comment">{{ comment.content }}</p>
-          <button @click="editSwitch(comment)">Edit</button>
+        <div v-if="comment.user === userStore.userPk">
+          <div class="comment" v-if="!comment.editing">
+            <p class="one-comment">{{ comment.content }}</p>
+            <button @click="editSwitch(comment)">Edit</button>
+          </div>
+          <div class="comment" v-else>
+            <form class="one-comment" @submit.prevent="commentEdit(comment.id, comment)">
+              <input type="text" v-model="comment.content">
+              <button type="submit">Accept</button>
+            </form>
+          </div>
+          <button @click="deleteComment(comment, comment.id)">Delete</button>
         </div>
-        <div class="comment" v-else>
-          <form class="one-comment" @submit.prevent="commentEdit(comment.id, comment)">
-            <input type="text" v-model="comment.content">
-            <button type="submit">Accept</button>
-          </form>
-        </div>
-
-        <button @click="deleteComment(comment, comment.id)">Delete</button>
+        <p>{{ comment.created_at }}</p>
       </div>
     </div>
   </div>
@@ -29,6 +30,7 @@
 
 <script setup>
   import { useRouter, useRoute } from 'vue-router'
+  import { useUserStore } from '@/stores/users'
   import { useCommentStore } from '@/stores/comments'
   import { useMovieStore } from '@/stores/movies'
 
@@ -36,6 +38,7 @@
   const route = useRoute()
   const movieStore = useMovieStore()
   const commentStore = useCommentStore()
+  const userStore =useUserStore()
 
   const deleteComment = (comment, pk) => {
     commentStore.commentDelete(route.params.title, pk)

@@ -150,6 +150,7 @@ export const useMovieStore = defineStore('post', () => {
 
   const similarMovie = ref([])
   const getSimilarMovie = function (pk) {
+    console.log(pk)
     const options = {
       method: 'GET',
       url: `https://api.themoviedb.org/3/movie/${pk}/similar`,
@@ -218,6 +219,9 @@ export const useMovieStore = defineStore('post', () => {
     })
   }
 
+
+
+  
   return { movieList, getMovieList, searchMovie, getSearchMovie,
     detailMovieComment, getMovieList, nowPlayingMovie, getNowPlayingMovie,
     topRatedMovie, getTopRatedMovie, upcomingMovie, getUpcomingMovie, similarMovie, getSimilarMovie,

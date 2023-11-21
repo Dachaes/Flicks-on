@@ -23,71 +23,17 @@
   import { useMovieStore } from '@/stores/movies'
 
   import { useRoute } from 'vue-router'
+  
+  const props = defineProps({
+    tmdbId: String
+  })
 
   const route = useRoute()
-  const tmdb_id = ref(route.params.title)
+  // const tmdb_id = ref(route.params.title)
 
   const router = useRouter()
   const movieStore = useMovieStore()
-  movieStore.getSimilarMovie(tmdb_id)
-
-
-  // @click="goPage('movie_detail', movie.id)"
-
-
-
-
-  // console.log(props.tmdbId)
-  // 코드 1.
-  // const goPage = function (pageName, id) {
-  //   router.push({name: pageName, params: {title: id}})
-  //   router.go(0)
-  // }
-
-  // 코드 2.
-  // const goPage = function (pageName, id) {
-  //   // 네비게이션 가드에서 디버깅을 위해 훅을 추가
-  //   router.beforeEach((to, from, next) => {
-  //     console.log('Before route update', { to, from });
-  //     next();
-  //   });
-  //   router.push({ name: pageName, params: { title: id } });
-  // }
-
-  // 코드 3.
-  // const goPage = function (pageName, id, forceReload = false) {
-  //   if (forceReload) {
-  //     window.location.href = `#/${pageName}/${id}`
-  //   } else {
-  //     router.push({name: pageName, params: {title: id}})
-  //   }
-  // }
-
-  // 코드 4.
-  // const goPage = function (pageName, id) {
-  //   router.go({name: pageName, params: {title: id}, replace: true})
-  // }
-
-  // 코드 5.
-  // const goPage = function (pageName, id) {
-  //   router.replace({name: pageName, params: {title: id}})
-  // }
-
-  // 코드 6.
-  // const goPage = function (pageName, id) {
-  //   router.replace({name: pageName, params: {title: id}})
-  //   window.location.reload()
-  // }
-
-  // 코드 7
-  // const goPage = function (pageName, id) {
-  //   router.push({name: pageName, params: {title: id}, replace: true})
-  // }
-
-  // 코드 8
-  // const goPage = function (pageName, id) {
-  //   router.replace({name: pageName, params: {newId: id}})
-  // }
+  movieStore.getSimilarMovie(props.tmdbId)
 
 </script>
 
