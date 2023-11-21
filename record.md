@@ -112,7 +112,7 @@
 
 
 ## 2. MovieList Components 에 원하는 Props 를 내려받아 영화 불러오기
-- `MainView` -> `MovieList` Components, `MovieDetailView` -> `MovieList` Components 에서 원하는 Movie 정보에 따라 다른 `Props` 를 내려주고 싶었다. 
+- `MainView` &rarr; `MovieList` Components, `MovieDetailView` &rarr; `MovieList` Components 에서 원하는 Movie 정보에 따라 다른 `Props` 를 내려주고 싶었다. 
 
 ### 시도해본 것들
 - 코드 1
@@ -160,4 +160,83 @@
 - 페이지 첫 렌더링과 데이터 로딩 비동기 처리에 대해 고민해보았으나 성공하지 못하고, 다른 방식으로 코드 작성을 완료하였다.
 - 결국, 다른 데이터를 가지고 있는 똑같은 컴포넌트를 여러 개 만들었다.
 - `MovieListNowPlaying` Component, `MovieListTopRated` Component, `MoviesListSimilar` Component
+- 작성자 : 전소현
+
+## 3. MovieList Components 에 원하는 Props 를 내려받아 영화 불러오기
+    ```
+        @click="goPage('movie_detail', movie.id)"
+    ```
+- `MovieList` Components &rarr; `MovieDetailView` &rarr; `MovieDetail` Components, `MovieListSimilar` Components 로 연결된다.
+- `MovieListSimilar` Components 에서 `MovieDetailView` 를 다시 불러오는 과정에서, 새로운 영화들의 데이터를 가져오고 싶었다.
+
+### 시도해본 것들
+
+- 코드 1.
+    ```
+   const goPage = function (pageName, id) {
+     router.push({name: pageName, params: {title: id}})
+     router.go(0)
+   }
+   ```
+
+- 코드 2.
+    ```
+   const goPage = function (pageName, id) {
+      네비게이션 가드에서 디버깅을 위해 훅을 추가
+     router.beforeEach((to, from, next) => {
+       console.log('Before route update', { to, from });
+       next();
+     });
+     router.push({ name: pageName, params: { title: id } });
+   }
+    ```
+
+- 코드 3.
+    ```
+   const goPage = function (pageName, id, forceReload = false) {
+     if (forceReload) {
+       window.location.href = `#/${pageName}/${id}`
+     } else {
+       router.push({name: pageName, params: {title: id}})
+     }
+   }
+    ```
+
+- 코드 4.
+    ```
+   const goPage = function (pageName, id) {
+     router.go({name: pageName, params: {title: id}, replace: true})
+   }
+    ```
+
+- 코드 5.
+    ```
+   const goPage = function (pageName, id) {
+     router.replace({name: pageName, params: {title: id}})
+   }
+    ```
+
+- 코드 6.
+    ```
+   const goPage = function (pageName, id) {
+     router.replace({name: pageName, params: {title: id}})
+     window.location.reload()
+   }
+    ```
+
+- 코드 7
+    ```
+   const goPage = function (pageName, id) {
+     router.push({name: pageName, params: {title: id}, replace: true})
+   }
+    ```
+
+- 코드 8
+    ```
+   const goPage = function (pageName, id) {
+     router.replace({name: pageName, params: {newId: id}})
+   }
+    ```
+
+- page url 이 변경되지만, 같은 route 의 다른 variable routing 의 route 로는 컴포넌트가 새로고침이 되지 않았다.
 - 작성자 : 전소현
