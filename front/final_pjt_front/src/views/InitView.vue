@@ -2,7 +2,8 @@
   <div>
     <button @click="getMoviesInfo">버튼</button>
     <div v-for="movie in movies">
-      {{ movie }}
+      <img :src="movie.poster_path" alt="" width="500">
+      {{ movie.title }}
     </div>
   </div>
 </template>

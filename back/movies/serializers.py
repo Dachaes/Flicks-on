@@ -1,18 +1,9 @@
 from rest_framework import serializers
-from .models import Movie, Genre, Comment, UserImage, MovieGenre
+from .models import Movie, Genre, Comment, UserImage
 from accounts.models import User
 
 
 class MovieSerializer(serializers.ModelSerializer):
-    class MovieGenreSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = MovieGenre
-            fields = '__all__'
-            read_only_fields = ('movie')
-    
-    genre_set = MovieGenreSerializer(read_only=True, many=True)
-    # movie_genres = serializers.CharField(source='moviegenre.genre', read_only=True)
-
     class Meta:
         model = Movie
         fields = '__all__'

@@ -8,11 +8,26 @@ class Movie(models.Model):
     tmdb_id = models.IntegerField()
     movie_rate = models.FloatField()
     release_date = models.CharField(max_length=50)
-
-
-class MovieGenre(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    genre = models.CharField(max_length=255)
+    
+    action = models.BooleanField(default=False)
+    adventure = models.BooleanField(default=False)
+    animation = models.BooleanField(default=False)
+    comedy = models.BooleanField(default=False)
+    crime = models.BooleanField(default=False)
+    documentary = models.BooleanField(default=False)
+    drama = models.BooleanField(default=False)
+    family = models.BooleanField(default=False)
+    fantasy = models.BooleanField(default=False)
+    history = models.BooleanField(default=False)
+    horror = models.BooleanField(default=False)
+    music = models.BooleanField(default=False)
+    mystery = models.BooleanField(default=False)
+    romance = models.BooleanField(default=False)
+    science_fiction = models.BooleanField(default=False)
+    tv_movie = models.BooleanField(default=False)
+    thriller = models.BooleanField(default=False)
+    war = models.BooleanField(default=False)
+    western = models.BooleanField(default=False)
 
 
 class UserGenre(models.Model):

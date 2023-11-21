@@ -4,7 +4,7 @@ from django.urls import is_valid_path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Movie, Genre, Comment, UserImage, MovieGenre
+from .models import Movie, Genre, Comment, UserImage
 from accounts.models import User
 from .serializers import MovieSerializer, CommentSerializer, MovieDetailSerializer, ImageSerializer
 import requests
@@ -45,42 +45,33 @@ def index(request):
         )
         data = response.json()
         for movie in data['results']:
-            movie_obj = Movie.objects.create(
+            Movie.objects.create(
                 title=movie["title"],
                 poster_path=f'https://image.tmdb.org/t/p/original/{movie["poster_path"]}',
                 tmdb_id=movie["id"],
                 movie_rate = round(movie["vote_average"], 1),
                 release_date=movie['release_date'],
+                action= True if 28 in movie['genre_ids'] else False,
+                adventure = True if 12 in movie['genre_ids'] else False,
+                animation = True if 16 in movie['genre_ids'] else False,
+                comedy = True if 35 in movie['genre_ids'] else False,
+                crime = True if 80 in movie['genre_ids'] else False,
+                documentary = True if 99 in movie['genre_ids'] else False,
+                drama = True if 18 in movie['genre_ids'] else False,
+                family = True if 10751 in movie['genre_ids'] else False,
+                fantasy = True if 14 in movie['genre_ids'] else False,
+                history = True if 36 in movie['genre_ids'] else False,
+                horror = True if 27 in movie['genre_ids'] else False,
+                music = True if 10402 in movie['genre_ids'] else False,
+                mystery = True if 9648 in movie['genre_ids'] else False,
+                romance = True if 10749 in movie['genre_ids'] else False,
+                science_fiction = True if 878 in movie['genre_ids'] else False,
+                tv_movie = True if 10770 in movie['genre_ids'] else False,
+                thriller = True if 53 in movie['genre_ids'] else False,
+                war = True if 10752 in movie['genre_ids'] else False,
+                western = True if 27 in movie['genre_ids'] else False,
+
             )
-            genres = []
-            for genre_num in movie['genre_ids']:
-                if genre_num == 28: genres.append('action')
-                elif genre_num == 12: genres.append('adventure')
-                elif genre_num == 16: genres.append('animation')
-                elif genre_num == 35: genres.append('comedy')
-                elif genre_num == 80: genres.append('crime')
-                elif genre_num == 99: genres.append('documentary')
-                elif genre_num == 18: genres.append('drama')
-                elif genre_num == 10751: genres.append('family')
-                elif genre_num == 14: genres.append('fantasy')
-                elif genre_num == 36: genres.append('history')
-                elif genre_num == 27: genres.append('horror')
-                elif genre_num == 10402: genres.append('music')
-                elif genre_num == 9648: genres.append('mystery')
-                elif genre_num == 10749: genres.append('romance')
-                elif genre_num == 878: genres.append('science_fiction')
-                elif genre_num == 10770: genres.append('tv_movie')
-                elif genre_num == 53: genres.append('thriller')
-                elif genre_num == 10752: genres.append('war')
-                elif genre_num == 27: genres.append('western')
-            
-            for genre_name in genres:
-                MovieGenre.objects.create(
-                    movie=movie_obj,
-                    genre=genre_name
-                )
-            
-    pass
 
 
 @api_view(['GET'])
