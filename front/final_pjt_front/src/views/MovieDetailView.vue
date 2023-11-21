@@ -4,7 +4,7 @@
 
     <MovieDetail :tmdb-id="tmdb_id"/>
 
-    <MovieListSimilar :tmdb-id="tmdb_id" />
+    <MovieListSimilar />
 
     <CommentCreate />
     <!-- <CommentCreate 
@@ -33,18 +33,17 @@
   import Footers from '@/components/Footers.vue'
 
   import { ref } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
 
   const route = useRoute()
+  const router = useRouter()
   const tmdb_id = ref(route.params.title)
+  console.log(tmdb_id.value)
 
   // import { onMounted } from 'vue'
   // import { useMovieStore } from '@/stores/movies'
   // const route = useRoute()
   // const store = useMovieStore()
-  // onMounted(() => {
-  //   store.getDetailMovie(route.params.pk)
-  // })
 
 </script>
 

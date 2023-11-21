@@ -1,7 +1,7 @@
 <template>
   <div class="movies-container">
     <div class="movies"
-    v-for="movie in movieStore.nowPlayingMovie" :key="movie.id">
+    v-for="movie in movieStore.upcomingMovie" :key="movie.id">
       <div v-if="movie.poster_path === null">
         <img class="movie-poster" @click="goPage('movie_detail', movie.id)"
       src="@/assets/movie/movieAltImage.png" alt="movie_poster">
@@ -17,16 +17,16 @@
 </template>
 
 <script setup>
-  import { useRouter } from 'vue-router'
-  import { useMovieStore } from '@/stores/movies'
+import { useRouter } from 'vue-router'
+import { useMovieStore } from '@/stores/movies'
 
-  const router = useRouter()
-  const movieStore = useMovieStore()
-  movieStore.getNowPlayingMovie()
+const router = useRouter()
+const movieStore = useMovieStore()
+movieStore.getUpcomingMovie()
 
-  const goPage = function (pageName, id) {
-    router.push({name: pageName, params: {title: id}})
-  }
+const goPage = function (pageName, id) {
+  router.push({name: pageName, params: {title: id}})
+}
 </script>
 
 <style scoped>

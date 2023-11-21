@@ -8,7 +8,7 @@
     <div class="comment">
       <form @submit.prevent="createComment">
         <input type="text" :value="content" @input="updateComment">
-        <input type="submit" value="등록">
+        <input type="submit" value="Accept">
       </form>
     </div>
   </div>
@@ -37,7 +37,7 @@
   
     // console.log(route.params.title)
     // router.push({name:'movies', params:{title:route.params.title}})
-    // router.go(0)
+    router.go(0)
   }
 </script>
 

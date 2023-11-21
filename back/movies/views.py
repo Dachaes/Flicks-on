@@ -111,7 +111,7 @@ def comment_cr(request, movie_pk):
     movie = get_object_or_404(Movie, tmdb_id=movie_pk)
     if request.method == 'GET':
         serializer = MovieDetailSerializer(movie)
-        return Response()
+        return Response(serializer.data)
 
     if request.method == 'POST':
         serializer = CommentSerializer(data=request.data)

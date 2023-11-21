@@ -3,7 +3,7 @@ import { useUserStore } from '../stores/users'
 import MainView from '@/views/MainView.vue'
 import LogInView from '@/views/LogInView.vue'
 import SignUpView from '@/views/SignUpView.vue'
-import MovieGenreView from '@/views/MovieGenreView.vue'
+import MovieSearchView from '@/views/MovieSearchView.vue'
 import MovieDetailView from '@/views/MovieDetailView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import ProfileEditView from '@/views/ProfileEditView.vue'
@@ -29,9 +29,9 @@ const router = createRouter({
       component: SignUpView
     },
     {
-      path: '/genre/:genre',
-      name: 'genre',
-      component: MovieGenreView
+      path: '/search/:query',
+      name: 'search',
+      component: MovieSearchView
     },
     {
       path: '/movies/:title',
