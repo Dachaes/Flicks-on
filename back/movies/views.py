@@ -1,6 +1,3 @@
-from functools import partial
-from tkinter import Image
-from urllib import response
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.urls import is_valid_path
 from rest_framework import status
