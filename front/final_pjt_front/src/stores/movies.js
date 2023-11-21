@@ -18,6 +18,38 @@ export const useMovieStore = defineStore('post', () => {
 
 
 
+  const searchMovie = ref([])
+  const getSearchMovie = function (q) {
+    const options = {
+      method: 'GET',
+      url: 'https://api.themoviedb.org/3/search/movie',
+      params: {query: `${q}`, include_adult: 'false', language: 'ko-KR', page: '1'},
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${TMDB_API_TOKEN.value}`
+      }
+    };
+    
+    axios
+      .request(options)
+      .then(function (response) {
+        searchMovie.value = response.data.results
+        searchMovie.value.forEach((movie, index) => {
+          if (movie.vote_average === 0) {
+            movie.vote_average = '--'
+          } else {
+            movie.vote_average = Math.round(movie.vote_average * 10) / 10
+          }
+        })
+        // console.log(response.data)
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
+
+  
+
   const nowPlayingMovie = ref([])
   const getNowPlayingMovie = function () {
     const options = {
@@ -73,12 +105,46 @@ export const useMovieStore = defineStore('post', () => {
             movie.vote_average = Math.round(movie.vote_average * 10) / 10
           }
         })
-
       })
       .catch(function (error) {
         console.error(error)
       });
   }
+
+
+
+
+  const upcomingMovie = ref([])
+  const getUpcomingMovie = function () {  
+    const options = {
+      method: 'GET',
+      url: 'https://api.themoviedb.org/3/movie/upcoming',
+      params: {language: 'ko-KR', page: '1'},
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${TMDB_API_TOKEN.value}`
+      }
+    };
+    
+    axios
+      .request(options)
+      .then(function (response) {
+        // console.log(response.data)
+        upcomingMovie.value = response.data.results
+        upcomingMovie.value.forEach((movie, index) => {
+          if (movie.vote_average === 0) {
+            movie.vote_average = '--'
+          } else {
+            movie.vote_average = Math.round(movie.vote_average * 10) / 10
+          }
+        })
+      })
+      .catch(function (error) {
+        console.error(error)
+      });
+  }
+
+
 
 
 
@@ -152,8 +218,8 @@ export const useMovieStore = defineStore('post', () => {
     })
   }
 
-  return { movieList, getMovieList,
+  return { movieList, getMovieList, searchMovie, getSearchMovie,
     detailMovieComment, getMovieList, nowPlayingMovie, getNowPlayingMovie,
-    topRatedMovie, getTopRatedMovie, similarMovie, getSimilarMovie,
+    topRatedMovie, getTopRatedMovie, upcomingMovie, getUpcomingMovie, similarMovie, getSimilarMovie,
     detailMovie, getDetailMovie}
 })

@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import { useMovieStore } from '@/stores/movies'
   
   const props = defineProps({
@@ -30,13 +30,15 @@
   })
 
   const movieStore = useMovieStore()
-  movieStore.getDetailMovie(props.tmdbId)
   // console.log(movieStore.detailMovie)
   
   // const title = ref(movieStore.detailMovie.title)
   // const original_title = ref(movieStore.detailMovie.original_title)
   // const year = ref(movieStore.detailMovie.release_date)
   // year.value = year.value.slice(0, 4)
+  onMounted(() => {
+    movieStore.getDetailMovie(props.tmdbId)
+  })
 
 </script>
 
