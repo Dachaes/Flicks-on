@@ -28,13 +28,35 @@ export const useUserStore = defineStore('user', () => {
       }
     })
       .then((res) => {
-        console.log(res)
         const password = password1
-        logIn({ username, password })
+        axios({
+          method: 'post',
+          url: `${API_URL}/accounts/login/`,
+          data:{
+            username,
+            password,
+          }
+        })
+      .then((res) => {
+        token.value = res.data.key
+        axios({
+          method:'get',
+          url: `${API_URL}/accounts/user/`,
+          headers:{
+            'Authorization': `Token ${token.value}`
+          }
       })
-      .catch((err) => {
-        console.log(err)
+      .then((res) => {
+        userData.value = res.data
+        userNickName.value = res.data.nickname
+        userPk.value = res.data.pk
+        router.push({name:'init', params:{user_pk: res.data.pk}})
       })
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   const logIn = function (payload) {
@@ -52,20 +74,8 @@ export const useUserStore = defineStore('user', () => {
         getUserDetail()
         console.log(res)
         token.value = res.data.key
-        return userData.value
-      })
-      .then((res) => {
-        if (res.last_login.slice(0,15) === res.date_joined.slice(0,15)){
-          router.push({name:'init', params:{user_pk: userPk.value}})
-        } else {
-          // 임시로 main으로 전송
-          // 추후 수정
-          router.push({ name:'main' })
-        }
-      })
-      .catch((err) => {
-          console.log(err)
-        })
+        router.push({ name:'main' })
+      })      
     }
     
     const logOut = function () {
