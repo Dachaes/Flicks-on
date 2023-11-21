@@ -75,6 +75,7 @@ def detail(request, tmdb_pk):
             title=data["title"],
             poster_path=f'https://image.tmdb.org/t/p/original/{data["poster_path"]}',
             tmdb_id=data["id"],
+            movie_rate = round(data["vote_average"], 1)
         )
     movie = get_object_or_404(Movie, tmdb_id=tmdb_pk)
     serializers = MovieDetailSerializer(movie)

@@ -6,7 +6,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=255)
     poster_path = models.CharField(max_length=255)
     tmdb_id = models.IntegerField()
-    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
+    movie_rate = models.FloatField()
     
     
 class Genre(models.Model):
