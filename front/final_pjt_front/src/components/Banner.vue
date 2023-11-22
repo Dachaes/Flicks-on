@@ -9,13 +9,13 @@
     <div id="carouselExample" class="carousel slide banner-container">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="@/assets/banner/img1.jpg" class="d-block w-100" alt="exImg1">
+          <img @click="goPage(157336)" src="@/assets/banner/img1.jpg" class="d-block" alt="exImg1">
         </div>
         <div class="carousel-item">
-          <img src="@/assets/banner/img2.png" class="d-block w-100" alt="exImg2">
+          <img @click="goPage(872585)" src="@/assets/banner/img4.jpg" class="d-block w-150" alt="exImg2">
         </div>
         <div class="carousel-item">
-          <img src="@/assets/banner/img3.jpg" class="d-block w-100" alt="exImg3">
+          <img @click="goPage(129)" src="@/assets/banner/img5.jpg" class="d-block w-150" alt="exImg3">
         </div>
       </div>
 
@@ -35,19 +35,38 @@
 
  
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goPage = function (id) {
+  router.push({name:'movie_detail', params:{title:id}})
+}
+
+
 </script>
 
 <style scoped>
   .banner-container {
     position: relative;
     margin: 20px 10px;
-    height: 300px;
-    min-height: 300px; 
+    height: 400px;
+    min-height: 400px; 
+    cursor: pointer;
   }
+
+  .banner-container:hover {
+    position: relative;
+    margin: 20px 10px;
+    height: 400px;
+    min-height: 400px;
+    opacity: 80%;
+  }
+
   .d-block {
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
-    min-height: 300px;
-    height: 300px;
+    min-height: 400px;
+    height: 400px;
   }
 </style>

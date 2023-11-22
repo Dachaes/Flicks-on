@@ -3,7 +3,7 @@
     <img class="logo-img" @click="goMain()" src="@/assets/logo/logo_dark.png" alt="logo">
     
     <div class="form">
-      <input type="text" class="input" :value="query" @input="updateQuery">
+      <input type="text" class="input" :value="query" @input="updateQuery" placeholder="무슨 영화를 찾으시나요?">
       <img @click="goSearch(query)" src="@/assets/search/search.png" alt="search">
     </div>
     <img class="user-img" @click="goProfile()" src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/FFFFFF/external-User-essential-collection-bearicons-glyph-bearicons.png" alt="external-User-essential-collection-bearicons-glyph-bearicons"/>
@@ -13,7 +13,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRouter, onBeforeRouteUpdate } from 'vue-router'
   import { useUserStore } from '../stores/users';
 
   const router = useRouter()
@@ -31,6 +31,11 @@
   const goSearch = function (query) {
     router.push({name: 'search', params: { query: query } })
   }
+
+  onBeforeRouteUpdate((to, from) => {
+    query.value = to.params.query
+  })
+  
 </script>
 
 <style scoped>
@@ -68,22 +73,22 @@
 }
 
 .input {
-  width: 500px;
+  width: 200%;
   height: 40px;
-  padding: 10px 25px;
+  padding: 13px 25px 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   /* text-align: center; */
 }
 
 .input:hover {
-  width: 500px;
+  width: 300px;
   height: 40px;
-  padding: 10px 25px;
+  padding: 13px 25px 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   /* text-align: center; */
-  opacity: 0.8;
+  opacity: 90%;
 }
 
 .form img {

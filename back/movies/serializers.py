@@ -10,21 +10,27 @@ class MovieSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    class UserNicknameSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = User
-            fields = ('nickname', )
-
-    users = UserNicknameSerializer(read_only=True)
-    user_nickname = serializers.CharField(source='user.nickname', read_only=True)
-
     class Meta:
         model = Comment
-        fields = '__all__'
-        read_only_fields = ('user', 'movie',)
+        fields = ('id', 'content',)
 
 
 class MovieDetailSerializer(serializers.ModelSerializer):
+    class CommentSerializer(serializers.ModelSerializer):
+        class UserNicknameSerializer(serializers.ModelSerializer):
+            class Meta:
+                model = User
+                fields = ('id', 'nickname', )
+
+        user_set = UserNicknameSerializer(read_only=True)
+        user_nickname = serializers.CharField(source='user.nickname', read_only=True)
+        user_id = serializers.IntegerField(source='user.id', read_only=True)
+        class Meta:
+            model = Comment
+            fields = ('id', 'content', 'user_nickname', 'user_id', 'user_set', )
+            # fields = ('id', 'content', 'user_set', )
+
+
     comment_set = CommentSerializer(read_only=True, many=True)
 
     class Meta:
