@@ -13,7 +13,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRouter, onBeforeRouteUpdate } from 'vue-router'
   import { useUserStore } from '../stores/users';
 
   const router = useRouter()
@@ -31,6 +31,11 @@
   const goSearch = function (query) {
     router.push({name: 'search', params: { query: query } })
   }
+
+  onBeforeRouteUpdate((to, from) => {
+    query.value = to.params.query
+  })
+  
 </script>
 
 <style scoped>

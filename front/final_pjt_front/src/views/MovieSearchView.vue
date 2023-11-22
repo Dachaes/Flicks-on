@@ -46,7 +46,7 @@
   import Footers from '@/components/Footers.vue'
 
   import { ref, onMounted } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
   import { useMovieStore } from '@/stores/movies'
 
   const route = useRoute()
@@ -59,6 +59,11 @@
   const goPage = (pageName, id) => {
     router.push({name:pageName, params:{title:id}})
   }
+
+  onBeforeRouteUpdate((to, from) => {
+    movieStore.getSearchMovie(to.params.query)
+	query.value = to.params.query
+  })
 
 </script>
 
