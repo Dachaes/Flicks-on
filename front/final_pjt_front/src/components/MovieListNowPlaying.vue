@@ -57,6 +57,7 @@
     width: 100%;
     height: 280px;
     object-fit: cover;
+    cursor: pointer;
   }
 
   .movie-poster:hover {

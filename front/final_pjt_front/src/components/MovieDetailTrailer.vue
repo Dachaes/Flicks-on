@@ -1,6 +1,6 @@
 <template>
-  <div class="trailers" v-for="Url in youtubeEmbedUrl" :key="Url">
-    <iframe class="trailer"
+  <div class="trailers">
+    <iframe v-for="Url in youtubeEmbedUrl" :key="Url" class="trailer"
       width="560"
       height="315"
       :src="Url"
@@ -21,8 +21,8 @@ const props = defineProps({
 
 
 const TMDB_API_TOKEN = ref(import.meta.env.VITE_TMDB_API_TOKEN)
-const keys = ref(['', '', ''])
-const youtubeEmbedUrl = ref(['', '', ''])
+const keys = ref([])
+const youtubeEmbedUrl = ref([])
 const options = {
   method: 'GET',
   url: `https://api.themoviedb.org/3/movie/${props.tmdbId}/videos`,
@@ -40,12 +40,14 @@ axios
     keys.value[0] = response.data.results[0].key
     keys.value[1] = response.data.results[1].key
     keys.value[2] = response.data.results[2].key
+    keys.value[3] = response.data.results[3].key
 
     // const youtubeEmbedUrl = `https://www.youtube.com/embed/${url}`
     // const youtubeEmbedUrl = computed(() => `https://www.youtube.com/embed/${props.movieTrailer}`)
     youtubeEmbedUrl.value[0] = `https://www.youtube.com/embed/${keys.value[0]}`
     youtubeEmbedUrl.value[1] = `https://www.youtube.com/embed/${keys.value[1]}`
     youtubeEmbedUrl.value[2] = `https://www.youtube.com/embed/${keys.value[2]}`
+    youtubeEmbedUrl.value[3] = `https://www.youtube.com/embed/${keys.value[3]}`
   })
   .catch(function (error) {
     console.error(error);
@@ -58,20 +60,64 @@ axios
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 20px 0;
+  align-items: center;
+  gap: 10px;
 }
 
-.trailer {
-  width: 300px;
-  height: 170px;
-  margin: 10px;
-  border-radius: 5px;
-}
-
-@media (max-width: 768px) {
+@media (min-width: 576px) {
   .trailer {
-    width: 200px;
-    height: 112px;
+    width: 500px;
+    height: 300px;
+    border: 1px solid #ccc;
+  }
+  .trailer:hover {
+    width: 500px;
+    height: 300px;
+    border: 1px solid #ccc;
+    opacity: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .trailer {
+    width: 350px;
+    height: 210px;
+    border: 1px solid #ccc;
+  }
+  .trailer:hover {
+    width: 350px;
+    height: 210px;
+    border: 1px solid #ccc;
+    opacity: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .trailer {
+    width: 440px;
+    height: 260px;
+    border: 1px solid #ccc;
+  }
+  .trailer:hover {
+    width: 440px;
+    height: 260px;
+    border: 1px solid #ccc;
+    opacity: 50%;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .trailer {
+    width: 520px;
+    height: 300px;
+    border: 1px solid #ccc;
+  }
+  .trailer:hover {
+    width: 520px;
+    height: 300px;
+    border: 1px solid #ccc;
+    opacity: 50%;
   }
 }
 </style>

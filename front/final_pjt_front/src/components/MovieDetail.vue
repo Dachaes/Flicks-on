@@ -1,31 +1,30 @@
 <template>
-  <div v-if="movieStore.detailMovie.poster_path">
-    <div class="container">
-      <div class="movie">
-        <img class="movie-poster" :src="movieStore.detailMovie.poster_path" alt="poster">
-      </div>
+  <div class="container" v-if="movieStore.detailMovie.poster_path">
+    <div class="movie">
+      <img class="movie-poster" :src="movieStore.detailMovie.poster_path" alt="poster">
       <div class="movie-rating">
         <img class="movie-heart" src="@/assets/likes/heart2.png" alt="likes">
         <p class="movie-rate" >{{ movieStore.detailMovie.vote_average }} </p>
       </div>
-      <div class="movie-info">
-        <div class="movie-title" v-if="movieStore.detailMovie.production_countries">
-          <p class="title">{{ movieStore.detailMovie.title }}</p>
-          <div class="original-title">
-            <p>{{ movieStore.detailMovie.original_title }}, <span data-start="0" data-end="5">{{ movieStore.detailMovie.release_date }}</span></p>
-          </div>
-          <p class="runtime">{{ movieStore.detailMovie.runtime }}분 / {{ movieStore.detailMovie.production_countries[0].name }}</p>
-          <span v-for="genre in movieStore.detailMovie.genres" :key="genre.id">
-            <span class="genre">{{ genre.name }}</span>
-          </span>
-        </div>
-        <div class="movie-detail">
-          <p>{{ movieStore.detailMovie.overview }}</p>
-        </div>
-      </div>
     </div>
 
+    <div class="movie-info">
+      <div class="movie-title" v-if="movieStore.detailMovie.production_countries">
+        <p class="title">{{ movieStore.detailMovie.title }}</p>
+        <div class="original-title">
+          <p>{{ movieStore.detailMovie.original_title }}, <span data-start="0" data-end="5">{{ movieStore.detailMovie.release_date }}</span></p>
+        </div>
+        <p class="runtime">{{ movieStore.detailMovie.runtime }}분 / {{ movieStore.detailMovie.production_countries[0].name }}</p>
+        <span v-for="genre in movieStore.detailMovie.genres" :key="genre.id">
+          <span class="genre">{{ genre.name }}</span>
+        </span>
+      </div>
+      <div class="movie-detail">
+        <p>{{ movieStore.detailMovie.overview }}</p>
+      </div>
+    </div>
   </div>
+
   <div v-else>
     <p>로딩중</p>
   </div>
@@ -51,14 +50,14 @@
   .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  margin: 20px;
+  margin: 20px auto;
+
   padding: 20px;
   background-color: rgb(20, 20, 20);
   border-radius: 10px;
   text-align: right;
-  background-image: linear-gradient(0deg, rgb(20, 20, 20) 0%, #363636 100%);
+  background-image: linear-gradient(0deg, rgb(20, 20, 20) 0%, #2d2d2d 50%, rgb(20, 20, 20) 100%);
 }
 
 .movie {
@@ -74,6 +73,15 @@
   object-fit: contain;
   margin-right: 20px;
   margin-bottom: 20px; 
+}
+
+.movie-poster:hover {
+  width: 300px;
+  height: 450px;
+  object-fit: contain;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  opacity: 50%;
 }
 
 .movie-rating {  
@@ -110,16 +118,35 @@
   margin-bottom: 5px;
 }
 
+.title:hover {
+  margin-bottom: 5px;
+  opacity: 50%;
+}
+
 .original-title {
   font-size: 20px;
   font-weight: normal;
   margin-bottom: 5px;
 }
 
+.original-title:hover {
+  font-size: 20px;
+  font-weight: normal;
+  margin-bottom: 5px;
+  opacity: 50%;
+}
+
 .runtime {
   font-size: 15px;
   font-weight: normal;
   margin-bottom: 5px;
+}
+
+.runtime:hover {
+  font-size: 15px;
+  font-weight: normal;
+  margin-bottom: 5px;
+  opacity: 50%;
 }
 
 .genre {
@@ -130,8 +157,24 @@
   margin-bottom: 5px;
 }
 
+.genre:hover {
+  font-size: 14px;
+  font-weight: normal;
+
+  margin-left: 10px;
+  margin-bottom: 5px;
+  opacity: 50%;
+}
+
+
 .movie-detail {
   font-size: 15px;
   font-weight: normal;
+}
+
+.movie-detail:hover {
+  font-size: 15px;
+  font-weight: normal;
+  opacity: 50%;
 }
 </style>

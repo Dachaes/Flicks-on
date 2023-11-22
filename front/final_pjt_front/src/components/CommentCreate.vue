@@ -1,31 +1,30 @@
 <template>
-  <h2 class="mt-3">한줄평</h2>
-  <div class="comments-container">
-    <div class="movie">
-      <p class="user-name">User</p>
-      <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
+  <div class="comment-container">
+    <div class="comment-user">
+      <p class="user-name">{{ userStore.userNickName }}</p>
+    <img class="user-img" @click="goProfile()" src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/FFFFFF/external-User-essential-collection-bearicons-glyph-bearicons.png" alt="external-User-essential-collection-bearicons-glyph-bearicons"/>
     </div>
-    <div class="comment">
-      <form @submit.prevent="createComment">
-        <input type="text" :value="content" @input="updateComment">
-        <input type="submit" value="Accept">
+    <div class="comment-content">
+      <form >
+        <input class="content" type="text" :value="content" @input="updateComment">
+        <img @click="createComment" class="accept" src="https://img.icons8.com/pulsar-line/96/FFFFFF/plus-2-math.png" alt="plus-2-math"/>
       </form>
     </div>
   </div>
-
 </template>
 
 <script setup>
   import { ref } from 'vue'
+  import { useUserStore } from '@/stores/users'
   import { useCommentStore } from '@/stores/comments.js'
   import { useMovieStore } from '@/stores/movies'
   import { useRouter, useRoute } from 'vue-router'
 
+  const userStore =useUserStore()
   const movieStore = useMovieStore()
-  const store = useCommentStore()
+  const commentStore = useCommentStore()
   const router = useRouter()
   const route = useRoute()
-
   const content = ref('')
 
   const updateComment = function (event) {
@@ -33,7 +32,7 @@
   }
 
   const createComment = function () {
-    store.commentCreate(route.params.title, content.value)
+    commentStore.commentCreate(route.params.title, content.value)
   
     // console.log(route.params.title)
     // router.push({name:'movies', params:{title:route.params.title}})
@@ -42,42 +41,87 @@
 </script>
 
 <style scoped>
-  .comments-container {
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-    border-top: 1px solid rgb(139, 139, 139);
-    border-bottom: 1px solid rgb(139, 139, 139);
-    padding: 10px 0 20px;
-  }
+  .comment-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: 10px;
+}
 
-  .movie {
-    width: 20%;
-  }
+.comment-user {
+  margin: auto;
+  padding-left: 20px;
+  padding-bottom: 18px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
-  .movie p {
-    text-align: center;
-  }
+.user-name {
+  font-weight: bold;
+}
 
-  .movie-poster {
-    width: 100%;
-    /* object-fit: cover; */
-  }
+.user-name:hover {
+  font-weight: bold;
+  opacity: 50%;
+}
 
-  .user-name {
-    margin-top: 2px;
-    margin-bottom: 5px;
-  }
+.user-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
-  .comment {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin-left: 10px;
-  }
+.user-img:hover {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  opacity: 50%;
+}
 
-  .one-comment {
-    margin-top: 10px;
-    margin-right: 100px;
-  }
+.comment-content {
+  margin: 20px 0;
+
+  flex: 0.9;
+  margin-left: auto;
+  flex-direction: row;
+}
+
+.content {
+  width: 88%;
+  height: 100px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 20px;
+  margin-bottom: 6px;
+}
+
+.content:hover {
+  width: 88%;
+  height: 100px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 20px;
+  margin-bottom: 6px;
+  opacity: 50%;
+}
+
+.accept {
+  width: 45px;
+  padding-top: 50px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.accept:hover {
+  width: 45px;
+  padding-top: 50px;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 50%;
+}
 </style>

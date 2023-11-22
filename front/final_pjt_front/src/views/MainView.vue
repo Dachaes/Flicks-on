@@ -4,6 +4,7 @@
     <banner />
     <div class="container">
       <h2 class="recommendation-message">현재 상영작이에요!</h2>
+      <hr>
       <MovieListNowPlaying />
       <h2 class="recommendation-message">유명한 작품이에요!</h2>
       <MovieListTopRated />

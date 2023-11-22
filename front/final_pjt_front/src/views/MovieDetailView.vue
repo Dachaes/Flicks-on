@@ -3,23 +3,17 @@
     <Headers />
     <MovieDetail :tmdb-id="tmdb_id"/>
     
+    <h2 class="recommendation-message">관련 영상</h2>
     <MovieDetailTrailer :tmdb-id="tmdb_id"/>
+
+    <h2 class="recommendation-message">관련 영화</h2>
     <MovieListSimilar :tmdb-id="tmdb_id"/>
 
+    <h2 class="recommendation-message">한줄평</h2>
     <CommentCreate />
-    <!-- <CommentCreate 
-      :moviePk="store.detailMovie.id"
-    /> -->
     
     <CommentList />
-    <!-- <ul class="comment-list">
-      <CommentList
-          v-for="comment in store.detailMovie.comment_set"
-          :key="comment.id"
-          class="comment-item"
-          :comment="comment"
-        />
-    </ul> -->
+    
     <Footers />
   </div>
 </template>
@@ -50,4 +44,12 @@
 
 <style scoped>
 
+.recommendation-message {
+  margin-top: 70px;
+  margin-right: auto;
+  margin-bottom: 30px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #333;
+}
 </style>
