@@ -58,8 +58,6 @@ onMounted(() => userStore.getUserDetail())
   }
 
   .edit:hover, .logout:hover, .signout:hover {
-    margin: 5px;
-    padding-right: 10px;
     opacity: 50%;
   }
 
@@ -68,6 +66,6 @@ onMounted(() => userStore.getUserDetail())
     top: 230px;
     position: absolute;
     justify-content: center;
-    width: 100px;
+    width: 170px;
   }
 </style>

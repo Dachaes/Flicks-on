@@ -112,7 +112,7 @@
   .movie-heart {
     width: 17px;
     height: 17px;
-    margin: 6px 6px 17px;
+    margin: 6px 6px 25px;
   }
 
   .movie-rate {

@@ -89,11 +89,11 @@
   .movie-heart {
     width: 17px;
     height: 17px;
-    margin: 6px 6px 17px;
+    margin: 6px 6px 25px;
   }
 
   .movie-rate {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: bold;
     color: rgb(170, 170, 170);
   }

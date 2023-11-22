@@ -22,7 +22,7 @@
         </div>
         <input class="submit-button" type="submit" value="Create New Account">
       </form>
-  </div>
+    </div>
   </div>
 </template>
 
@@ -69,11 +69,6 @@ const signUp = function () {
   .login-container{
     width: 500px;
   }
-  .signup-message {
-    display: none;
-    padding-right: 0px;
-
-  }
 }
 
 .login-logo {
@@ -84,10 +79,6 @@ const signUp = function () {
   margin-right: 3px;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
 
 .login-form {
   flex: 0.5;
@@ -108,7 +99,6 @@ h1 {
   margin-bottom: 2px;
 }
 
-.form-select,
 .form-input {
   width: 100%;
   height: 80%;

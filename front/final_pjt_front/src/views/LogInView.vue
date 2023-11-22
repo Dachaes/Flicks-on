@@ -111,7 +111,6 @@ h1 {
   margin-bottom: 2px;
 }
 
-.form-select,
 .form-input {
   width: 100%;
   height: 80%;
