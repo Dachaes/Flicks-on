@@ -33,6 +33,10 @@
   const movieStore = useMovieStore()
   movieStore.getSearchMovie(query.value)
 
+  const goPage = (pageName, id) => {
+    router.push({name:pageName, params:{title:id}})
+  }
+
 </script>
 
 <style scoped>
