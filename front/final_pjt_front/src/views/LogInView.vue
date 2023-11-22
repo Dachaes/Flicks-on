@@ -1,27 +1,23 @@
 <template>
   <div class="login-container">
-
-    <div class="login-logo">
-      <img src="@/assets/movie/movieAltImage.png" alt="" width="200">
-    </div>
-    
+    <img class="login-logo" src="@/assets/movie/movieAltImage.png" alt="" width="200">
 
     <div class="login-form">
-      <form @submit.prevent="logIn" class="">
+      <form @submit.prevent="logIn">
         <div>
-          <label for="username" class="form-label">아이디 : </label>
+          <label for="username" class="form-label">ID : </label>
           <input type="text" v-model.trim="username" id="username" class="form-input">
         </div>
         <div>
-          <label for="password" class="form-label">비밀번호 : </label>
+          <label for="password" class="form-label">Password : </label>
           <input type="password" v-model.trim="password" id="password" class="form-input">
         </div>
-        <input type="submit" class="submit-button" value="로그인">
+        <input type="submit" class="submit-button" value="Log In">
       </form>
 
       <div class="login-signup">
         <span class="signup-message">아직 회원이 아니신가요 ? </span>
-        <button class="signup" @click="goPage('signup')">Create Account</button>
+        <button class="signup" @click="goPage('signup')">Join Us!</button>
       </div>
     </div>
 
@@ -85,14 +81,10 @@ const goPage = function (pageName) {
 
 .login-logo {
   margin: 0;
-  width: auto;
-  height: 40%;
-  flex: 0.5;
-}
-
-.login-logo > img {
-  height: 0%;
+  height: 100%;
   border-radius: 7px;
+  flex: 0.5;
+  margin-right: 3px;
 }
 
 h1 {
@@ -105,35 +97,35 @@ h1 {
   margin: 0;
   padding: 20px;
   color:black;
-  width: 400px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   background-color: #fff;
   border: 1px solid #ccc;
-  /* border-radius: 5px; */
-  padding: 20px;
   align-items: center;
   border-radius: 7px;
 }
 
 .form-label {
-  font-size: 16px;
+  font-size: 20px;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .form-select,
 .form-input {
   width: 100%;
-  padding: 10px;
-  font-size: 14px;
+  height: 80%;
+  padding: 5px;
+  font-size: 18px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .submit-button {
   display: block;
   width: 100%;
+  margin-top: 10px;
   padding: 10px;
   font-size: 16px;
   background-color:rgb(34, 34, 34);
@@ -141,11 +133,11 @@ h1 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.5s;
 }
 
 .submit-button:hover {
-  background-color: #333;
+  background-color: #414141;
 }
 
 .login-signup{
@@ -159,7 +151,7 @@ h1 {
   border-radius: 5px;
   padding: 0 15px;
   background-color: rgb(34, 34, 34);
-  transition: background-color 0.2s;
+  transition: background-color 0.5s;
 }
 
 .signup:hover {
