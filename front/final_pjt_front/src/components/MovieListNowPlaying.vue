@@ -69,13 +69,11 @@
 
   .movie-title {
     font-size: 18px;
-    font-weight: bold;
     margin: 5px 0px 10px;
   }
 
   .movie-title:hover {
     font-size: 18px;
-    font-weight: bold;
     margin: 5px 0px 10px;
     opacity: 0.5;
   }

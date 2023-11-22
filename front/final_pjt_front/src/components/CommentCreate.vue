@@ -5,8 +5,8 @@
     <img class="user-img" @click="goProfile()" src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/FFFFFF/external-User-essential-collection-bearicons-glyph-bearicons.png" alt="external-User-essential-collection-bearicons-glyph-bearicons"/>
     </div>
     <div class="comment-content">
-      <form >
-        <input class="content" type="text" :value="content" @input="updateComment">
+      <form>
+        <input class="content" type="text" :value="content" @input="updateComment" placeholder="해당 영화의 한 줄 평가를 해주세요!">
         <img @click="createComment" class="accept" src="https://img.icons8.com/pulsar-line/96/FFFFFF/plus-2-math.png" alt="plus-2-math"/>
       </form>
     </div>
@@ -48,15 +48,16 @@
   border: 1px solid #333;
   padding: 10px;
   border-radius: 10px;
+  margin-bottom: 50px;
 }
 
 .comment-user {
   margin: auto;
-  padding-left: 20px;
   padding-bottom: 18px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: auto;
 }
 
 .user-name {
@@ -86,7 +87,7 @@
   margin: 20px 0;
 
   flex: 0.9;
-  margin-left: auto;
+  /* margin-left: auto; */
   flex-direction: row;
 }
 
@@ -108,20 +109,19 @@
   border: 1px solid #ccc;
   margin-right: 20px;
   margin-bottom: 6px;
-  opacity: 50%;
+  opacity: 90%;
 }
 
 .accept {
   width: 45px;
-  padding-top: 50px;
   border-radius: 4px;
   cursor: pointer;
 }
 .accept:hover {
   width: 45px;
-  padding-top: 50px;
   border-radius: 4px;
   cursor: pointer;
   opacity: 50%;
 }
+
 </style>

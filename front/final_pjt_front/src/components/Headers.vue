@@ -83,7 +83,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   /* text-align: center; */
-  opacity: 0.8;
+  opacity: 90%;
 }
 
 .form img {
