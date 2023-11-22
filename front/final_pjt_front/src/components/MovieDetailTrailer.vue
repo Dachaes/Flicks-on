@@ -1,6 +1,6 @@
 <template>
-  <div v-for="Url in youtubeEmbedUrl" :key="Url">
-    <iframe
+  <div class="trailers" v-for="Url in youtubeEmbedUrl" :key="Url">
+    <iframe class="trailer"
       width="560"
       height="315"
       :src="Url"
@@ -54,5 +54,24 @@ axios
 </script>
 
 <style scoped>
+.trailers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
 
+.trailer {
+  width: 300px;
+  height: 170px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .trailer {
+    width: 200px;
+    height: 112px;
+  }
+}
 </style>

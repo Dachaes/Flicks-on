@@ -1,8 +1,8 @@
 <template>
   <div>
     <Headers />
+    <banner />
     <div class="container">
-      <banner />
       <h2 class="recommendation-message">현재 상영작이에요!</h2>
       <MovieListNowPlaying />
       <h2 class="recommendation-message">유명한 작품이에요!</h2>
@@ -38,8 +38,6 @@
 </script>
 
 <style scoped>
-
-/* Main container */
 .container {
   display: flex;
   flex-direction: column;
@@ -49,12 +47,18 @@
   margin: 0 auto;
 }
 
-/* Search form */
-
-/* Recommendation messages */
 .recommendation-message {
-  margin: 50px 0px 0px;
-  text-align: left;
+  margin-top: 60px;
+  margin-left: 70px;
+  margin-right: auto;
+  margin-bottom: -5px;
 }
 
+.recommendation-message:hover {
+  margin-top: 60px;
+  margin-left: 70px;
+  margin-right: auto;
+  margin-bottom: -5px;
+  opacity: 50%;
+}
 </style>

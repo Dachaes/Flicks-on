@@ -69,7 +69,14 @@
   .movie-title {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 5px 0px 10px;
+  }
+
+  .movie-title:hover {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0px 10px;
+    opacity: 0.5;
   }
 
   .movie-rating {  
@@ -89,5 +96,6 @@
   .movie-rate {
     font-size: 16px;
     font-weight: bold;
+    color: rgb(170, 170, 170);
   }
 </style>
