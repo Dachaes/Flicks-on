@@ -2,13 +2,13 @@
   <div class="user">
     <img class="user-img" src="@/assets/user/anonymous_user.png" alt="user">
   </div>
-  <div class="profile-container1">
+  <div class="profile-container">
     <div class="blank"></div>
-    <p class="edit" @click="edit">Edit</p>
-    <p class="sign-out" @click="logOut">Log Out</p>
+    <p class="edit" @click="edit">Edit Profile</p>
+    <p class="logout" @click="logOut">Log Out</p>
+    <p class="signout" @click="SignOut">Sign Out</p>
   </div>
-  <div class="profile-container2">
-  </div>
+
 </template>
 
 <script setup>
@@ -38,37 +38,36 @@ onMounted(() => userStore.getUserDetail())
     justify-content: center;
     align-items: center;
   }
-  .profile-container1 {
+  .profile-container {
     display: flex;
     flex-direction: column;
 
-    height: 300px;
+    height: 400px;
     text-align: end;
-
-    border-bottom: 1px solid rgb(227, 227, 227);
-    background-color: rgb(187, 252, 252);
+    margin-top: 10px;
+    margin-bottom: 250px;
+    background-image: linear-gradient(0deg, rgb(20, 20, 20) 0%, #454545 100%);
+    background-color:  #333;
   }
   .blank{
     height: 250px;
   }
-  .edit {
+  .edit, .logout, .signout {
   margin: 5px;
   padding-right: 10px;
   }
 
-  .sign-out {
+  .edit:hover, .logout:hover, .sign-out:hover {
     margin: 5px;
     padding-right: 10px;
+    opacity: 50%;
   }
 
-  .profile-container2 {
-    height: 200px;
-  }
 
   .user-img {
     top: 230px;
     position: absolute;
     justify-content: center;
-    width: 130px;
+    width: 100px;
   }
 </style>
