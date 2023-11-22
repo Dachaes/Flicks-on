@@ -11,7 +11,7 @@
   <div class="likes">
     <div v-if="userRecommendList">
       <span v-for="movie in userRecommendList">
-        <img :src="movie.poster_path" alt="" width="60">
+        <img @click="goPage(movie.tmdb_id)" :src="movie.poster_path" alt="" width="60">
         <strong>{{ movie.title }}</strong>
       </span>
     </div>
@@ -44,7 +44,6 @@ const getRecommendMovie = () => {
     .then((res) => {
       const uniqueMovies = removeDuplicates(res.data);
       userRecommendList.value = uniqueMovies.slice(0, 20);
-      console.log(uniqueMovies.slice(0, 20))
     })
     .catch(err => console.log(err))
 }
@@ -56,6 +55,10 @@ const removeDuplicates = (array) => {
   );
   return uniqueArray;
 };
+
+const goPage = (movieId) => {
+  router.push({name:'movie_detail', params:{title:movieId}})
+}
 
 onMounted(() => {
   getRecommendMovie(route.params.user_name)
