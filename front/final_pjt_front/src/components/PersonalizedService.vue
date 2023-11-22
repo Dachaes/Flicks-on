@@ -108,6 +108,13 @@ onMounted(() => {
   .detail-analysis {
     display: flex;
     align-items: center;
+	cursor: pointer;
+  }
+  .detail-analysis:hover {
+    display: flex;
+    align-items: center;
+	cursor: pointer;
+	opacity: 50%;
   }
 
   .detail-analysis img {

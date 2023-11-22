@@ -57,7 +57,7 @@ onMounted(() => userStore.getUserDetail())
   padding-right: 10px;
   }
 
-  .edit:hover, .logout:hover, .sign-out:hover {
+  .edit:hover, .logout:hover, .signout:hover {
     margin: 5px;
     padding-right: 10px;
     opacity: 50%;

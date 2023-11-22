@@ -81,15 +81,6 @@
   margin-bottom: 20px; 
 }
 
-.movie-poster:hover {
-  width: 300px;
-  height: 450px;
-  object-fit: contain;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  opacity: 50%;
-}
-
 .movie-rating {  
     display: flex;
     flex-direction: row;
@@ -130,35 +121,16 @@
   margin-bottom: 5px;
 }
 
-.title:hover {
-  margin-bottom: 5px;
-  opacity: 50%;
-}
-
 .original-title {
   font-size: 20px;
   font-weight: normal;
   margin-bottom: 5px;
 }
 
-.original-title:hover {
-  font-size: 20px;
-  font-weight: normal;
-  margin-bottom: 5px;
-  opacity: 50%;
-}
-
 .runtime {
   font-size: 15px;
   font-weight: normal;
   margin-bottom: 5px;
-}
-
-.runtime:hover {
-  font-size: 15px;
-  font-weight: normal;
-  margin-bottom: 5px;
-  opacity: 50%;
 }
 
 .genre {
@@ -169,24 +141,8 @@
   margin-bottom: 5px;
 }
 
-.genre:hover {
-  font-size: 14px;
-  font-weight: normal;
-
-  margin-left: 10px;
-  margin-bottom: 5px;
-  opacity: 50%;
-}
-
-
 .movie-detail {
   font-size: 15px;
   font-weight: normal;
-}
-
-.movie-detail:hover {
-  font-size: 15px;
-  font-weight: normal;
-  opacity: 50%;
 }
 </style>

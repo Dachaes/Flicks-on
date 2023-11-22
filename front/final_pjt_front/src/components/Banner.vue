@@ -52,7 +52,17 @@ const goPage = function (id) {
     margin: 20px 10px;
     height: 400px;
     min-height: 400px; 
+    cursor: pointer;
   }
+
+  .banner-container:hover {
+    position: relative;
+    margin: 20px 10px;
+    height: 400px;
+    min-height: 400px;
+    opacity: 80%;
+  }
+
   .d-block {
     object-fit: cover;
     width: 100%;

@@ -90,12 +90,6 @@ onBeforeRouteUpdate((to, from) => {
     height: 300px;
     border: 1px solid #ccc;
   }
-  .trailer:hover {
-    width: 500px;
-    height: 300px;
-    border: 1px solid #ccc;
-    opacity: 50%;
-  }
 }
 
 @media (min-width: 768px) {
@@ -103,12 +97,6 @@ onBeforeRouteUpdate((to, from) => {
     width: 350px;
     height: 210px;
     border: 1px solid #ccc;
-  }
-  .trailer:hover {
-    width: 350px;
-    height: 210px;
-    border: 1px solid #ccc;
-    opacity: 50%;
   }
 }
 
@@ -118,12 +106,6 @@ onBeforeRouteUpdate((to, from) => {
     height: 260px;
     border: 1px solid #ccc;
   }
-  .trailer:hover {
-    width: 440px;
-    height: 260px;
-    border: 1px solid #ccc;
-    opacity: 50%;
-  }
 }
 
 
@@ -132,12 +114,6 @@ onBeforeRouteUpdate((to, from) => {
     width: 520px;
     height: 300px;
     border: 1px solid #ccc;
-  }
-  .trailer:hover {
-    width: 520px;
-    height: 300px;
-    border: 1px solid #ccc;
-    opacity: 50%;
   }
 }
 </style>

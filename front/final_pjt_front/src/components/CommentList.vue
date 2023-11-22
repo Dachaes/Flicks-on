@@ -184,5 +184,10 @@
   margin: 0px;
 }
 
-
+.edit:hover, .delete:hover, .accept:hover {
+  width: 30px;
+  cursor: pointer;
+  margin: 5px 0;
+  opacity: 50%;
+}
 </style>

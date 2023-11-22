@@ -3,7 +3,8 @@
     <div class="login-logo">
       <img src="@/assets/movie/movieAltImage.png" alt="" width="200">
     </div>
-    <div class="create-login-page login-form">
+
+    <div class="login-form">
       <form @submit.prevent="logIn" class="">
         <div>
           <label for="username" class="form-label">아이디 : </label>
@@ -15,11 +16,13 @@
         </div>
         <input type="submit" class="submit-button" value="로그인">
       </form>
+
       <div class="login-signup">
-        <span>아직 회원이 아닌신가요 ? </span>
+        <span>아직 회원이 아니신가요 ? </span>
         <button @click="goPage('signup')">Create Account</button>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -56,17 +59,15 @@ const goPage = function (pageName) {
   align-items: center;
   margin: 350px 0px;
 }
+
 .login-logo {
   margin: 0;
+  height: 100%;
+  width: auto;
 }
+
 .login-logo > img {
-  height: 300px;
-}
-.create-login-page {
-  max-width: 600px;
-  margin: 0;
-  padding: 20px;
-  color:black
+  height: 0%;
 }
 
 h1 {
@@ -75,6 +76,10 @@ h1 {
 }
 
 .login-form {
+  max-width: 600px;
+  margin: 0;
+  padding: 20px;
+  color:black;
   width: 400px;
   height: 500px;
   background-color: #fff;
