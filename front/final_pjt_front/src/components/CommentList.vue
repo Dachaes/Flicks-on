@@ -1,30 +1,45 @@
 <template>
-  <div class="comments-container">
-    <div v-for="comment in movieStore.detailMovieComment" :key="comment.id">
-      <div class="movie" v-if="!comment.deleting">
+    <div class="comment-container" v-for="comment in movieStore.detailMovieComment" :key="comment.id">
+
+      <div class="comment-user" v-if="!comment.deleting">
         <div v-if="comment.content">
           <p class="user-name">{{ comment.user_nickname }}</p>
-          <img class="movie-poster" src="@/assets/user/anonymous_user.png" alt="user_profile">
-        </div>
-        <!-- <img src="@/assets/likes/heart2.png" width="33" alt="likes"> -->
-        <div v-if="comment.user === userStore.userPk">
-          <div class="comment" v-if="!comment.editing">
-            <p class="one-comment">{{ comment.content }}</p>
-            <button @click="editSwitch(comment)">Edit</button>
-          </div>
-          <div class="comment" v-else>
-            <form class="one-comment" @submit.prevent="commentEdit(comment.id, comment)">
-              <input type="text" v-model="comment.content">
-              <button type="submit">Accept</button>
-            </form>
-          </div>
-          <button @click="deleteComment(comment, comment.id)">Delete</button>
-        </div>
-        <p>{{ comment.created_at }}</p>
-      </div>
-    </div>
-  </div>
 
+          <img v-if="comment.user === userStore.userPk" class="user-img" @click="goProfile(userStore.userPk)" src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/FFFFFF/external-User-essential-collection-bearicons-glyph-bearicons.png" alt="external-User-essential-collection-bearicons-glyph-bearicons"/>
+          <img v-else class="other-user-img" src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/FFFFFF/external-User-essential-collection-bearicons-glyph-bearicons.png" alt="external-User-essential-collection-bearicons-glyph-bearicons"/>
+        
+        </div>
+      </div>
+        
+      <div v-if="comment.user === userStore.userPk">
+
+        <div class="comment-content" v-if="!comment.editing">
+          <p class="content">{{ comment.content }}</p>
+          <img class="edit" @click="editSwitch(comment)" src="https://img.icons8.com/glyph-neue/64/FFFFFF/edit--v1.png" alt="edit--v1"/>
+        </div>
+
+        <div v-else>
+            <form class="content-editing" >
+              <input class="content" type="text" v-model="comment.content">
+              <img class="accept" @click="commentEdit(comment.id, comment)" src="https://img.icons8.com/glyph-neue/64/FFFFFF/checkmark.png" alt="checkmark"/>
+            </form>
+        </div>
+
+        <img class="delete" @click="deleteComment(comment, comment.id)" src="https://img.icons8.com/sf-regular-filled/48/FFFFFF/trash.png" alt="trash"/>
+        <p class="date">{{ comment.created_at }}</p>
+      </div>
+
+      <div v-else>
+
+        <div class="comment-content">
+        <p class="content">{{ comment.content }}</p>
+        <p class="date">{{ comment.created_at }}</p>
+        </div>
+
+      </div>
+
+
+    </div>
   
 </template>
 
@@ -38,11 +53,10 @@
   const route = useRoute()
   const movieStore = useMovieStore()
   const commentStore = useCommentStore()
-  const userStore =useUserStore()
+  const userStore = useUserStore()
 
   const deleteComment = (comment, pk) => {
     commentStore.commentDelete(route.params.title, pk)
-    // router.push({name: "movie_detail", params: {title: pk}})
     comment.deleting = !comment.deleting
   }
 
@@ -60,49 +74,101 @@
     comment.editing = false
   }
   
-  // const comments = ref(movieStore.detailMovieComment)
-
-  // watch(comments, (newValue, oldValue) => {
-  //   console.log(newValue)
-  // }, { immediate: true })
-
+  const goProfile = function (id) {
+    router.push({name: 'profile', params: {user_name: id}})
+  }
 </script>
 
 
 <style scoped>
-  .comments-container {
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-  }
 
-  .movie {
-    width: 20%;
-  }
+  .comment-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
 
-  .movie p {
-    text-align: center;
-  }
+.comment-user {
+  margin: auto;
+  padding-bottom: 18px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+}
 
-  .movie-poster {
-    width: 100%;
-    /* object-fit: cover; */
-  }
+.user-name {
+  font-weight: bold;
+}
 
-  .user-name {
-    margin-top: 2px;
-    margin-bottom: 5px;
-  }
+.user-name:hover {
+  font-weight: bold;
+  opacity: 50%;
+}
 
-  .comment {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin-left: 10px;
-  }
+.user-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
-  .one-comment {
-    margin-top: 10px;
-    margin-right: 100px;
-  }
+.user-img:hover {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  opacity: 50%;
+}
+
+.other-user-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 40%;
+}
+.comment-content {
+  margin: 20px 0;
+
+  flex: 0.9;
+  flex-direction: row;
+}
+
+.content {
+  width: 88%;
+  height: 100px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 20px;
+  margin-bottom: 6px;
+}
+
+.content:hover {
+  width: 88%;
+  height: 100px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 20px;
+  margin-bottom: 6px;
+  opacity: 90%;
+}
+
+.accept {
+  width: 45px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.accept:hover {
+  width: 45px;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 50%;
+}
+
 </style>
