@@ -6,12 +6,14 @@
         - Comment CRUD
     - `Front`
         - Vue Components Tree 초안
+        - 같은 route를 사용하는 컴포넌트 간 url로 이동 가능하게 구현
     - `Back`
         - ERD 1차 수정
         - 전체 Model 작성 및 TMDB API를 이용해 DB 데이터 작성
-        - Login, SignUp 구현 및 테스트 진행해 확인
-        - rest-auth 커스텀 &rarr; user deatil serializer 수정
+        - Login, SignUp 구현, 최초 로그인 시 취향을 설정할 수 있게 설정
+        - rest-auth 커스텀 &rarr; user deatil serializer 커스텀
         - API 로 불러 온 영화 데이터 일부 조작
+        - 취향을 기반으로 영화 추천 알고리즘 제작
 
 - **전소현**
     - 구현 목록 1차 수정
@@ -53,7 +55,7 @@
         - `Back` :
         - `CSS` : 메인-영화 리스트, 헤더, 푸터, 디테일-영화 정보
     - 23.11.22(수)
-        - `Front` : signup 함수 수정 &rarr; 최초 로그인 시 장르 선택
+        - `Front` : signup 함수 수정 &rarr; 최초 로그인 시 장르 선택, 같은 url에서 parameter만 수정한 url로 접속 시도 시 안되던 버그 수정
         - `Back` : signup
         - `CSS` : 각 페이지의 제목 메세지, 디테일-유튜브 트레일러
     - 23.11.23(목)

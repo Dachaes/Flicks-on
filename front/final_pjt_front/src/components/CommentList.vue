@@ -11,8 +11,7 @@
         </div>
       </div>
         
-      <div class="comment-content" v-if="comment.user === userStore.userPk">
-
+      <div class="comment-content" v-if="comment.user_id === userStore.userPk">
         <div v-if="!comment.editing" class="content-container">
           <p class="content">{{ comment.content }}</p>
           <div class="icon">
@@ -39,6 +38,7 @@
 </template>
 
 <script setup>
+  import { computed } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
   import { useUserStore } from '@/stores/users'
   import { useCommentStore } from '@/stores/comments'
