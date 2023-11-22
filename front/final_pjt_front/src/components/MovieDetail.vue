@@ -114,6 +114,12 @@
   padding: 0 20px 0 0;
 }
 
+@media (max-width: 768px) {
+  .movie-info {
+  display: none;
+}
+}
+
 .movie-title {
   font-size: 40px;
   font-weight: bold;
