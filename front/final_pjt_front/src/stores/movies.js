@@ -189,7 +189,7 @@ export const useMovieStore = defineStore('post', () => {
     })
     .then(res => {
       detailMovieComment.value = res.data.comment_set
-      console.log(detailMovieComment.value)
+      console.log(detailMovieComment.value.reverse())
     })
     .catch(err => console.log(err))
 

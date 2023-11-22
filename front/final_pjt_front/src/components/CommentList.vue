@@ -1,6 +1,5 @@
 <template>
     <div class="comment-container" v-for="comment in movieStore.detailMovieComment" :key="comment.id">
-    
       <div class="comment-user" v-if="!comment.deleting">
         <div v-if="comment.content">
           <p class="user-name">{{ comment.user_nickname }}</p>
@@ -11,7 +10,7 @@
         </div>
       </div>
         
-      <div class="comment-content" v-if="comment.user_id === userStore.userPk">
+      <div class="comment-content" v-if="comment.user_id === userStore.userPk && !comment.deleting">
         <div v-if="!comment.editing" class="content-container">
           <p class="content">{{ comment.content }}</p>
           <div class="icon">
@@ -28,7 +27,7 @@
         <p class="date">{{ comment.created_at }}</p>
       </div>
 
-      <div class="comment-content" v-else>
+      <div class="comment-content" v-else-if="!comment.deleting">
         <p class="content">{{ comment.content }}</p>
         <p class="date">{{ comment.created_at }}</p>
       </div>
@@ -38,7 +37,7 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue'
+  import { watch } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
   import { useUserStore } from '@/stores/users'
   import { useCommentStore } from '@/stores/comments'
@@ -72,6 +71,12 @@
   const goProfile = function (id) {
     router.push({name: 'profile', params: {user_name: id}})
   }
+
+  watch(movieStore.detailMovieComment, (newValue, oldValue) => {
+    if (newValue != oldValue) {
+      movieStore.getDetailMovie(route.params.title)
+    }
+  })
 </script>
 
 

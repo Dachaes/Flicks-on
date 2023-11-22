@@ -25,18 +25,17 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         user_set = UserNicknameSerializer(read_only=True)
         user_nickname = serializers.CharField(source='user.nickname', read_only=True)
         user_id = serializers.IntegerField(source='user.id', read_only=True)
-        created_at = serializers.DateTimeField(format='%Y-%m-%d', read_only=True)
-        updated_at = serializers.DateTimeField(format='%Y-%m-%d', read_only=True)
         class Meta:
             model = Comment
             fields = ('id', 'content', 'user_nickname', 'user_id', 'user_set', 'created_at', 'updated_at',)
             read_only_fields = ('created_at', 'updated_at')
 
     comment_set = CommentSerializer(read_only=True, many=True)
-
+    release_date = serializers.CharField(read_only=True)
     class Meta:
         model = Movie
         fields = '__all__'
+        read_only_fields = ('release_date', )
 
 
 class GenreSerializer(serializers.ModelSerializer):

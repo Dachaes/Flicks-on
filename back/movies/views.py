@@ -115,8 +115,8 @@ def detail(request, tmdb_pk):
             western = True if 27 in data['genre_ids'] else False,
         )
     movie = get_object_or_404(Movie, tmdb_id=tmdb_pk)
-    serializers = MovieDetailSerializer(movie)
-    return Response(serializers.data)
+    serializer = MovieDetailSerializer(movie)
+    return Response(serializer.data)
 
 
 @api_view(['GET', 'POST'])
@@ -211,7 +211,8 @@ def recommend_movies(request, user_pk):
         if item[1] == 1:
             movies = Movie.objects.filter(**{item[0]: True})
             movie_list.extend(movies)
-
+    movie_list = list(set(movie_list))
+    movie_list = sorted(movie_list, key=lambda x: -x.movie_rate)
     serializer = MovieSerializer(movie_list, many=True)
     return Response(serializer.data)
     
