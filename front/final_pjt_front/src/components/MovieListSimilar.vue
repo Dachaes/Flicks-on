@@ -1,7 +1,10 @@
 <template>
   <div class="movies-container">
     <div class="movies"
-    v-for="movie in movieStore.similarMovie" :key="movie.id">
+      v-for="movie in movieStore.similarMovie" 
+      :key="movie.id"
+      @click="goPage(movie.id)"
+    >
       <div v-if="movie.poster_path === null">
         <img class="movie-poster"
       src="@/assets/movie/movieAltImage.png" alt="movie_poster">
@@ -21,7 +24,7 @@
 
 <script setup>
   import { ref, onMounted, watch } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRouter, onBeforeRouteUpdate } from 'vue-router'
   import { useMovieStore } from '@/stores/movies'
 
   import { useRoute } from 'vue-router'
@@ -37,6 +40,18 @@
   const movieStore = useMovieStore()
   movieStore.getSimilarMovie(props.tmdbId)
 
+  const goPage = (movieTmdbId) => {
+    router.push({
+      name: 'movie_detail',
+      params: {
+        title: movieTmdbId,
+      },
+    })
+  }
+
+  onBeforeRouteUpdate((to, from) => {
+    movieStore.getSimilarMovie(to.params.title)
+  })
 </script>
 
 <style scoped>

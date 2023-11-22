@@ -33,6 +33,7 @@
 
 <script setup>
   import { ref, onMounted } from 'vue'
+  import { onBeforeRouteUpdate, useRouter } from 'vue-router'
   import { useMovieStore } from '@/stores/movies'
   
   const props = defineProps({
@@ -40,8 +41,13 @@
   })
 
   const movieStore = useMovieStore()
+  const router = useRouter()
   onMounted(() => {
     movieStore.getDetailMovie(props.tmdbId)
+  })
+
+  onBeforeRouteUpdate((to, from) => {
+    movieStore.getDetailMovie(to.params.title)
   })
 
 </script>

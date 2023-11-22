@@ -7,19 +7,9 @@
     <MovieListSimilar :tmdb-id="tmdb_id"/>
 
     <CommentCreate />
-    <!-- <CommentCreate 
-      :moviePk="store.detailMovie.id"
-    /> -->
     
     <CommentList />
-    <!-- <ul class="comment-list">
-      <CommentList
-          v-for="comment in store.detailMovie.comment_set"
-          :key="comment.id"
-          class="comment-item"
-          :comment="comment"
-        />
-    </ul> -->
+
     <Footers />
   </div>
 </template>
@@ -34,17 +24,16 @@
   import Footers from '@/components/Footers.vue'
 
   import { ref } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 
   const route = useRoute()
   const router = useRouter()
   const tmdb_id = ref(route.params.title)
   console.log(tmdb_id.value)
 
-  // import { onMounted } from 'vue'
-  // import { useMovieStore } from '@/stores/movies'
-  // const route = useRoute()
-  // const store = useMovieStore()
+  onBeforeRouteUpdate((to, from) => {
+    tmdb_id.value = to.params.title
+  })
 
 </script>
 
