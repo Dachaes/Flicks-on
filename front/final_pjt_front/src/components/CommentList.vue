@@ -1,6 +1,6 @@
 <template>
     <div class="comment-container" v-for="comment in movieStore.detailMovieComment" :key="comment.id">
-
+    
       <div class="comment-user" v-if="!comment.deleting">
         <div v-if="comment.content">
           <p class="user-name">{{ comment.user_nickname }}</p>
