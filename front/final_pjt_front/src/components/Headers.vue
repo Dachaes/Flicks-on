@@ -68,7 +68,7 @@
 }
 
 .input {
-  width: 500px;
+  width: 200%;
   height: 40px;
   padding: 10px 25px;
   border: 1px solid #ccc;
@@ -77,7 +77,7 @@
 }
 
 .input:hover {
-  width: 500px;
+  width: 300px;
   height: 40px;
   padding: 10px 25px;
   border: 1px solid #ccc;
