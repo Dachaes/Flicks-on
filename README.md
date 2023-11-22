@@ -14,6 +14,7 @@
         - rest-auth 커스텀 &rarr; user deatil serializer 커스텀
         - API 로 불러 온 영화 데이터 일부 조작
         - 취향을 기반으로 영화 추천 알고리즘 제작
+        - 시리얼라이저 작성
     - `CSS`
         - 배너
 
@@ -71,15 +72,16 @@
     <br>
 5. 진행해야 할 부분
     - 우선순위 상
-        - signup 추가 (취향 추천 알고리즘)
+        - [x]signup 추가 (취향 추천 알고리즘)
 
     - 우선순위 중하
         - 프로필 사진 추가 (추가 기능)   
         - signout 추가
-        - comment 생성 (추가 기능 &rarr; 새로고침 디버깅)
+        - [x]comment 생성 (추가 기능 &rarr; 새로고침 디버깅)
+        - 선택한 장르를 기준으로 배너 이미지를 넣으면 어떨까
 
     - CSS
-        - 배너 수정
+        - [x]배너 수정
         
 
 ### REFERENCE<hr>
@@ -110,6 +112,9 @@
 
     - 1차 수정안<br>
     <img src="assets/erd/erd2.png" width="70%"><br>
+
+    - 2차 수정안<br>
+    <img src="assets/erd/erd3.png" width="70%"><br>
 
 - 모델이 저장될 때 마다 tmdb 의 영화 id 가 있는지 확인 후 없는 경우에만 영화를 저장
 

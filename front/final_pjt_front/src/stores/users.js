@@ -75,7 +75,10 @@ export const useUserStore = defineStore('user', () => {
         console.log(res)
         token.value = res.data.key
         router.push({ name:'main' })
-      })      
+      })
+      .catch(err => {
+        alert('입력하신 정보가 올바르지 않습니다.')
+      })
     }
     
     const logOut = function () {

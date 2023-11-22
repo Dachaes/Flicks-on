@@ -211,8 +211,16 @@ def recommend_movies(request, user_pk):
         if item[1] == 1:
             movies = Movie.objects.filter(**{item[0]: True})
             movie_list.extend(movies)
-    movie_list = list(set(movie_list))
-    movie_list = sorted(movie_list, key=lambda x: -x.movie_rate)
-    serializer = MovieSerializer(movie_list, many=True)
+    
+    unique_movies = []
+    seen_ids = set()
+
+    for movie in movie_list:
+        if movie.tmdb_id not in seen_ids:
+            unique_movies.append(movie)
+            seen_ids.add(movie.tmdb_id)
+
+    unique_movies = sorted(unique_movies, key=lambda x: -x.movie_rate)
+    serializer = MovieSerializer(unique_movies, many=True)
     return Response(serializer.data)
     
