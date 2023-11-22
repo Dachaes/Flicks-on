@@ -13,11 +13,6 @@
     <CommentCreate />
     
     <CommentList />
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> css
     <Footers />
   </div>
 </template>
