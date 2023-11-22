@@ -1,27 +1,32 @@
 <template>
-  <div class="container">
-    <div class="movie">
-      <img class="movie-poster" :src="movieStore.detailMovie.poster_path" alt="poster">
-    </div>
-    <div class="movie-rating">
-      <img class="movie-heart" src="@/assets/likes/heart2.png" alt="likes">
-      <p class="movie-rate" >{{ movieStore.detailMovie.vote_average }} </p>
-    </div>
-    <div class="movie-info">
-      <div class="movie-title" v-if="movieStore.detailMovie.production_countries">
-        <p class="title">{{ movieStore.detailMovie.title }}</p>
-        <div class="original-title">
-          <p>{{ movieStore.detailMovie.original_title }}, <span data-start="0" data-end="5">{{ movieStore.detailMovie.release_date }}</span></p>
+  <div v-if="movieStore.detailMovie.poster_path">
+    <div class="container">
+      <div class="movie">
+        <img class="movie-poster" :src="movieStore.detailMovie.poster_path" alt="poster">
+      </div>
+      <div class="movie-rating">
+        <img class="movie-heart" src="@/assets/likes/heart2.png" alt="likes">
+        <p class="movie-rate" >{{ movieStore.detailMovie.vote_average }} </p>
+      </div>
+      <div class="movie-info">
+        <div class="movie-title" v-if="movieStore.detailMovie.production_countries">
+          <p class="title">{{ movieStore.detailMovie.title }}</p>
+          <div class="original-title">
+            <p>{{ movieStore.detailMovie.original_title }}, <span data-start="0" data-end="5">{{ movieStore.detailMovie.release_date }}</span></p>
+          </div>
+          <p class="runtime">{{ movieStore.detailMovie.runtime }}분 / {{ movieStore.detailMovie.production_countries[0].name }}</p>
+          <span v-for="genre in movieStore.detailMovie.genres" :key="genre.id">
+            <span class="genre">{{ genre.name }}</span>
+          </span>
         </div>
-        <p class="runtime">{{ movieStore.detailMovie.runtime }}분 / {{ movieStore.detailMovie.production_countries[0].name }}</p>
-        <span v-for="genre in movieStore.detailMovie.genres" :key="genre.id">
-          <span class="genre">{{ genre.name }}</span>
-        </span>
-      </div>
-      <div class="movie-detail">
-        <p>{{ movieStore.detailMovie.overview }}</p>
+        <div class="movie-detail">
+          <p>{{ movieStore.detailMovie.overview }}</p>
+        </div>
       </div>
     </div>
+  </div>
+  <div v-else>
+    <p>로딩중</p>
   </div>
 </template>
 
