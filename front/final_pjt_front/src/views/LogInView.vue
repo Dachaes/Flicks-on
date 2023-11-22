@@ -1,8 +1,10 @@
 <template>
-  <div class="login-main">
+  <div class="login-container">
+
     <div class="login-logo">
       <img src="@/assets/movie/movieAltImage.png" alt="" width="200">
     </div>
+    
 
     <div class="login-form">
       <form @submit.prevent="logIn" class="">
@@ -18,8 +20,8 @@
       </form>
 
       <div class="login-signup">
-        <span>아직 회원이 아니신가요 ? </span>
-        <button @click="goPage('signup')">Create Account</button>
+        <span class="signup-message">아직 회원이 아니신가요 ? </span>
+        <button class="signup" @click="goPage('signup')">Create Account</button>
       </div>
     </div>
 
@@ -53,21 +55,44 @@ const goPage = function (pageName) {
 </script>
 
 <style scoped>
-.login-main{
+.login-container{
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 350px 0px;
+  border-radius: 10px;
+  background-color: rgb(39, 39, 39);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+@media (max-width: 680px) {
+  .login-container{
+    width: 500px;
+  }
+  .signup-message {
+    display: none;
+    padding-right: 0px;
+
+  }
 }
 
 .login-logo {
   margin: 0;
-  height: 100%;
   width: auto;
+  height: 40%;
+  flex: 0.5;
 }
 
 .login-logo > img {
   height: 0%;
+  border-radius: 7px;
 }
 
 h1 {
@@ -76,7 +101,7 @@ h1 {
 }
 
 .login-form {
-  max-width: 600px;
+  flex: 0.5;
   margin: 0;
   padding: 20px;
   color:black;
@@ -87,6 +112,7 @@ h1 {
   /* border-radius: 5px; */
   padding: 20px;
   align-items: center;
+  border-radius: 7px;
 }
 
 .form-label {
@@ -110,8 +136,8 @@ h1 {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
+  background-color:rgb(34, 34, 34);
+  color: rgb(219, 219, 219);;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -119,11 +145,24 @@ h1 {
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #333;
 }
+
 .login-signup{
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.signup {
+  color: rgb(219, 219, 219);
+  border-radius: 5px;
+  padding: 0 15px;
+  background-color: rgb(34, 34, 34);
+  transition: background-color 0.2s;
+}
+
+.signup:hover {
+  background-color: #333;
 }
 </style>
