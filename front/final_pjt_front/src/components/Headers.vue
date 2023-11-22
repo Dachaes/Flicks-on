@@ -3,7 +3,7 @@
     <img class="logo-img" @click="goMain()" src="@/assets/logo/logo_dark.png" alt="logo">
     
     <div class="form">
-      <input type="text" class="input" :value="query" @input="updateQuery">
+      <input type="text" class="input" :value="query" @input="updateQuery" placeholder="무슨 영화를 찾으시나요?">
       <img @click="goSearch(query)" src="@/assets/search/search.png" alt="search">
     </div>
     <img class="user-img" @click="goProfile()" src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/FFFFFF/external-User-essential-collection-bearicons-glyph-bearicons.png" alt="external-User-essential-collection-bearicons-glyph-bearicons"/>
@@ -70,7 +70,7 @@
 .input {
   width: 200%;
   height: 40px;
-  padding: 10px 25px;
+  padding: 13px 25px 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   /* text-align: center; */
@@ -79,7 +79,7 @@
 .input:hover {
   width: 300px;
   height: 40px;
-  padding: 10px 25px;
+  padding: 13px 25px 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   /* text-align: center; */

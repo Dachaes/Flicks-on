@@ -11,33 +11,28 @@
         </div>
       </div>
         
-      <div v-if="comment.user === userStore.userPk">
+      <div class="comment-content" v-if="comment.user === userStore.userPk">
 
-        <div class="comment-content" v-if="!comment.editing">
+        <div v-if="!comment.editing" class="content-container">
           <p class="content">{{ comment.content }}</p>
-          <img class="edit" @click="editSwitch(comment)" src="https://img.icons8.com/glyph-neue/64/FFFFFF/edit--v1.png" alt="edit--v1"/>
+          <div class="icon">
+            <img class="edit" @click="editSwitch(comment)" src="https://img.icons8.com/glyph-neue/64/FFFFFF/edit--v1.png" alt="edit--v1"/>
+            <img class="delete" @click="deleteComment(comment, comment.id)" src="https://img.icons8.com/sf-regular-filled/48/FFFFFF/trash.png" alt="trash"/>
+          </div>
         </div>
 
         <div v-else>
-            <form class="content-editing" >
-              <input class="content" type="text" v-model="comment.content">
-              <img class="accept" @click="commentEdit(comment.id, comment)" src="https://img.icons8.com/glyph-neue/64/FFFFFF/checkmark.png" alt="checkmark"/>
-            </form>
+            <input class="content" type="text" v-model="comment.content">
+            <img class="accept" @click="commentEdit(comment.id, comment)" src="https://img.icons8.com/glyph-neue/64/FFFFFF/checkmark.png" alt="checkmark"/>
         </div>
 
-        <img class="delete" @click="deleteComment(comment, comment.id)" src="https://img.icons8.com/sf-regular-filled/48/FFFFFF/trash.png" alt="trash"/>
         <p class="date">{{ comment.created_at }}</p>
       </div>
 
-      <div v-else>
-
-        <div class="comment-content">
+      <div class="comment-content" v-else>
         <p class="content">{{ comment.content }}</p>
         <p class="date">{{ comment.created_at }}</p>
-        </div>
-
       </div>
-
 
     </div>
   
@@ -82,7 +77,7 @@
 
 <style scoped>
 
-  .comment-container {
+.comment-container {
   display: flex;
   flex-direction: row;
   background-color: #1e1e1e;
@@ -103,10 +98,12 @@
 
 .user-name {
   font-weight: bold;
+  text-align: center;
 }
 
 .user-name:hover {
   font-weight: bold;
+  text-align: center;
   opacity: 50%;
 }
 
@@ -133,9 +130,14 @@
 }
 .comment-content {
   margin: 20px 0;
-
   flex: 0.9;
   flex-direction: row;
+  padding-bottom: -10px;
+}
+
+.content-container {
+  display: flex;
+  align-items: center;
 }
 
 .content {
@@ -159,16 +161,28 @@
   opacity: 90%;
 }
 
-.accept {
-  width: 45px;
-  border-radius: 4px;
-  cursor: pointer;
+.icon {
+  display: flex;
+  flex-direction: column;
 }
-.accept:hover {
-  width: 45px;
-  border-radius: 4px;
+
+.comment-content img {
+  width: 30px;
   cursor: pointer;
+  margin: 5px 0;
+}
+.comment-content img :hover {
+  width: 30px;
+  cursor: pointer;
+  margin: 5px 0;
   opacity: 50%;
 }
+
+.date {
+  text-align: right;
+  padding-right: 13%;
+  margin: 0px;
+}
+
 
 </style>

@@ -3,12 +3,11 @@
     <Headers />
     <banner />
     <div class="container">
-      <h2 class="recommendation-message">현재 상영작이에요!</h2>
-      <hr>
+      <h2 class="recommendation-message">> 현재 상영작이에요!</h2>
       <MovieListNowPlaying />
-      <h2 class="recommendation-message">유명한 작품이에요!</h2>
+      <h2 class="recommendation-message">> 유명한 작품이에요!</h2>
       <MovieListTopRated />
-      <h2 class="recommendation-message">개봉 예정작이에요!</h2>
+      <h2 class="recommendation-message">> 개봉 예정작이에요!</h2>
       <MovieListUpcomming />
     </div>
     <Footers />
@@ -22,20 +21,6 @@
   import MovieListTopRated from '@/components/MovieListTopRated.vue'
   import MovieListUpcomming from '@/components/MovieListUpcomming.vue'
   import Footers from '@/components/Footers.vue'
-
-  import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
-  const router = useRouter()
-
-  const query = ref('')
-  
-  const updateQuery = function (event) {
-    query.value = event.currentTarget.value
-  }
-  
-  const goSearch = function (query) {
-    router.push({name: 'search', params: { query: query } })
-  }
 </script>
 
 <style scoped>
@@ -50,16 +35,16 @@
 
 .recommendation-message {
   margin-top: 60px;
-  margin-left: 70px;
+  margin-left: 3%;
   margin-right: auto;
-  margin-bottom: -5px;
+  margin-bottom: -10px;
 }
 
 .recommendation-message:hover {
   margin-top: 60px;
-  margin-left: 70px;
+  margin-left: 3%;
   margin-right: auto;
-  margin-bottom: -5px;
+  margin-bottom: -10px;
   opacity: 50%;
 }
 </style>
