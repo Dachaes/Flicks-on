@@ -58,7 +58,7 @@ const userStore = useUserStore()
 const userRecommendList = ref(null)
   
 const analysisUser = () => {
-  return alert('아직 준비중이에요')
+  return alert('아직 준비중이에요! 🥰')
 }
 
 const getRecommendMovie = () => {
