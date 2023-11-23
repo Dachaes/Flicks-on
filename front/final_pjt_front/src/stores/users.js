@@ -108,6 +108,7 @@ export const useUserStore = defineStore('user', () => {
       }
     })
       .then((res) => {
+        console.log(res.data.usergenre_set)
         userData.value = res.data
         userNickName.value = res.data.nickname
         userPk.value = res.data.pk

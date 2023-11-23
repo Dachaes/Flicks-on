@@ -66,7 +66,7 @@ const getRecommendMovie = () => {
     method: 'post',
     url: `${userStore.API_URL}/api/v1/movies/recommend/${userStore.userPk}/`,
     data:{
-      user_genre: userStore.userData.usergenre_set[0]
+      user_genre: userStore.userData.usergenre_set
     }
   })
     .then((res) => {
@@ -89,7 +89,8 @@ const goPage = (movieId) => {
 }
 
 onMounted(() => {
-  getRecommendMovie(route.params.user_name)
+  getRecommendMovie()
+  console.log(userStore.userData.usergenre_set)
 })
 
 </script>

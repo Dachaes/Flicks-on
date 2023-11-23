@@ -208,59 +208,26 @@ def user_init(request, user_pk):
 def recommend_movies(request, user_pk):
     id_score = []
     like_movie_list = []
-    movie_list = []
-    # for item in request.data['user_genre'].items():
-    #     if item[1] > 0:
-    #         # 각 영화의 가중치 점수 계산
-    #         movies = Movie.objects.filter(**{item[0]: True})
-    #         for movie in movies:
-    #             if movie.tmdb_id:
-    #                 score = item[1] * movie.movie_rate
-    #                 id_score.append([movie.tmdb_id, score])
-    #             else:
-    #                 like_movie_list.append(movie)
-
-    #     else:
-    #         movies = Movie.objects.filter(**{item[0]: True})
-    #         movie_list.extend(movies)
-
-    # unique_movies = []
-    # seen_ids = set()
-
-    # for movie in movie_list:
-    #     if movie.tmdb_id not in seen_ids:
-    #         unique_movies.append(movie)
-    #         seen_ids.add(movie.tmdb_id)
-
-    # unique_movies = sorted(unique_movies, key=lambda x: -x.movie_rate)
-    # serializer = MovieSerializer(unique_movies, many=True)
-    # return Response(serializer.data)
-    for item in request.data['user_genre'].items():
+    for item in request.data['user_genre'][0].items():
         if item[1] > 0:
-            # 각 영화의 가중치 점수 계산
             movies = Movie.objects.filter(**{item[0]: True})
             for movie in movies:
                 if movie.tmdb_id:
                     score = item[1] * movie.movie_rate
                     id_score.append([movie.tmdb_id, score])
-                else:
                     like_movie_list.append(movie)
-
-        else:
-            movies = Movie.objects.filter(**{item[0]: True})
-            movie_list.extend(movies)
 
     unique_movies = []
     seen_ids = set()
 
-    for movie in movie_list:
+    for movie in like_movie_list:
         if movie.tmdb_id not in seen_ids:
             unique_movies.append(movie)
             seen_ids.add(movie.tmdb_id)
 
     for movie in unique_movies:
         overlap_count = 0
-        for genre in request.data['user_genre'].keys():
+        for genre in request.data['user_genre'][0].keys():
             if movie.__dict__[genre]:
                 overlap_count += 1
         if overlap_count > 1:
