@@ -4,10 +4,17 @@
     <div class="genres">
     <div class="genre" v-for="genre in genres" :key="genre.id">
       <button class="genre-button" @click="selectGenres(genre)">{{ genre.name }}</button>
-      <input v-if="genre.isSelected" type="number" v-model="genre.score">
+      <div v-if="genre.showModal" class="modal">
+        <div class="genre-score">
+          <span class="close" @click="closeModal(genre)">&times;</span>
+          <h3>{{ genre.name }} 장르를 얼마나 좋아하세요?</h3>
+          <input class="genre-score-input" type="number" @keyup.enter="closeModal(genre, genre.name)" v-model="genre.score">
+          {{ genre['name'].score }}
+        </div>
+      </div>
     </div>
   </div>
-  <div class="submit" v-if="comp">
+  <div class="submit" v-if="cnt > 2">
     <button class="submit-button" @click="addGenre">FINISH</button>
   </div>
 </div>
@@ -22,7 +29,14 @@ import axios from 'axios'
 const userStore = useUserStore()
 const router = useRouter()
 const genres = ref(null)
-const selectedGenres = ref([])
+const selectedGenres = ref({
+  'Action': 0, 'Adventure': 0, 'Animation': 0, 'Comedy': 0,
+  'Crime': 0, 'Documentary': 0, 'Drama': 0, 'Family': 0,
+  'Fantasy': 0, 'History': 0, 'Horror': 0, 'Music': 0,
+  'Mystery': 0, 'Romance': 0, 'Science Fiction': 0, 'TV Movie': 0,
+  'Thriller': 0, 'War': 0, 'Western': 0
+})
+const cnt = ref(0)
 
 const getMoviesInfo = function () {
     axios({
@@ -33,6 +47,7 @@ const getMoviesInfo = function () {
         genres.value = res.data
         genres.value.forEach((genre) => {
           genre.isSelected = false
+          genre.showModal = false
           genre.score = 0
         })
       })
@@ -42,9 +57,14 @@ const getMoviesInfo = function () {
   }
 
 const selectGenres = function (genre) {
-  genre.isSelected = !genre.isSelected
-  const genreValue = {'genre_name': genre.name, 'genre_score': genre.score}
-  selectedGenres.value.includes(genre.name) ? false : selectedGenres.value.push(genre.name)
+  genre.showModal = !genre.showModal
+}
+
+const closeModal = function (genre, name) {
+  genre.showModal = !genre.showModal
+  selectedGenres.value[name] = genre.score
+  console.log(selectedGenres.value)
+  cnt.value++
 }
 
 const addGenre = () => {
@@ -64,9 +84,9 @@ const addGenre = () => {
     })
 }
 
-const comp = computed(() => {
-  return selectedGenres.value.length > 2 ? true : false
-})
+// const comp = computed(() => {
+//   return selectedGenres.value.length > 2 ? true : false
+// })
 
 onMounted(() => {
   getMoviesInfo()
@@ -147,8 +167,34 @@ onMounted(() => {
   cursor: pointer;
   transition: background-color 0.5s;
 }
-
+.genre-score{
+  text-align: center;
+  color: black;
+}
 .submit-button:hover {
   background-color: #414141;
+}
+.modal {
+display: flex;
+align-items: center;
+justify-content: center;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgb(237, 237, 237, 0.92);
+z-index: 1;
+}
+.close {
+position: absolute;
+top: 30px;
+right: 30px;
+cursor: pointer;
+color: rgb(30, 30, 30);
+font-size: 24px;
+}
+.genre-score-input{
+  text-align: center;
 }
 </style>

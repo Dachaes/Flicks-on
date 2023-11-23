@@ -180,25 +180,25 @@ def user_init(request, user_pk):
     elif request.method == 'POST':
         user_genre = UserGenre.objects.create(
             user = user,
-            action = 1 if 'Action' in request.data['selectedGenres'] else 0,
-            adventure = 1 if 'Adventure' in request.data['selectedGenres'] else 0,
-            animation = 1 if 'Animation' in request.data['selectedGenres'] else 0,
-            comedy = 1 if 'Comedy' in request.data['selectedGenres'] else 0,
-            crime = 1 if 'Crime' in request.data['selectedGenres'] else 0,
-            documentary = 1 if 'Documentary' in request.data['selectedGenres'] else 0,
-            drama = 1 if 'Drama' in request.data['selectedGenres'] else 0,
-            family = 1 if 'Family' in request.data['selectedGenres'] else 0,
-            fantasy = 1 if 'Fantasy' in request.data['selectedGenres'] else 0,
-            history = 1 if 'History' in request.data['selectedGenres'] else 0,
-            horror = 1 if 'Horror' in request.data['selectedGenres'] else 0,
-            music = 1 if 'Music' in request.data['selectedGenres'] else 0,
-            mystery = 1 if 'Mystery' in request.data['selectedGenres'] else 0,
-            romance = 1 if 'Romance' in request.data['selectedGenres'] else 0,
-            science_fiction = 1 if 'Science Fiction' in request.data['selectedGenres'] else 0,
-            tv_movie = 1 if 'TV Movie' in request.data['selectedGenres'] else 0,
-            thriller = 1 if 'Thriller' in request.data['selectedGenres'] else 0,
-            war = 1 if 'War' in request.data['selectedGenres'] else 0,
-            western = 1 if 'Western' in request.data['selectedGenres'] else 0,
+            action = request.data['selectedGenres']['Action'],
+            adventure = request.data['selectedGenres']['Adventure'],
+            animation = request.data['selectedGenres']['Animation'],
+            comedy = request.data['selectedGenres']['Comedy'],
+            crime = request.data['selectedGenres']['Crime'],
+            documentary = request.data['selectedGenres']['Documentary'],
+            drama = request.data['selectedGenres']['Drama'],
+            family = request.data['selectedGenres']['Family'],
+            fantasy = request.data['selectedGenres']['Fantasy'],
+            history = request.data['selectedGenres']['History'],
+            horror = request.data['selectedGenres']['Horror'],
+            music = request.data['selectedGenres']['Music'],
+            mystery = request.data['selectedGenres']['Mystery'],
+            romance = request.data['selectedGenres']['Romance'],
+            science_fiction = request.data['selectedGenres']['Science Fiction'],
+            tv_movie = request.data['selectedGenres']['TV Movie'],
+            thriller = request.data['selectedGenres']['Thriller'],
+            war = request.data['selectedGenres']['War'],
+            western =  request.data['selectedGenres']['Western'],
         )
         serializer = UserGenreSerializer(user_genre)
         return Response(serializer.data)
@@ -206,12 +206,50 @@ def user_init(request, user_pk):
 
 @api_view(['POST'])
 def recommend_movies(request, user_pk):
+    id_score = []
+    like_movie_list = []
     movie_list = []
+    # for item in request.data['user_genre'].items():
+    #     if item[1] > 0:
+    #         # 각 영화의 가중치 점수 계산
+    #         movies = Movie.objects.filter(**{item[0]: True})
+    #         for movie in movies:
+    #             if movie.tmdb_id:
+    #                 score = item[1] * movie.movie_rate
+    #                 id_score.append([movie.tmdb_id, score])
+    #             else:
+    #                 like_movie_list.append(movie)
+
+    #     else:
+    #         movies = Movie.objects.filter(**{item[0]: True})
+    #         movie_list.extend(movies)
+
+    # unique_movies = []
+    # seen_ids = set()
+
+    # for movie in movie_list:
+    #     if movie.tmdb_id not in seen_ids:
+    #         unique_movies.append(movie)
+    #         seen_ids.add(movie.tmdb_id)
+
+    # unique_movies = sorted(unique_movies, key=lambda x: -x.movie_rate)
+    # serializer = MovieSerializer(unique_movies, many=True)
+    # return Response(serializer.data)
     for item in request.data['user_genre'].items():
-        if item[1] == 1:
+        if item[1] > 0:
+            # 각 영화의 가중치 점수 계산
+            movies = Movie.objects.filter(**{item[0]: True})
+            for movie in movies:
+                if movie.tmdb_id:
+                    score = item[1] * movie.movie_rate
+                    id_score.append([movie.tmdb_id, score])
+                else:
+                    like_movie_list.append(movie)
+
+        else:
             movies = Movie.objects.filter(**{item[0]: True})
             movie_list.extend(movies)
-    
+
     unique_movies = []
     seen_ids = set()
 
@@ -220,7 +258,16 @@ def recommend_movies(request, user_pk):
             unique_movies.append(movie)
             seen_ids.add(movie.tmdb_id)
 
+    for movie in unique_movies:
+        overlap_count = 0
+        for genre in request.data['user_genre'].keys():
+            if movie.__dict__[genre]:
+                overlap_count += 1
+        if overlap_count > 1:
+            for i in range(len(id_score)):
+                if id_score[i][0] == movie.tmdb_id:
+                    id_score[i][1] *= overlap_count
+
     unique_movies = sorted(unique_movies, key=lambda x: -x.movie_rate)
     serializer = MovieSerializer(unique_movies, many=True)
     return Response(serializer.data)
-    
