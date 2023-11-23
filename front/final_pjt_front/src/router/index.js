@@ -9,10 +9,17 @@ import ProfileView from '@/views/ProfileView.vue'
 import ProfileEditView from '@/views/ProfileEditView.vue'
 import InitView from '@/views/InitView.vue'
 
+import MovieDetailReview from '@/components/MovieDetailReview.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/api',
+      name: 'api',
+      component: MovieDetailReview
+    },
     {
       path: '/',
       name: 'main',

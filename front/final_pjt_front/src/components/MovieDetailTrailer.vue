@@ -7,8 +7,8 @@
         :src="Url"
         frameborder="0"
         allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
   <div v-else>

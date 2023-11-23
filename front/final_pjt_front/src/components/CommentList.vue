@@ -31,9 +31,7 @@
         <p class="content">{{ comment.content }}</p>
         <p class="date">{{ comment.created_at }}</p>
       </div>
-
     </div>
-  
 </template>
 
 <script setup>
@@ -72,10 +70,15 @@
     router.push({name: 'profile', params: {user_name: id}})
   }
 
+  // watch(movieStore.detailMovieComment, (newValue, oldValue) => { 
+  //   if (newValue != oldValue) {
+  //     movieStore.getDetailMovie(route.params.title)
+  //   }
+  // })
+
   watch(movieStore.detailMovieComment, (newValue, oldValue) => {
-    if (newValue != oldValue) {
-      movieStore.getDetailMovie(route.params.title)
-    }
+    movieStore.getDetailMovie(route.params.title)
+    movieStore.detailMovieComment = newValue
   })
 </script>
 
