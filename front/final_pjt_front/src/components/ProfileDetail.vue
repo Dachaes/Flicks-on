@@ -1,11 +1,7 @@
 <template>
-  <div class="box">
-    <div v-if="posterImage1" class="image-back">
-      <img :src="posterImage1" alt="">
-      <!-- <img :src="posterImage2" alt=""> -->
-      <!-- <img :src="posterImage3" alt=""> -->
-    </div>
-  </div>
+  <!-- <div v-if="posterImage1" class="image-box">
+    <img :src="posterImage1" class="image" alt="">
+  </div> -->
   <div class="user">
     <!-- <img class="user-img" src="@/assets/user/anonymous_user.png" alt="user"> -->
   </div>
@@ -31,11 +27,6 @@ const logOut = function () {
 }
 
 const posterImage1 = ref(userStore.userRecommendList[15].poster_path)
-// const posterImage1 = ref('../assets/movie/movieAltImage.png')
-const posterImage2 = ref(userStore.userRecommendList[16].poster_path)
-// const posterImage2 = ref('../assets/movie/movieAltImage.png')
-const posterImage3 = ref(userStore.userRecommendList[17].poster_path)
-// const posterImage3 = ref('../assets/movie/movieAltImage.png')
 
 const edit = function () {
   router.push({name:'edit'})
@@ -46,19 +37,6 @@ onMounted(() => userStore.getUserDetail())
 </script>
 
 <style scoped>
-  .box {
-    position: absolute;
-    height: 400px;
-    clip: rect(0 0 50% 0);
-  }
-  .image-back{
-    position: absolute;
-    left: 20%;
-    bottom: 100%;
-    height: 400px;
-    z-index: -2;
-    opacity: 40%;
-  }
   .user {
     display: flex;
     position: relative;
@@ -72,16 +50,19 @@ onMounted(() => userStore.getUserDetail())
     height: 400px;
     text-align: end;
     margin-top: 10px;
-    margin-bottom: 250px;
-    /* background-image: linear-gradient(0deg, rgb(20, 20, 20) 0%, #454545 100%); */
-    /* background-color:  #333; */
+    margin-bottom: 100px;
+    background-image: url('../assets/banner/img6.png');
+    background-size: cover;
+    background-position: center;
   }
   .blank{
-    height: 250px;
+    height: 290px;
   }
   .edit, .logout, .signout {
-  margin: 5px;
-  padding-right: 10px;
+    text-shadow: -1px 0px rgb(22, 22, 22);
+    margin: 5px;
+    padding-right: 10px;
+    font-size: 20px;
   }
 
   .edit:hover, .logout:hover, .signout:hover {
