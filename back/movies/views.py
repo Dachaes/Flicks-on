@@ -217,24 +217,23 @@ def recommend_movies(request, user_pk):
                     id_score.append([movie.tmdb_id, score])
                     like_movie_list.append(movie)
 
-    unique_movies = []
-    seen_ids = set()
+    id_score.sort()
+    res = [id_score.pop()]
+    while id_score:
+        tmp = id_score.pop()
+        if tmp[0] == res[-1][0]:
+            res[-1][1] += tmp[1]
+        else:
+            res.append(tmp)
+    
+    res.sort(key=lambda x: -x[1])
 
-    for movie in like_movie_list:
-        if movie.tmdb_id not in seen_ids:
-            unique_movies.append(movie)
-            seen_ids.add(movie.tmdb_id)
+    movies = []
+    for movie_info in res:
+        for movie in like_movie_list:
+            if movie_info[0] == movie.tmdb_id:
+                movies.append(movie)
+                break
 
-    for movie in unique_movies:
-        overlap_count = 0
-        for genre in request.data['user_genre'][0].keys():
-            if movie.__dict__[genre]:
-                overlap_count += 1
-        if overlap_count > 1:
-            for i in range(len(id_score)):
-                if id_score[i][0] == movie.tmdb_id:
-                    id_score[i][1] *= overlap_count
-
-    unique_movies = sorted(unique_movies, key=lambda x: -x.movie_rate)
-    serializer = MovieSerializer(unique_movies, many=True)
+    serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
