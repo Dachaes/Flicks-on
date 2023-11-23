@@ -25,13 +25,14 @@
         - Project, App 생성
         - Comment CRUD
     - `Front`
-        - Vue Components Tree 1차 수정, 2차 수정 (완성)
+        - Vue Components Tree 1차 수정, 2차 수정, 3차 수정 (완성)
         - Login, SignUp 제외, 전 페이지 초안 구현
         - API Data 불러오기 (현재 상영작, 인기작, 관련 영화, 검색 기능, 트레일러)
+        - 카카오 API 를 사용하여 영화 제목 + '리뷰' 을 검색해서 타사이트의 리뷰를 볼 수 있도록 함
     - `Back`
         - ERD 초안
     - `CSS`
-        - 헤더, 배너, 푸터, 영화 리스트 카드, 특정 영화 카드, 유튜브 트레일러, 댓글 CRUD 컴포넌트, 검색 페이지, 프로필 페이지
+        - 헤더, 배너(bootstrap-carosel), 푸터, 영화 리스트 카드, 단일 영화 카드, 단일 영화 유튜브 트레일러(modal), 단일 영화 리뷰(modal), 댓글 CRUD 컴포넌트, 검색 페이지, 프로필 페이지
         - 로그인 페이지, 회원 가입 페이지, 취향 선택 페이지, 회원 정보 수정 페이지
 
 ### PLAN<hr>
@@ -74,7 +75,7 @@
         - `Back` : Comment Read 부분 버그 발생으로 인한 Serializer 수정
         - `CSS` : 각 페이지의 제목 메세지, 디테일-유튜브 트레일러, Comment CRUD, 프로필 페이지, 검색 페이지, 로그인 페이지, 회원 가입 페이지, 취향 선택 페이지, 회원 정보 수정 페이지
     - 23.11.23(목)
-        - `Front` : 
+        - `Front` : 카카오 API 를 이용한 디테일-리뷰 컴포넌트 추가
         - `Back` : 
     - 23.11.24(금)
         - `Front` :
@@ -106,6 +107,8 @@
     <img src="assets/components/components2.png" width="85%"><br>
     - 2차 수정안<br>
     <img src="assets/components/components3.png" width="85%"><br>
+    - 3차 수정안 (최종)<br>
+    <img src="assets/components/components4.png" width="85%"><br>
 
 - UI/UX<br>
     <img src="assets/wire_frame/login_page.png">
