@@ -3,7 +3,8 @@
     <h2>선호하는 장르를 선택해주세요!</h2>
     <div class="genres">
     <div class="genre" v-for="genre in genres" :key="genre.id">
-      <button class="genre-button" @click="selectGenres(genre.name)">{{ genre.name }}</button>
+      <button class="genre-button" @click="selectGenres(genre)">{{ genre.name }}</button>
+      <input v-if="genre.isSelected" type="number" v-model="genre.score">
     </div>
   </div>
   <div class="submit" v-if="comp">
@@ -30,15 +31,20 @@ const getMoviesInfo = function () {
     })
       .then((res) => {
         genres.value = res.data
+        genres.value.forEach((genre) => {
+          genre.isSelected = false
+          genre.score = 0
+        })
       })
       .catch((err) => {
         console.log(err)
       })
   }
 
-const selectGenres = function (genreName) {
-  selectedGenres.value.includes(genreName) ? false : selectedGenres.value.push(genreName)
-  console.log(selectedGenres.value)
+const selectGenres = function (genre) {
+  genre.isSelected = !genre.isSelected
+  const genreValue = {'genre_name': genre.name, 'genre_score': genre.score}
+  selectedGenres.value.includes(genre.name) ? false : selectedGenres.value.push(genre.name)
 }
 
 const addGenre = () => {
