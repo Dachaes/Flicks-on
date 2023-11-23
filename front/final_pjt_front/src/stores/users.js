@@ -140,44 +140,23 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  const updateUserImage = function (image) {
+  const userRecommendList = ref(null)
+
+  const getRecommendMovie = () => {
     axios({
       method: 'post',
-      url: `${API_URL}/api/v1/addimage/${userPk.value}/`,
+      url: `${API_URL}/api/v1/movies/recommend/${userPk.value}/`,
       data:{
-        img:image
+        user_genre: userData.value.usergenre_set
       }
     })
       .then((res) => {
-        console.log('image@@@@@@@@@@@@@@@@@@@@@@@@@@')
-        console.log(res)
+        userRecommendList.value = res.data.slice(0, 20);
       })
-      .catch((err) => {
-        console.log('image error @@@@@@@@@@@@@@@@@@@@@@@@@@')
-        console.log(err)
-      })
+      .catch(err => console.log(err))
   }
 
-  // const deleteUser = function () {
-  //   axios({
-  //     method: 'patch',
-  //     url: `${API_URL}/accounts/user/`,
-  //     headers:{
-  //       'Authorization': `Token ${token.value}`
-  //     },
-  //     data:{
-  //       is_acitve: 0,
-  //     }
-  //   })
-  //     .then((res) => {
-  //       console.log(res)
-  //       logOut()
-  //       router.push({name:'profile', params:{user_name:userPk.value}})
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
-
-  return { isLogin, API_URL, token, userNickName, userPk, userData, signUp, logIn, logOut, getUserDetail, updateUserDetail, updateUserImage }
+  return { isLogin, API_URL, token, userNickName, userPk, userData, userRecommendList,
+    signUp, logIn, logOut, getUserDetail, updateUserDetail, getRecommendMovie
+  }
 }, {persist: true})

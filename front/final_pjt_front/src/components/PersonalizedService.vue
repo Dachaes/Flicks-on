@@ -7,8 +7,8 @@
     </div>
   </div>
 
-  <div class="movies-container"  v-if="userRecommendList">
-    <div class="movies" v-for="movie in userRecommendList" :key="movie.id">
+  <div class="movies-container"  v-if="userStore.userRecommendList">
+    <div class="movies" v-for="movie in userStore.userRecommendList" :key="movie.id">
       <div v-if="movie.poster_path === null">
         <img class="movie-poster" @click="goPage(movie.tmdb_id)"
       src="@/assets/movie/movieAltImage.png" alt="movie_poster">
@@ -55,42 +55,17 @@ const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
 
-const userRecommendList = ref(null)
-  
 const analysisUser = () => {
-  return alert('아직 준비중이에요! 🥰')
-}
+	return alert('아직 준비중이에요! 🥰')
+  }
 
-const getRecommendMovie = () => {
-  axios({
-    method: 'post',
-    url: `${userStore.API_URL}/api/v1/movies/recommend/${userStore.userPk}/`,
-    data:{
-      user_genre: userStore.userData.usergenre_set
-    }
-  })
-    .then((res) => {
-      const uniqueMovies = removeDuplicates(res.data);
-      userRecommendList.value = uniqueMovies.slice(0, 20);
-    })
-    .catch(err => console.log(err))
-}
-
-// Helper function to remove duplicates from an array of objects
-const removeDuplicates = (array) => {
-  const uniqueArray = array.filter((item, index, self) =>
-    index === self.findIndex(obj => JSON.stringify(obj) === JSON.stringify(item))
-  );
-  return uniqueArray;
-};
 
 const goPage = (movieId) => {
   router.push({name:'movie_detail', params:{title:movieId}})
 }
 
 onMounted(() => {
-  getRecommendMovie()
-  console.log(userStore.userData.usergenre_set)
+	userStore.getRecommendMovie()
 })
 
 </script>
