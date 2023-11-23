@@ -2,12 +2,15 @@
   <div>
     <Headers />
     <MovieDetail :tmdb-id="tmdb_id"/>
-    
+
     <h2 class="recommendation-message">관련 영상</h2>
     <MovieDetailTrailer :tmdb-id="tmdb_id"/>
-
+    
     <h2 class="recommendation-message">관련 영화</h2>
     <MovieListSimilar :tmdb-id="tmdb_id"/>
+    
+    <h2 class="recommendation-message">관련 리뷰</h2>
+    <MovieDetailReview :tmdb-id="tmdb_id" />
 
     <h2 class="recommendation-message">한줄평</h2>
     <CommentCreate />
@@ -22,6 +25,7 @@
   import MovieDetail from '@/components/MovieDetail.vue'
   import MovieDetailTrailer from '@/components/MovieDetailTrailer.vue'
   import MovieListSimilar from '@/components/MovieListSimilar.vue'
+  import MovieDetailReview from '@/components/MovieDetailReview.vue'
   import CommentCreate from '@/components/CommentCreate.vue'
   import CommentList from '@/components/CommentList.vue'
   import Footers from '@/components/Footers.vue'
