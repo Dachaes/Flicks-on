@@ -37,6 +37,7 @@
     // console.log(route.params.title)
     // router.push({name:'movies', params:{title:route.params.title}})
     movieStore.getDetailMovie(route.params.title)
+    router.go()
     content.value = ''
   }
 </script>
@@ -65,23 +66,11 @@
   font-weight: bold;
 }
 
-.user-name:hover {
-  font-weight: bold;
-  opacity: 50%;
-}
-
 .user-img {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   cursor: pointer;
-}
-
-.user-img:hover {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  opacity: 50%;
 }
 
 .comment-content {
