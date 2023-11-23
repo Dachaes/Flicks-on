@@ -14,13 +14,13 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
   import { useUserStore } from '@/stores/users'
   import { useCommentStore } from '@/stores/comments.js'
   import { useMovieStore } from '@/stores/movies'
   import { useRouter, useRoute } from 'vue-router'
 
-  const userStore =useUserStore()
+  const userStore = useUserStore()
   const movieStore = useMovieStore()
   const commentStore = useCommentStore()
   const router = useRouter()
@@ -37,9 +37,13 @@
     // console.log(route.params.title)
     // router.push({name:'movies', params:{title:route.params.title}})
     movieStore.getDetailMovie(route.params.title)
-    router.go()
+    // router.go()
     content.value = ''
   }
+  
+  watch(movieStore.content, (newComments) => {
+    movieStore.content = newComments
+  }, {immediate: true})
 </script>
 
 <style scoped>
@@ -107,6 +111,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
 .accept:hover {
   width: 45px;
   border-radius: 4px;
