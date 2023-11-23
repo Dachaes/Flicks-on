@@ -54,6 +54,7 @@ onMounted(() => userStore.getUserDetail())
     background-image: url('../assets/banner/img6.png');
     background-size: cover;
     background-position: center;
+    opacity: 0.4;
   }
   .blank{
     height: 290px;
