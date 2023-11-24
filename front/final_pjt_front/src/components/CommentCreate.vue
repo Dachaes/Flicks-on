@@ -37,7 +37,7 @@
     // console.log(route.params.title)
     // router.push({name:'movies', params:{title:route.params.title}})
     movieStore.getDetailMovie(route.params.title)
-    // router.go()
+    router.go()
     content.value = ''
   }
   

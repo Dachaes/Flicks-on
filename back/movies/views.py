@@ -88,31 +88,34 @@ def detail(request, tmdb_pk):
             }
         )
         data = response.json()
+        genres = []
+        for i in data['genres']:
+            genres.append(i['id'])
         Movie.objects.create(
             title=data["title"],
             poster_path=f'https://image.tmdb.org/t/p/original/{data["poster_path"]}',
             tmdb_id=data["id"],
             movie_rate = round(data["vote_average"], 1),
             release_date=data['release_date'],
-            action= True if 28 in data['genre_ids'] else False,
-            adventure = True if 12 in data['genre_ids'] else False,
-            animation = True if 16 in data['genre_ids'] else False,
-            comedy = True if 35 in data['genre_ids'] else False,
-            crime = True if 80 in data['genre_ids'] else False,
-            documentary = True if 99 in data['genre_ids'] else False,
-            drama = True if 18 in data['genre_ids'] else False,
-            family = True if 10751 in data['genre_ids'] else False,
-            fantasy = True if 14 in data['genre_ids'] else False,
-            history = True if 36 in data['genre_ids'] else False,
-            horror = True if 27 in data['genre_ids'] else False,
-            music = True if 10402 in data['genre_ids'] else False,
-            mystery = True if 9648 in data['genre_ids'] else False,
-            romance = True if 10749 in data['genre_ids'] else False,
-            science_fiction = True if 878 in data['genre_ids'] else False,
-            tv_movie = True if 10770 in data['genre_ids'] else False,
-            thriller = True if 53 in data['genre_ids'] else False,
-            war = True if 10752 in data['genre_ids'] else False,
-            western = True if 27 in data['genre_ids'] else False,
+            action= True if 28 in genres else False,
+            adventure = True if 12 in genres else False,
+            animation = True if 16 in genres else False,
+            comedy = True if 35 in genres else False,
+            crime = True if 80 in genres else False,
+            documentary = True if 99 in genres else False,
+            drama = True if 18 in genres else False,
+            family = True if 10751 in genres else False,
+            fantasy = True if 14 in genres else False,
+            history = True if 36 in genres else False,
+            horror = True if 27 in genres else False,
+            music = True if 10402 in genres else False,
+            mystery = True if 9648 in genres else False,
+            romance = True if 10749 in genres else False,
+            science_fiction = True if 878 in genres else False,
+            tv_movie = True if 10770 in genres else False,
+            thriller = True if 53 in genres else False,
+            war = True if 10752 in genres else False,
+            western = True if 27 in genres else False,
         )
     movie = get_object_or_404(Movie, tmdb_id=tmdb_pk)
     serializer = MovieDetailSerializer(movie)
