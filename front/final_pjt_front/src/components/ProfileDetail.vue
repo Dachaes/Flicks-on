@@ -2,16 +2,13 @@
   <!-- <div v-if="posterImage1" class="image-box">
     <img :src="posterImage1" class="image" alt="">
   </div> -->
-  <div class="user">
-    <!-- <img class="user-img" src="@/assets/user/anonymous_user.png" alt="user"> -->
-  </div>
   <div class="profile-container">
     <div class="blank"></div>
     <p class="edit" @click="edit">Edit Profile</p>
     <p class="logout" @click="logOut">Log Out</p>
     <p class="signout" @click="SignOut">Sign Out</p>
   </div>
-
+  
 </template>
 
 <script setup>
@@ -26,7 +23,7 @@ const logOut = function () {
   userStore.logOut()
 }
 
-const posterImage1 = ref(userStore.userRecommendList[15].poster_path)
+// const posterImage1 = ref(userStore.userRecommendList[15].poster_path)
 
 const edit = function () {
   router.push({name:'edit'})
@@ -37,12 +34,12 @@ onMounted(() => userStore.getUserDetail())
 </script>
 
 <style scoped>
-  .user {
+  /* .user {
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
-  }
+  } */
   .profile-container {
     display: flex;
     flex-direction: column;
@@ -54,7 +51,11 @@ onMounted(() => userStore.getUserDetail())
     background-image: url('../assets/banner/img6.png');
     background-size: cover;
     background-position: center;
+    opacity: 0.78;
+  }
+  .profile-container:after {
     opacity: 0.4;
+    z-index: -3;
   }
   .blank{
     height: 290px;
@@ -64,17 +65,17 @@ onMounted(() => userStore.getUserDetail())
     margin: 5px;
     padding-right: 10px;
     font-size: 20px;
+    color: white;
   }
 
   .edit:hover, .logout:hover, .signout:hover {
     opacity: 50%;
   }
 
-
-  .user-img {
+  /* .user-img {
     top: 230px;
     position: absolute;
     justify-content: center;
     width: 170px;
-  }
+  } */
 </style>
