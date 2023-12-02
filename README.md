@@ -13,7 +13,7 @@
         - 전체 Model 작성 및 TMDB API를 이용해 DB 데이터 작성
         - Login, SignUp 구현, 최초 로그인 시 취향을 설정할 수 있게 설정
         - rest-auth 커스텀 &rarr; user deatil serializer 커스텀
-        - API 로 불러 온 영화 데이터 일부 조작
+        - TMDB API 로 불러 온 영화 데이터 일부 조작
         - 취향을 기반으로 영화 추천 알고리즘 제작
         - 시리얼라이저 작성
     - `CSS`
@@ -28,7 +28,7 @@
     - `Front`
         - Vue Components Tree 1차 수정, 2차 수정, 3차 수정 (완성)
         - 페이지 초안 구현
-        - API Data 불러오기 (현재 상영작, 인기작, 관련 영화, 검색 기능, 트레일러)
+        - TMDB API Data 불러오기 (현재 상영작, 인기작, 관련 영화, 검색 기능, 트레일러)
         - 카카오 API 를 사용하여 영화 제목 + '리뷰' 을 검색해서 타사이트의 리뷰를 볼 수 있도록 함
     - `Back`
         - ERD 초안
@@ -44,10 +44,10 @@
     - `Front` : Components Tree 변경 및 완성, 그에 따른 Vue Project 구체화 -> 전 페이지 초안 완성
     - `Back` : signup, login, 현재 로그인 하고 있는 유저의 정보 return 값 customizing
 - 23.11.20 (월)
-    - `Front` : Comment CRUD, API Data 불러오기 (현재 상영작, 인기작, 관련 영화)
+    - `Front` : Comment CRUD, TMDB API Data 불러오기 (현재 상영작, 인기작, 관련 영화)
     - `Back` : Comment CRUD
 - 23.11.21 (화)
-    - `Front` : 관련 영화 API 부분 디버깅, API Data 불러오기 (개봉 예정작, 검색 기능, 유튜브 트레일러)
+    - `Front` : 관련 영화 TMDB API 부분 디버깅, TMDB API Data 불러오기 (개봉 예정작, 검색 기능, 유튜브 트레일러)
     - `Back` :
     - `CSS` : 메인-영화 리스트, 헤더, 푸터, 디테일-영화 정보
 - 23.11.22 (수)
@@ -152,7 +152,7 @@ def recommend_movies(request, user_pk):
 - 회원 가입시에 작성한 정보를 기반으로 유저 페이지에서 영화 추천
 - 메인 화면에서 현재 상영작, 인기작, 개봉 예정작을 추천
 - 키워드로 영화 검색 가능
-- 단일 영화 페이지에서 영화 정보, 관련 영상 (트레일러), 관련 영화, 관련 리뷰 모달 (kakao api, 평론가 리뷰로 검색), 유저 한줄평
+- 단일 영화 페이지에서 영화 정보, 관련 영상 (트레일러), 관련 영화, 관련 리뷰 모달 (Kakao API, 평론가 리뷰로 검색), 유저 한줄평
 
 # 7. 느낀점
 ### 전소현
@@ -329,7 +329,7 @@ def recommend_movies(request, user_pk):
 - `MovieListNowPlaying` Component, `MovieListTopRated` Component, `MoviesListSimilar` Component
 - 작성자 : 전소현
 
-## 3. MovieList Components 에 원하는 Props 를 내려받아 영화 불러오기
+## 3. MovieListSimilar Components 에서 MovieDetailView 를 다시 불러오기 (같은 route 의 다른 variable routing 의 route 로는 컴포넌트가 새로고침 x)
     ```
         @click="goPage('movie_detail', movie.id)"
     ```
@@ -405,5 +405,12 @@ def recommend_movies(request, user_pk):
    }
     ```
 
+- 코드 9 (해결)
+    ```
+    onBeforeRouteUpdate((to, from) => {
+        movieStore.getSimilarMovie(to.params.title)
+    })
+    ```
 - page url 이 변경되지만, 같은 route 의 다른 variable routing 의 route 로는 컴포넌트가 새로고침이 되지 않았다.
-- 작성자 : 전소현
+- `onBeforeRouteUpdate` 를 이용하여 해결하였다.
+- 작성자 : 전소현, 박수형
