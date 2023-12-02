@@ -107,7 +107,7 @@
 - 2차 수정안<br>
 <img src="assets/components/components3.png" width="85%"><br>
 - 3차 수정안 (최종)<br>
-<img src="assets/components/components4.png" width="85%"><br>
+<img src="assets/components/components4-1.png" width="85%"><br>
 
 # 4. 영화 추천 알고리즘에 대한 기술적 설명
 ```python
