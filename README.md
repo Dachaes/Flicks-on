@@ -1,3 +1,4 @@
+# [<img src="./assets/logo/logo1.png" width="30%">](./assets/ppt/Flicks-on.pdf)
 # 1. 팀원 정보 및 업무 분담 내역
 ### - `대전 2반 9조`
 - 박수형
